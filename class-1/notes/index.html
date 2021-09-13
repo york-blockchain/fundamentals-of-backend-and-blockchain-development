@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
 
-    <title>Smart Contracts And Decentralized Applications</title>
+    <title>Fundamentals of Backend and Blockchain Development</title>
 
     <meta name="author" content="Dhruvin Parikh">
 
@@ -84,9 +84,9 @@
 
 <section data-markdown><script type="text/template">
 
-## CSBC 2010 - Smart Contracts And Decentralized Applications
+## CSBC 1000 - Fundamentals of Backend and Blockchain Development
 
-### Class 1: Introduction to Ethereum And Solidity
+### Class 1: The three-tier architecture
 
 *Dhruvin Parikh*
 
@@ -94,424 +94,294 @@
 
 <section data-markdown><script type="text/template">
 ## `$WHOAMI`  
-- I am fullstack javascript developer, blockchain developer and an Instructor  
-- Senior Blockchain Developer at opty.fi
+- DeFi developer and Web3.0 instructor.  
+- Senior Blockchain Developer and CTO at opty.fi
 - Also Adjunct Professor at George Brown College in Blockchain Development Program 
 </script></section>
 
 <section data-markdown><script type="text/template">
 ## Evaluation
-- **Quiz** (Today) - 10% 
-- **9 Coding Assignments** - 60% (6.67%/assignment)
-- **Final Use-Case Assignment** - 30%
+- **knowledge checks** - 30% 
+- **Final Project (milestone 1)** - 35%
+- **Final Project (milestone 2)** - 35%
 </script></section>
 
 <section data-markdown><script type="text/template">
 
 ## Class Plan
-* Solidity Smart Contracts
-    * State Variables
-    * Functions
-    * Hashing & Typecasting
-    * Events
+* Course Overview
+* Introduction to three-tier architecture
+* Frontend development
+* Backend development
+* Full stack development
+* Project expectations
 </script></section>
 
 <section data-markdown><script type="text/template">
 
-## Smart contracts
+## Course Overview
 
-* Computer programs
-* Created by transactions
-* Have their own ethereum addresses
-* Called "autonomous agents"
-  * After you send them to the blockchain, they exist forever (unless they self destruct)
-  * Anyone can send transactions to them to trigger functionality
-
-</script></section>
-
-
-
-<section data-markdown><script type="text/template">
-
-## Smart contract addresses
-
-* A contract's address is the hash of the creator's address and the nonce of the transaction that created it (RLP encoded)
-  * So, contracts do not have private keys
-* Contracts *do* have nonces
-  * Incremented whenever they deploy children contracts (so children contracts have unique addresses)
-
+* Learn core concepts of front end, backend and fullstack and blockchain development
+* Solving problems with help of blockchain technology and other off-chain components
+* Final project work in groups.
+* Knowledge checks/coding activity followed by the end of each class
+* Moodle includes *THINK* questions as a brainstorming exercise.
 </script></section>
 
 
 
 <section data-markdown><script type="text/template">
 
-## Solidity
+## DBMS architecture
 
-* A programming language, like C++ or Python or Javascript
-* But designed specially for smart contracts
-* Compiles to a special machine called the Ethereum Virtual Machine (EVM) 
-
+* **Single tier architecture** 
+  * Client, server and database reside on same machine
+* **Two tier architecture**
+  * Server and database reside on same machine
+* **Three tier architecture**
+  * functional processes, logic, data access, data storage and UI interface done independently a separate modules
 </script></section>
 
 
 
 <section data-markdown><script type="text/template">
 
-<img src="solc.svg" style="background-color: white" />
+## Three tier DBMS architecture diagram
+
+<img src="dbms_3tier.png" style="background-color: white" />
 
 </script></section>
 
-
-
 <section data-markdown><script type="text/template">
 
-## Structure
+## Goal of three tier architecture
 
-```
-    // SPDX-License-Identifier: MIT
-    pragma solidity ^0.6.10;
-    contract MyContractName {
-        // code goes here
-    }
-```
+* Segregate user applications and physical database
+* DBMS characteristic 
+* Program-data independence
+* Multiple views of Data
 
-* `pragma` line: What version of solidity you want
-  * We'll leave this out of examples, but you should always have it in your code
-  * Use at least `0.6.10`: This course does not cover security issues of earlier versions
-* `contract`: Everything inside the curly braces is your contract
-
-</script></section>
-
-
-
-<section data-markdown><script type="text/template">
-
-  ## Primitive types
-  
-  * **uintX**: `X` is the number of bits: `uint256`, `uint32`
-  * **intX**: Same as `uintX` except signed (negatives allowed): `int256`, `int64`
-  * **bytesX**: Fixed size collection of bytes: `bytes32`
-  * **address**: An Ethereum address (20 bytes)
-  * **bool**: Boolean: `true` or `false`
-  * **string**: Dynamic-size collection of characters
-  * **bytes**: Dynamic-size collection of bytes
-  
 </script></section>
 
 
 <section data-markdown><script type="text/template">
 
-## Math Operations
+## Layers of 3 tier architecture
 
-- Arithmetic Operators - +,-,\*,/,%, **
-* Incremental Operators - ++, --
-* Bitwise Operators - | , ~ , >> , <<
-* Logical Operators - !, &&, ||, ==, !=
+* **Presentation layer**
+  * HTML, JavaScript, CSS
+* **Application layer**
+  * Java, .NET, C#, Python, C++
+* **Database server**
+  * MySQL, PostgreSQL, SQL Server, MongoDB
+
+</script></section>
+
+
+<section data-markdown><script type="text/template">
+
+## Presentation layer
+
+* Consists of web-based user interface displaying content usedful to end user
+* Web-based application mostly build with Php, HTML, JavaScript and CSS based frameworks like React, Next, Vue, Nuxt, etc
+* Mobile based application mostly build with Swift, Android, React native, ionic, Xamarin, Objective C etc
 
 </script></section>
   
   
 <section data-markdown><script type="text/template">
 
-## Example
+## Application layer
 
-```
-contract operators {
-  // Arithmetic Operators
-  // +,-,*,/, %, **
-  // Incremental Operators
-  // a++, a--, a+=1, a=a+1,++a,--a;
-  uint a=10;
-  a= a++; //here, output will be 10, because the value is first       
-         // returned and then then increment is done
-  a=++a;
-  //Logical Operators
-  // !, &&, ||, ==, !=
-  isOwner = true && false;
-  uint orValue= 0x02 | 0x01; // output would be 0x03
-
-  function Operators() {
-    // Initialize state variables here
-  }
-}
-```
+* Contains application's business logic to drive application's core capabilities
+* Mostly build using NodeJS, Java, .NET, C#, Python, C++, etc
 
 </script></section>
 
 
 <section data-markdown><script type="text/template">
   
-## Structs
-  
-```
-struct Account {
-  uint256 balance;
-  uint256 lastUpdatedTimestamp;
-}
-```
-  
-  * For grouping together multiple values into a single new type
-  * Can contain other structs, mappings, etc
+## Data layer
+
+* Contains database/data storage system and data access layer.
+* Mostly spinned up using MySQL, PostgreSQL, MongoDB, etc
+* The application layer accesses data via API calls.
+* Useful for scaling the system
   
 </script></section>
 
 <section data-markdown><script type="text/template">
 
-## Arrays
-
+## Sample Data 
+* Insight for e-commerce store's customer location 
 <pre class="hljs js">
-    <span class="highlight">address[] users;</span>
-
-    function addMyself() public {
-        <span class="highlight">users.push</span>(msg.sender);
-    }
-
-    function richestUser() public view returns(address) {
-        address richest = address(0);
-        uint256 richestBalance = 0;
-
-        for (uint256 i = 0; i < <span class="highlight">users.length</span>; i++) {
-            if (<span class="highlight">users[i]</span>.balance > richestBalance) {
-                richest = <span class="highlight">users[i]</span>;
-            }
-        }
-
-        return richest;
-    }
+    <span class="highlight">id, first_name, last_name, email, city</span>
+    1, Rufe, Loynes, rloynes0@imgur.com, Nanchangshan
+    2, Elfie, Daines, edaines1@com.com, Bromolla
+    3, Steven, Philpault, sphilpault2@nps.gov, Russkiy
+    4, Bibby, Leyban, bleyban3@weebly.com, Gul'cha
+    5, Sheena, Cochet, scochet4@vimeo.com, Begles
+    6, Heriberto, Neasam, hneasam5@soup.io, Watergrasshill
+    7, Brett, Spellessy, bspellessy6@ow. ly, Villa Elisa
+    8, Spencer, MacCaig, smaccaig7@xrea.com, Terek
+    9, Ezekiel, Favela, efavela8@nasa.gov, Yamaguchi - shi
+    10, Hersch, Geratasch, hgeratashch9@biblegateway.com, Wan'an
 </pre>
 
 </script></section>
 
 
-
 <section data-markdown><script type="text/template">
 
-  ## Strings
+  ## Frontend
   
-  <pre class="hljs js">
-      <span class="highlight">string</span> name = <span class="highlight">"Alice"</span>;
-  </pre>
-  
-  * Solidity supports strings, which are arbitrary length arrays of characters
-  * Try to avoid using strings, if possible
-    * Handling strings in solidity is difficult
-    * Long strings cost a lot of gas
-    * Better to store a hash of the string
+  * Lies on application layer
+  * Provides visual and interactive experience to user
+  * Parses data from data layer and presents in human readable form.  
   
 </script></section>
 
 
 <section data-markdown><script type="text/template">
 
-## DEMO : Greeter
+## UI/UX design
   
-```
-  // SPDX-License-Identifier: MIT
-  pragma solidity ^0.6.10;
-  contract Greeter {
-      // state variables
-      string yourName = "HelloWorld"; // contract storage
-      function set(string memory _name) public {
-          yourName = _name;    
-      }
-      function hello() public view returns(string memory) {
-          return yourName;
-      }
-  }
-```
+* Look and feel of the application
+* Tools like Adobe XD, Figma, Lucid chart, etc are used for wire framing and simulation
   
 </script></section>
 
   
 <section data-markdown><script type="text/template">
 
-  ## Functions
+  ## Development
   
-  ```
-  contract SimpleAdder {
-      function addOne(uint256 a) public pure returns(uint256) {
-          return a + 1;
-      }
-  }
-  ```
+  * The wireframs created during UI/UX design is converted into code.
+  * Involves creating visual components around the screen of the device
+  * **Client Side rendering**
+    *  Page gets renders entirely by client side javascript
+  * **Server side rendering**
+    * HTML is generated at each request.
+</script></section>
   
-  * Functions are as in other languages:
-    * Accept parameters
-    * Perform computations and actions
-    * Optionally can return results
+
+  
+<section data-markdown><script type="text/template">
+  
+  ## Deployment/Publishing
+  
+  * Web application can be deployed on the hosted services on the internet
+  * Mobile applications can be published to its corresponding digital distribution service.
   
 </script></section>
   
   
-  
-  
 <section data-markdown><script type="text/template">
   
-  ## Types
+  ## Backend
   
-  <pre>
-      function addOne(<span class="highlight">uint256</span> a) public pure returns(<span class="highlight">uint256</span>)
-  </pre>
-  
-  * Parameters, return values, and variables have types that determine what they can contain
-  * *uint256*
-    * unsigned (can't be negative)
-    * integer
-    * 256 bits (32 bytes)
-  
-</script></section>
-  
-  
-  
-  
-  
-  
-<section data-markdown><script type="text/template">
-  
-  ## Access restrictions
-  
-  <pre>
-      function addOne(uint256 a) <span class="highlight">public</span> pure returns(uint256)
-  </pre>
-  
-  * Who can call the function
-    * *public*: Everyone
-    * *private*: Only other functions in this contract
-    * *external*: Everyone, except other functions in this contract
-    * *internal*: Like *private*, except for inheritance (more later)
-  
-</script></section>
-  
-  
-  
-  
-  
-  
-<section data-markdown><script type="text/template">
-  
-  ## Storage restrictions
-  
-  <pre>
-      function addOne(uint256 a) public <span class="highlight">pure</span> returns(uint256)
-  </pre>
-  
-  * Contracts have a persistent memory called storage (or sometimes state)
-  * This will preserve values between transactions
-    * *pure*: Doesn't read or write to storage
-    * *view*: Reads from storage, but does not write
-    * None: Reads and writes to storage
-  
-</script></section>
-  
-  
-  
-  
-  
-  
-
-
-<section data-markdown><script type="text/template">
-  
-  ## `keccak256()`
-  
-  <pre>
-    //6e91ec6b618bb462a4a6ee5aa2cb0e9cf30f7a052bb467b0ba58b8748c00d2e5
-    keccak256(abi.encodePacked("abcdef"));
-    //b1f078126895a1424524de5321b339ab00408010b7cf0e6ed451514981e58aa9
-    keccak256(abi.encodePacked("abcdee"));
-  </pre>
-  
-  * Built-in function which is a version of SHA3.
-  * `keccak256` accepts single parameter
+  * Decision on storing and computation of data
+  * Requires robust planning as it takes important decisions.
+  * Scalable, reliable and maintainable
   
 </script></section>
 
-
-
-
-
 <section data-markdown><script type="text/template">
   
-  ## typecasting
-  
-  ```
-  uint8 a = 5;
-  uint b = 6;
-  // throws an error because a * b returns a uint, not uint8:
-  uint8 c = a * b; 
-  // we have to typecast b as a uint8 to make it work:
-  uint8 c = a * uint8(b);
-  ```
-  
-  * Conversion from one type to another is possible in solidity
-  
-</script></section>
+  ## System design
 
+  * Requirement gathering
+  * High level system design
+  * Design core components like API, data model
+  * Identify bottle necks and scale up the system
 
-
-
-<section data-markdown><script type="text/template">
-
-## Logs/Events
-
-* Contracts can define events:
-<pre class="hljs js">
-event LogDeposit(address indexed account, uint256 amount);
-</pre>
-* That can be `emit`ted inside functions:
-<pre class="hljs js">
-    function deposit() public {
-        // ...
-        emit LogDeposit(msg.sender, msg.value);
-    }
-</pre>
-* These logs are not accessible to contracts
-* But can be read by dapps that monitor the chain
-  * Also useful during development
-
-</script></section>
-
-
-<section data-markdown><script type="text/template">
-
-## Demo: Counter 
-  
-```
-// SPDX-License-Identifier: MIT
-
-pragma solidity ^0.6.10;
-
-contract Counter {
+  <aside class="notes">
+    Sequence 1 :
+    Who is this system for?
+    How will this end user get access to your service?
+    How many users do you estimate will be on this service hourly, daily, annually?
+    What do the requests to the system look like?
+    What will users expect this service to output?
+    Will the system be more read heavy than write intensive?
+    How fast should search results be?
+    Should user requests be handled in real time?
+    Will web traffic always be equally distributed across all locations your service will be deployed?
     
-    event ValueChanged(uint indexed oldValue, uint256 indexed newValue);
-    
-    // tracks the number of counts
-    uint256 count = 0;
+    Sequence 4 :
+    Design core components like the API, data model
+    Do your use cases point you towards a relationship data model or document-based model?
+    Will you use RPC, SOAP, REST or another API model (if your service is web based)?
+    For each endpoint on your API, what will the request body/parameters contain?
+    If tasks take too long, how do you store them so that their status can be later queried by a user?
+    How will your service authenticate and authorize users?
+    Will any processes in your service depend on an external service?
 
-    // Function that increments counter
-    function increment() public {
-        count += 1;
-        emit ValueChanged(count - 1, count);
-    }
-    
-    // Getter function to get the count value
-    function getCount() public view returns (uint256) {
-        return count;
-    }
-}
-```
+    Sequence 5 :
+    What portion of the code/system takes too long?
+    Can certain tasks be broken up and handled by smaller child processes?
+    Is it possible to store static files separately and closer to your users with a CDN?
+    How do you ensure that if a server or database goes down, your service won’t go down as well?
+    Is there a way to monitor and log the behaviour of your service?
+  </aside>
+  
+</script></section>
+
+<section data-markdown><script type="text/template">
+  
+  ## High level design
+
+  <img src="system_design.png" style="background-color: white; width: 600px;" />
+  
+</script></section>
+  
+  
+
+<section data-markdown><script type="text/template">
+  
+  ## Three tier application architecture
+
+  <img src="backend-architecture.jpeg" style="background-color: white; width: 800px;" />
+  
+  
+</script></section>
+  
+
+
+<section data-markdown><script type="text/template">
+  
+  ## Backend development
+  
+  * Selecting database (SQL v/s NoSQL)
+  * Application configuration
+  * Code Review
+  * Testing - unit, integration, system, acceptance
+  * Technical debt
+  * **Deployment environments**
+    * Development, testing, staging, production 
   
 </script></section>
 
 
+
+
+
+<section data-markdown><script type="text/template">
+  
+  ## Development stacks
+  
+  * LAMP stack - Linux Apache MySQL PHP
+  * MEAN stack - MongoDB Express Angular Node
+  * MERN stack - MongoDB Express React Node
+  * JAM stack - Javascript API Markup
+  
+</script></section>
+
 <section data-markdown><script type="text/template">
 
-## Example of Event logs 
-    
-<img src="event-log.jpg" width=600>
+## Final Project discussion
 
-* The indexed parameters for logged events will allow you to search for these events using the indexed parameters as filters.
+* Milestone #1
+* Milestone #2
     
 </script></section>
 
