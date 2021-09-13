@@ -1,0 +1,566 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+
+    <title>Smart Contracts And Decentralized Applications</title>
+
+    <meta name="author" content="Dhruvin Parikh">
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+    <link rel="stylesheet" href="../../reveal.js/css/reveal.css">
+    <link rel="stylesheet" href="../../reveal.js/css/theme/black.css" id="theme">
+
+    <!-- Code syntax highlighting -->
+    <link rel="stylesheet" href="../../reveal.js/lib/css/zenburn.css">
+
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? '../../reveal.js/css/print/pdf.css' : '../../reveal.js/css/print/paper.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="../reveal.js/lib/js/html5shiv.js"></script>
+    <![endif]-->
+
+    <style>
+      .reveal .slides h1, .reveal .slides h2, .reveal .slides h3 {
+        text-transform: none;
+      }
+
+      .two-column {
+        display: flex;
+        flex-wrap: wrap;
+      }
+
+      .two-column em {
+        margin: 20px;
+      }
+
+      .reveal .big-and-bold {
+        font-weight: bold;
+        font-size: 135%;
+      }
+
+      .reveal .shrunk-a-bit {
+        font-size: 90%;
+      }
+
+      .reveal .shrunk-a-bit pre {
+        width: 100%;
+      }
+
+      .reveal pre {
+        width: 100%;
+      }
+
+      .reveal .highlight {
+        color: yellow;
+        font-weight: bold;
+      }
+
+      .reveal .highlightRed {
+        color: red;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="reveal">
+      <div class="slides">
+
+<!------------------------------------------------------->
+
+
+
+<section data-markdown><script type="text/template">
+
+## CSBC 2010 - Smart Contracts And Decentralized Applications
+
+### Class 1: Introduction to Ethereum And Solidity
+
+*Dhruvin Parikh*
+
+</script></section>
+
+<section data-markdown><script type="text/template">
+## `$WHOAMI`  
+- I am fullstack javascript developer, blockchain developer and an Instructor  
+- Senior Blockchain Developer at opty.fi
+- Also Adjunct Professor at George Brown College in Blockchain Development Program 
+</script></section>
+
+<section data-markdown><script type="text/template">
+## Evaluation
+- **Quiz** (Today) - 10% 
+- **9 Coding Assignments** - 60% (6.67%/assignment)
+- **Final Use-Case Assignment** - 30%
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## Class Plan
+* Solidity Smart Contracts
+    * State Variables
+    * Functions
+    * Hashing & Typecasting
+    * Events
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## Smart contracts
+
+* Computer programs
+* Created by transactions
+* Have their own ethereum addresses
+* Called "autonomous agents"
+  * After you send them to the blockchain, they exist forever (unless they self destruct)
+  * Anyone can send transactions to them to trigger functionality
+
+</script></section>
+
+
+
+<section data-markdown><script type="text/template">
+
+## Smart contract addresses
+
+* A contract's address is the hash of the creator's address and the nonce of the transaction that created it (RLP encoded)
+  * So, contracts do not have private keys
+* Contracts *do* have nonces
+  * Incremented whenever they deploy children contracts (so children contracts have unique addresses)
+
+</script></section>
+
+
+
+<section data-markdown><script type="text/template">
+
+## Solidity
+
+* A programming language, like C++ or Python or Javascript
+* But designed specially for smart contracts
+* Compiles to a special machine called the Ethereum Virtual Machine (EVM) 
+
+</script></section>
+
+
+
+<section data-markdown><script type="text/template">
+
+<img src="solc.svg" style="background-color: white" />
+
+</script></section>
+
+
+
+<section data-markdown><script type="text/template">
+
+## Structure
+
+```
+    // SPDX-License-Identifier: MIT
+    pragma solidity ^0.6.10;
+    contract MyContractName {
+        // code goes here
+    }
+```
+
+* `pragma` line: What version of solidity you want
+  * We'll leave this out of examples, but you should always have it in your code
+  * Use at least `0.6.10`: This course does not cover security issues of earlier versions
+* `contract`: Everything inside the curly braces is your contract
+
+</script></section>
+
+
+
+<section data-markdown><script type="text/template">
+
+  ## Primitive types
+  
+  * **uintX**: `X` is the number of bits: `uint256`, `uint32`
+  * **intX**: Same as `uintX` except signed (negatives allowed): `int256`, `int64`
+  * **bytesX**: Fixed size collection of bytes: `bytes32`
+  * **address**: An Ethereum address (20 bytes)
+  * **bool**: Boolean: `true` or `false`
+  * **string**: Dynamic-size collection of characters
+  * **bytes**: Dynamic-size collection of bytes
+  
+</script></section>
+
+
+<section data-markdown><script type="text/template">
+
+## Math Operations
+
+- Arithmetic Operators - +,-,\*,/,%, **
+* Incremental Operators - ++, --
+* Bitwise Operators - | , ~ , >> , <<
+* Logical Operators - !, &&, ||, ==, !=
+
+</script></section>
+  
+  
+<section data-markdown><script type="text/template">
+
+## Example
+
+```
+contract operators {
+  // Arithmetic Operators
+  // +,-,*,/, %, **
+  // Incremental Operators
+  // a++, a--, a+=1, a=a+1,++a,--a;
+  uint a=10;
+  a= a++; //here, output will be 10, because the value is first       
+         // returned and then then increment is done
+  a=++a;
+  //Logical Operators
+  // !, &&, ||, ==, !=
+  isOwner = true && false;
+  uint orValue= 0x02 | 0x01; // output would be 0x03
+
+  function Operators() {
+    // Initialize state variables here
+  }
+}
+```
+
+</script></section>
+
+
+<section data-markdown><script type="text/template">
+  
+## Structs
+  
+```
+struct Account {
+  uint256 balance;
+  uint256 lastUpdatedTimestamp;
+}
+```
+  
+  * For grouping together multiple values into a single new type
+  * Can contain other structs, mappings, etc
+  
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## Arrays
+
+<pre class="hljs js">
+    <span class="highlight">address[] users;</span>
+
+    function addMyself() public {
+        <span class="highlight">users.push</span>(msg.sender);
+    }
+
+    function richestUser() public view returns(address) {
+        address richest = address(0);
+        uint256 richestBalance = 0;
+
+        for (uint256 i = 0; i < <span class="highlight">users.length</span>; i++) {
+            if (<span class="highlight">users[i]</span>.balance > richestBalance) {
+                richest = <span class="highlight">users[i]</span>;
+            }
+        }
+
+        return richest;
+    }
+</pre>
+
+</script></section>
+
+
+
+<section data-markdown><script type="text/template">
+
+  ## Strings
+  
+  <pre class="hljs js">
+      <span class="highlight">string</span> name = <span class="highlight">"Alice"</span>;
+  </pre>
+  
+  * Solidity supports strings, which are arbitrary length arrays of characters
+  * Try to avoid using strings, if possible
+    * Handling strings in solidity is difficult
+    * Long strings cost a lot of gas
+    * Better to store a hash of the string
+  
+</script></section>
+
+
+<section data-markdown><script type="text/template">
+
+## DEMO : Greeter
+  
+```
+  // SPDX-License-Identifier: MIT
+  pragma solidity ^0.6.10;
+  contract Greeter {
+      // state variables
+      string yourName = "HelloWorld"; // contract storage
+      function set(string memory _name) public {
+          yourName = _name;    
+      }
+      function hello() public view returns(string memory) {
+          return yourName;
+      }
+  }
+```
+  
+</script></section>
+
+  
+<section data-markdown><script type="text/template">
+
+  ## Functions
+  
+  ```
+  contract SimpleAdder {
+      function addOne(uint256 a) public pure returns(uint256) {
+          return a + 1;
+      }
+  }
+  ```
+  
+  * Functions are as in other languages:
+    * Accept parameters
+    * Perform computations and actions
+    * Optionally can return results
+  
+</script></section>
+  
+  
+  
+  
+<section data-markdown><script type="text/template">
+  
+  ## Types
+  
+  <pre>
+      function addOne(<span class="highlight">uint256</span> a) public pure returns(<span class="highlight">uint256</span>)
+  </pre>
+  
+  * Parameters, return values, and variables have types that determine what they can contain
+  * *uint256*
+    * unsigned (can't be negative)
+    * integer
+    * 256 bits (32 bytes)
+  
+</script></section>
+  
+  
+  
+  
+  
+  
+<section data-markdown><script type="text/template">
+  
+  ## Access restrictions
+  
+  <pre>
+      function addOne(uint256 a) <span class="highlight">public</span> pure returns(uint256)
+  </pre>
+  
+  * Who can call the function
+    * *public*: Everyone
+    * *private*: Only other functions in this contract
+    * *external*: Everyone, except other functions in this contract
+    * *internal*: Like *private*, except for inheritance (more later)
+  
+</script></section>
+  
+  
+  
+  
+  
+  
+<section data-markdown><script type="text/template">
+  
+  ## Storage restrictions
+  
+  <pre>
+      function addOne(uint256 a) public <span class="highlight">pure</span> returns(uint256)
+  </pre>
+  
+  * Contracts have a persistent memory called storage (or sometimes state)
+  * This will preserve values between transactions
+    * *pure*: Doesn't read or write to storage
+    * *view*: Reads from storage, but does not write
+    * None: Reads and writes to storage
+  
+</script></section>
+  
+  
+  
+  
+  
+  
+
+
+<section data-markdown><script type="text/template">
+  
+  ## `keccak256()`
+  
+  <pre>
+    //6e91ec6b618bb462a4a6ee5aa2cb0e9cf30f7a052bb467b0ba58b8748c00d2e5
+    keccak256(abi.encodePacked("abcdef"));
+    //b1f078126895a1424524de5321b339ab00408010b7cf0e6ed451514981e58aa9
+    keccak256(abi.encodePacked("abcdee"));
+  </pre>
+  
+  * Built-in function which is a version of SHA3.
+  * `keccak256` accepts single parameter
+  
+</script></section>
+
+
+
+
+
+<section data-markdown><script type="text/template">
+  
+  ## typecasting
+  
+  ```
+  uint8 a = 5;
+  uint b = 6;
+  // throws an error because a * b returns a uint, not uint8:
+  uint8 c = a * b; 
+  // we have to typecast b as a uint8 to make it work:
+  uint8 c = a * uint8(b);
+  ```
+  
+  * Conversion from one type to another is possible in solidity
+  
+</script></section>
+
+
+
+
+<section data-markdown><script type="text/template">
+
+## Logs/Events
+
+* Contracts can define events:
+<pre class="hljs js">
+event LogDeposit(address indexed account, uint256 amount);
+</pre>
+* That can be `emit`ted inside functions:
+<pre class="hljs js">
+    function deposit() public {
+        // ...
+        emit LogDeposit(msg.sender, msg.value);
+    }
+</pre>
+* These logs are not accessible to contracts
+* But can be read by dapps that monitor the chain
+  * Also useful during development
+
+</script></section>
+
+
+<section data-markdown><script type="text/template">
+
+## Demo: Counter 
+  
+```
+// SPDX-License-Identifier: MIT
+
+pragma solidity ^0.6.10;
+
+contract Counter {
+    
+    event ValueChanged(uint indexed oldValue, uint256 indexed newValue);
+    
+    // tracks the number of counts
+    uint256 count = 0;
+
+    // Function that increments counter
+    function increment() public {
+        count += 1;
+        emit ValueChanged(count - 1, count);
+    }
+    
+    // Getter function to get the count value
+    function getCount() public view returns (uint256) {
+        return count;
+    }
+}
+```
+  
+</script></section>
+
+
+<section data-markdown><script type="text/template">
+
+## Example of Event logs 
+    
+<img src="event-log.jpg" width=600>
+
+* The indexed parameters for logged events will allow you to search for these events using the indexed parameters as filters.
+    
+</script></section>
+
+
+<section data-markdown><script type="text/template">
+
+## End of Class
+
+</script></section>
+
+
+<!------------------------------------------------------->
+
+
+      </div>
+
+    </div>
+
+    <script src="../../reveal.js/lib/js/head.min.js"></script>
+    <script src="../../reveal.js/js/reveal.js"></script>
+    <script src="../../reveal.js/plugin/zoom-js/zoom.js"></script>
+
+    <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+
+        transition: 'none', // none/fade/slide/convex/concave/zoom
+
+	math: {
+          mathjax: '../lib/MathJax/MathJax.js',
+          config: 'TeX-AMS_SVG-full',
+	},
+
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: '../../reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: '../../reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: '../../reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+          { src: '../../reveal.js/plugin/math/math.js', async: true }
+        ]
+      });
+
+    </script>
+
+  </body>
+</html>
