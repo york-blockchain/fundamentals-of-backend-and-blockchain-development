@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+
+    <title>Fundamentals of Backend and Blockchain Development</title>
+
+    <meta name="author" content="Dhruvin Parikh">
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+    <link rel="stylesheet" href="../../reveal.js/css/reveal.css">
+    <link rel="stylesheet" href="../../reveal.js/css/theme/black.css" id="theme">
+
+    <!-- Code syntax highlighting -->
+    <link rel="stylesheet" href="../../reveal.js/lib/css/zenburn.css">
+
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? '../../reveal.js/css/print/pdf.css' : '../../reveal.js/css/print/paper.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="../reveal.js/lib/js/html5shiv.js"></script>
+    <![endif]-->
+
+    <style>
+      .reveal .slides h1, .reveal .slides h2, .reveal .slides h3 {
+        text-transform: none;
+      }
+
+      .two-column {
+        display: flex;
+        flex-wrap: wrap;
+      }
+
+      .two-column em {
+        margin: 20px;
+      }
+
+      .reveal .big-and-bold {
+        font-weight: bold;
+        font-size: 135%;
+      }
+
+      .reveal .shrunk-a-bit {
+        font-size: 90%;
+      }
+
+      .reveal .shrunk-a-bit pre {
+        width: 100%;
+      }
+
+      .reveal pre {
+        width: 100%;
+      }
+
+      .reveal .highlight {
+        color: yellow;
+        font-weight: bold;
+      }
+
+      .reveal .highlightRed {
+        color: red;
+        font-weight: bold;
+      }
+
+      .left {
+        left:-8.33%;
+        text-align: left;
+        float: left;
+        width:50%;
+        z-index:-10;
+      }
+
+      .right {
+        left:31.25%;
+        top: 75px;
+        text-align: left;
+        float: right;
+        z-index:-10;
+        width:50%;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="reveal">
+      <div class="slides">
+
+<!------------------------------------------------------->
+
+
+
+<section data-markdown><script type="text/template">
+
+## CSBC 1000 - Fundamentals of Backend and Blockchain Development
+
+### Class 4: Full Stack Decentralized Application Development 
+
+*Dhruvin Parikh*
+
+</script></section>
+
+
+<section data-markdown><script type="text/template">
+
+## Class Plan
+* Smart contract languages
+* Frameworks
+* Wallets
+* Developing a DApp
+
+</script></section>
+
+
+<section data-markdown><script type="text/template">
+
+## Pet shop tutorial (Correct URL)
+
+* [https://www.trufflesuite.com/tutorial](https://www.trufflesuite.com/tutorial)
+
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## Smart contract languages
+* Solidity - [https://docs.soliditylang.org/en/latest/](https://docs.soliditylang.org/en/latest/)
+* Vyper - [https://vyper.readthedocs.io/en/latest/](https://vyper.readthedocs.io/en/latest/)
+
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## Smart contract frameworks
+
+* Truffle - [https://www.trufflesuite.com/docs/truffle](https://www.trufflesuite.com/docs/truffle/)
+* Hardhat - [https://hardhat.org/getting-started/](https://hardhat.org/getting-started/)
+* Brownie - [https://eth-brownie.readthedocs.io/en/latest/](https://eth-brownie.readthedocs.io/en/latest/)
+
+</script></section>
+
+
+<section data-markdown><script type="text/template">
+
+## Smart contract IDE
+* Remix - [https://remix.ethereum.org/](https://remix.ethereum.org/)
+* VS Code Solidity Extension - [https://marketplace.visualstudio.com/items?itemName=JuanBlanco.solidity](https://marketplace.visualstudio.com/items?itemName=JuanBlanco.solidity)
+* Eth fiddle - [https://ethfiddle.com/](https://ethfiddle.com/)
+
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## Test blockchain network
+* Ganache - [https://www.trufflesuite.com/ganache](https://www.trufflesuite.com/ganache)
+* Infura - [https://infura.io/](https://infura.io/)
+* Chainstack - [https://chainstack.com/developers/](https://chainstack.com/developers/)
+* Alchemy - [https://www.alchemy.com/](https://www.alchemy.com/)
+* Pokt network - [https://www.pokt.network/](https://www.pokt.network/)
+
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## Test Ether faucet
+
+* Rinkeby - [https://faucet.rinkeby.io/](https://faucet.rinkeby.io/)
+* Kovan - [https://gitter.im/kovan-testnet/faucet](https://gitter.im/kovan-testnet/faucet)
+* Rinkeby, Kovan, Ropsten, Goerli - [https://faucet.metamask.io/](https://faucet.metamask.io/)
+* Goerli - [https://goerli-faucet.slock.it/](https://goerli-faucet.slock.it/)
+
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## Front end Ethereum APIs
+
+* Web3.js - [https://web3js.readthedocs.io/](https://web3js.readthedocs.io/)
+* Ethers.js - [https://docs.ethers.io/](https://docs.ethers.io/)
+* Web3.py - [https://web3py.readthedocs.io/en/latest/](https://web3py.readthedocs.io/en/latest/)
+
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## DApp Wallets
+
+* Metamask - [https://metamask.io/](https://metamask.io/)
+* Wallet Connect - [https://walletconnect.org/](https://walletconnect.org/)
+* Portis  - [https://www.portis.io/](https://www.portis.io/)
+* Fortmatic - [https://fortmatic.com/](https://fortmatic.com/)
+
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## Front-end Frameworks
+
+* React - [https://reactjs.org/](https://reactjs.org/)
+* Next JS - [https://nextjs.org/docs](https://nextjs.org/docs)
+
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## DApp architecture
+
+<img src="dapp_architecture.png" style="background-color: white; width: 400px" />
+
+</script></section>
+
+
+<section data-markdown><script type="text/template">
+
+  ## Assessments : Developing a Full Stack DApp Quiz
+
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## References
+
+* [Ethereum developer tools list](https://github.com/ConsenSys/ethereum-developer-tools-list)
+* [Smart contract frameworks](https://github.com/PatrickAlphaC/smart-contract-frameworks)
+* [Setup Dev environemnt](https://ethereum.org/en/developers/local-environment/)
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## End of Class
+
+</script></section>
+
+
+<!------------------------------------------------------->
+
+
+      </div>
+
+    </div>
+
+    <script src="../../reveal.js/lib/js/head.min.js"></script>
+    <script src="../../reveal.js/js/reveal.js"></script>
+    <script src="../../reveal.js/plugin/zoom-js/zoom.js"></script>
+
+    <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+
+        transition: 'none', // none/fade/slide/convex/concave/zoom
+
+	math: {
+          mathjax: '../lib/MathJax/MathJax.js',
+          config: 'TeX-AMS_SVG-full',
+	},
+
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: '../../reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: '../../reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: '../../reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+          { src: '../../reveal.js/plugin/math/math.js', async: true }
+        ]
+      });
+
+    </script>
+
+  </body>
+</html>
