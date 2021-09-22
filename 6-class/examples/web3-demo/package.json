@@ -1,0 +1,16 @@
+{
+  "name": "web3-demo",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "web3": "^1.5.2"
+  },
+  "scripts": {
+    "sign": "node ./sign.js",
+    "transact": "node ./transaction.js"
+  },
+  "devDependencies": {
+    "dotenv": "^10.0.0"
+  }
+}
