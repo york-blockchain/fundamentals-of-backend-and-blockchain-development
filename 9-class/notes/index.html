@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+
+    <title>Fundamentals of Backend and Blockchain Development</title>
+
+    <meta name="author" content="Dhruvin Parikh">
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+    <link rel="stylesheet" href="../../reveal.js/css/reveal.css">
+    <link rel="stylesheet" href="../../reveal.js/css/theme/black.css" id="theme">
+
+    <!-- Code syntax highlighting -->
+    <link rel="stylesheet" href="../../reveal.js/lib/css/zenburn.css">
+
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? '../../reveal.js/css/print/pdf.css' : '../../reveal.js/css/print/paper.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="../reveal.js/lib/js/html5shiv.js"></script>
+    <![endif]-->
+
+    <style>
+      .reveal .slides h1, .reveal .slides h2, .reveal .slides h3 {
+        text-transform: none;
+      }
+
+      .two-column {
+        display: flex;
+        flex-wrap: wrap;
+      }
+
+      .two-column em {
+        margin: 20px;
+      }
+
+      .reveal .big-and-bold {
+        font-weight: bold;
+        font-size: 135%;
+      }
+
+      .reveal .shrunk-a-bit {
+        font-size: 90%;
+      }
+
+      .reveal .shrunk-a-bit pre {
+        width: 100%;
+      }
+
+      .reveal pre {
+        width: 100%;
+      }
+
+      .reveal .highlight {
+        color: yellow;
+        font-weight: bold;
+      }
+
+      .reveal .highlightRed {
+        color: red;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="reveal">
+      <div class="slides">
+
+<!------------------------------------------------------->
+
+
+
+<section data-markdown><script type="text/template">
+
+## CSBC 1000 - Fundamentals of Backend and Blockchain Development
+
+### Class 9: Blockchain & Bitcoin Architecture
+
+*Dhruvin Parikh*
+
+</script></section>
+
+
+<section data-markdown><script type="text/template">
+
+## Class Plan
+* Birth of blockchain technology
+* What is blockchain?
+* Blockchain nodes, networks and applications
+* Distributed ledger technology
+* Bitcoin protocol
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## Birth of Blockchain technology
+
+<img src="birth-blockchain.png" style="background-color: white" />
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## Blockchain
+* Peer to peer 
+* Group of nodes
+* Miners
+* Transaction
+* Block
+* Consensus
+* Token
+* State
+* Smart contract
+    
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## Block structure
+
+* Decentralized public database that keeps a permanent record of the digital transactions
+<img src="bitcoin-blocks.png" style="background-color: white" />
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## Merkle tree
+
+<img src="merkle-tree.png" style="background-color: white" />
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## Consensus
+
+* Need for consensus
+* Two general's problem
+* Byzantine Generals Problem
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## CAP Theorem
+
+* Consistency
+* Availability
+* Partition tolerance
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## How bitcoin work?
+    
+</script></section>
+
+
+<section data-markdown><script type="text/template">
+
+## Public key cryptography
+
+<img src="pkey.png" style="background-color: white; width:600px" />
+</script></section>
+
+
+<section data-markdown><script type="text/template">
+
+## Encrypted message sending
+
+<img src="message.png" style="background-color: white; width:500px" />
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## Double spending issue
+
+<img src="double-spending.png" style="background-color: white; width:500px" />
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## Solution to double spending issue
+
+<img src="double-spent-solution.png" style="background-color: white; width:400px" />
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## Hash function features
+
+* Deterministic
+* Quickly compute the hash value for any given message.
+* Impossible to reverse the process that generated the given hash value
+* Impossible to find two different messages with the same hash value
+* Structured
+
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## Hashing of timestamped transactions
+
+<img src="timestamp-hash.png" style="background-color: white; width:600px" />
+
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## Hash-based Proof-of-work
+
+<img src="hash-pow.png" style="background-color: white; width:600px" />
+
+</script></section>
+
+
+<section data-markdown><script type="text/template">
+
+## Bitcoin transactions
+
+<img src="bitcoin-tx.png" style="background-color: white; width:600px" />
+
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## Bitcoin transaction steps
+
+* Create a hash of the previous transaction and the public key of the next owner.
+* Add this hash to the end of the coin.
+
+<img src="bitcoin-txs.png" style="background-color: white; width:300px" />
+
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## Timestamp server
+
+<img src="timestamp-server.png" style="background-color: white; width:400px" />
+
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## UTXO model
+
+<img src="utxo.png" style="background-color: white; width:600px" />
+
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## Assessment
+
+* Module 9 : Blockchain And bitcoin architecture quiz
+    
+</script></section>
+
+
+<section data-markdown><script type="text/template">
+
+## End of Class
+
+</script></section>
+
+
+<!------------------------------------------------------->
+
+
+      </div>
+
+    </div>
+
+    <script src="../../reveal.js/lib/js/head.min.js"></script>
+    <script src="../../reveal.js/js/reveal.js"></script>
+    <script src="../../reveal.js/plugin/zoom-js/zoom.js"></script>
+
+    <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+
+        transition: 'none', // none/fade/slide/convex/concave/zoom
+
+	math: {
+          mathjax: '../lib/MathJax/MathJax.js',
+          config: 'TeX-AMS_SVG-full',
+	},
+
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: '../../reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: '../../reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: '../../reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+          { src: '../../reveal.js/plugin/math/math.js', async: true }
+        ]
+      });
+
+    </script>
+
+  </body>
+</html>
