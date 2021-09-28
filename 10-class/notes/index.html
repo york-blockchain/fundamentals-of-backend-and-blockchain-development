@@ -1,0 +1,768 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+
+    <title>Fundamentals of Backend and Blockchain Development</title>
+
+    <meta name="author" content="Dhruvin Parikh">
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+    <link rel="stylesheet" href="../../reveal.js/css/reveal.css">
+    <link rel="stylesheet" href="../../reveal.js/css/theme/black.css" id="theme">
+
+    <!-- Code syntax highlighting -->
+    <link rel="stylesheet" href="../../reveal.js/lib/css/zenburn.css">
+
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? '../../reveal.js/css/print/pdf.css' : '../../reveal.js/css/print/paper.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="../reveal.js/lib/js/html5shiv.js"></script>
+    <![endif]-->
+
+    <style>
+      .reveal .slides h1, .reveal .slides h2, .reveal .slides h3 {
+        text-transform: none;
+      }
+
+      .two-column {
+        display: flex;
+        flex-wrap: wrap;
+      }
+
+      .two-column em {
+        margin: 20px;
+      }
+
+      .reveal .big-and-bold {
+        font-weight: bold;
+        font-size: 135%;
+      }
+
+      .reveal .shrunk-a-bit {
+        font-size: 90%;
+      }
+
+      .reveal .shrunk-a-bit pre {
+        width: 100%;
+      }
+
+      .reveal pre {
+        width: 100%;
+      }
+
+      .reveal .highlight {
+        color: yellow;
+        font-weight: bold;
+      }
+
+      .reveal .highlightRed {
+        color: red;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="reveal">
+      <div class="slides">
+
+<!------------------------------------------------------->
+
+
+
+<section data-markdown><script type="text/template">
+
+## CSBC 1000 - Fundamentals of Backend and Blockchain Development
+
+### Class 10: Architecture Analysis : Ethereum
+
+*Dhruvin Parikh*
+
+</script></section>
+
+
+<section data-markdown><script type="text/template">
+
+## Class Plan
+* Ethereum Basics
+* Ethereum Scaling
+* Use cases
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## Distributed data-base
+
+* A blockchain is a distributed data-base (DB)
+* Everyone agrees on a basic set of rules about how it can be changed
+  * Example rule: only the owner of an account can send transactions from that account
+* When a blockchain is working properly, everyone in the world has the exact same copy of the DB
+  * How this happens is called a *consensus protocol*
+
+</script></section>
+
+
+<section data-markdown><script type="text/template">
+
+## Consensus
+
+<img src="determinism.svg" style="background-color: white" />
+
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## Deterministic effects
+
+* When applying a transaction to the DB, everyone in the world must get the same resulting DB
+* So: all transactions must be **deterministic**
+  * Cannot get input from outside world
+  * Cannot depend on anything except what is already in the DB
+  * Cannot generate random numbers
+
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## Turing Machine
+
+* A Turing Machine is a theoretical machine designed by Alan Turing
+* It can be programmed to perform any arbitrary computation
+* If you can show how to implement a Turing Machine in a programming language or virtual machine, it is called **turing complete**
+
+</script></section>
+
+
+
+<section data-markdown><script type="text/template">
+
+## Turing Machine
+
+<img style="background-color: white" src="turing-machine.png">
+
+</script></section>
+
+
+
+<section data-markdown><script type="text/template">
+
+## Turing Completeness
+
+* No real-world machine has an *infinite* tape, so can never be truely Turing Complete
+  * Informal "turing complete"
+* In practice, informal "turing complete" means:
+  * Can do loops
+  * Backwards branches (same as loops)
+
+</script></section>
+
+
+
+
+
+<section data-markdown><script type="text/template">
+
+## Harvard Architecture
+
+<img style="background-color: white; border: 0" width="500px" src="Harvard_architecture.svg">
+
+* Memory used to store the program code is separate from the working memory used by the program
+
+</script></section>
+
+
+
+<section data-markdown><script type="text/template">
+
+## Von Neumann Architecture
+
+<img style="background-color: white; border: 0" src="Von_Neumann_Architecture.svg">
+
+* There is only one class of memory that stores both program code and working memory
+* General purpose computers today are (mostly) Von Neumann
+
+</script></section>
+  
+
+<section data-markdown><script type="text/template">
+
+## What is Ethereum
+
+* Decentralized platform to run smart contracts
+  * no single point of failure
+  * censorship resistant
+* Account-based model
+* Distributed state machine
+  * block of transaction modeled as state transition function
+
+</script></section>
+
+
+<section data-markdown><script type="text/template">
+
+## Ethereum
+
+* Ethereum has a native asset called Ether
+  * basis of value in Ethereum ecosystem
+  * need to align incentives
+  * given to miners as reward to mint blocks
+
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## Ethereum vs Bitcoin
+
+* Ethereum : Smart contract platform
+  * Complex but feature-rich
+  * Turing complete scripting language
+  * Account based model
+* Bitcoin : Decentralized asset
+  * Simple and robust
+  * Simple stack based language; not Turing complete
+  * UTXO based model 
+</script></section>
+
+
+<section data-markdown><script type="text/template">
+
+## EVM (Ethereum Virtual Machine)
+
+<img src="evm.png" style="background-color: white" />
+
+</script></section>
+
+
+
+
+<section data-markdown><script type="text/template">
+
+## UTXO versus Accounts
+
+* Bitcoin uses *Unspent Transaction Outputs*
+  * Your balance doesn't exist in one place, it's the sum of all unspent "cheques" you've received
+* Ethereum uses *Accounts*
+  * Your balance exists in a single record in the DB
+
+</script></section>
+
+
+
+
+<section data-markdown><script type="text/template">
+
+## Replay attacks
+
+* Imagine Alice signs and sends a transaction:
+  * *I, Alice, send 10 coins to Bob*
+* Bob waits a while and then copies the **exact same transaction** and sends it again:
+  * *I, Alice, send 10 coins to Bob*
+* Without "replay prevention" Bob would now have 20 coins
+
+</script></section>
+
+
+
+
+
+<section data-markdown><script type="text/template">
+
+## Replay prevention
+
+* UTXO model: a transaction spends one or more UTXOs, invalidating them so they cannot be spent again
+* Account model: each account has a counter, and each transaction has a sequence number
+  * To apply a transaction, its sequence number must be the next account counter number
+  * After applying the transaction, the account counter is increased by 1
+
+</script></section>
+
+
+
+
+<section data-markdown><script type="text/template">
+
+## Account model (Ethereum)
+
+<img src="replay.svg" style="background-color: white" />
+
+</script></section>
+
+
+
+
+<section data-markdown><script type="text/template">
+
+## Types of Ethereum accounts
+
+* Externally Owned Accounts (EOA)
+  * Normal public/private key-pair accounts like we created last lesson
+* Contracts
+  * Do not have key-pairs
+  * Have "code" written by contract creators
+  * No ability to initiate transactions: can only respond to external events
+
+</script></section>
+
+
+
+
+
+<section data-markdown><script type="text/template">
+
+## Ethereum Transaction Structure
+
+| Field        | Explanation  |
+| ------------- |:-----:|
+| nonce      | Transaction sequence number |
+| to | Address being sent to |
+| value | Amount of ETH sent to `to` |
+| init / data | For smart contracts |
+| gasPrice, gasLimit | Resource limits |
+| v, r, s | Signature |
+
+</script></section>
+
+
+
+
+<section data-markdown><script type="text/template">
+
+## Nonce
+
+* <span class="big-and-bold">N</span>umber you can only use <span class="big-and-bold">ONCE</span>
+* Ethereum sometimes calls the account counter and/or the transaction sequence number a *nonce*
+* Sort of a bad name in Ethereum:
+  * Not harmful to re-use a nonce, because only one transaction will make it onto the chain
+  * This is only way to cancel a pending transaction
+* Ensures transactions applied in expected order
+
+</script></section>
+
+
+
+
+<section data-markdown><script type="text/template">
+
+## Smart contracts
+
+* A transaction can create a smart contract
+  * The `init` field will contain the initialization code that sets up the smart contract
+* Or, a transaction can be a message to an existing smart contract
+  * The `data` field will contain the parameters of the message
+
+</script></section>
+
+
+
+
+<section data-markdown><script type="text/template">
+
+## Resource Limits
+
+* In order to prevent a transaction from consuming excessive resources, transactions are required to pay fees proportional to how much they consume
+  * In Bitcoin the fee is based on transaction size
+  * Ethereum is more complicated: it uses **gas** accounting
+
+</script></section>
+
+
+
+
+<section data-markdown><script type="text/template">
+
+## Gas
+
+* Every operation performed by a transaction takes a certain amount of gas
+* The transaction must pay the sum of all gas it used times the `gasPrice` it offered to pay
+* If the transaction uses more than its `gasLimit` then all its effects are reverted (but the fee is still spent!)
+
+</script></section>
+
+
+
+<section data-markdown><script type="text/template">
+
+## Gas Intuition
+
+| Term        | Intuition  |
+| ------------- | -----|
+| gas&nbsp;limit | How many units of gas you buy before driving to the store. If there isn't enough you won't make it there (but if you do, you're refunded what you don't use) |
+| gas&nbsp;price | How much each unit of gas cost at the time you purchased it |
+| gas&nbsp;used | How many units of gas your car needed to drive to the store |
+
+</script></section>
+
+
+<section data-markdown><script type="text/template">
+
+## Why no from field?
+
+* The transaction contains the ethereum address being sent *to*
+* But why doesn't it contain the address the transaction is being sent *from*?
+  * Because it can be recovered from the signature
+  * We did this in **Cryptography and Security** class
+  * Can also be recovered using `ecrecover` in Solidity
+
+</script></section>
+
+
+<section data-markdown><script type="text/template">
+
+## Demo
+
+* For transactions on next slide, determine:
+  * The sender ("from")
+  * The recipient ("to")
+  * The gas price the transaction offered (in Gwei)
+  * How much gas was used (in units of gas)
+  * How much the sender actually paid as a "transaction fee" (in ETH and/or $)
+  * Did it use all gas up to the gas limit?
+  * Did the transaction succeed?
+  * Was the recipient an EOA or a smart contract?
+  * Was there any input data?
+
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## Example Ethereum transactions
+
+* [Simple transfer](https://etherscan.io/tx/0xc569558715e9e7e12ff9a07b07269693ce1cedd0f4e20c68c69dd3b6f61e95cb)
+* [Out of gas](https://etherscan.io/tx/0x18bf783fa0ebd7b04ba53f7caf71c5747dcd17933c3abe48bf76540f59d7a582)
+* [Exception thrown (old way: uses up all gas)](https://etherscan.io/tx/0xbd052407c5d985911ec46c9d3fa651b0bf6efdf7b9c86d13bf61270b24bc5031)
+* [Exception thrown (new way: revert)](https://etherscan.io/tx/0x3f56b4c15dbeadcb2965c71c47894a1413c11f991786123318a8fcaaac19839a)
+* [Contract creation](https://etherscan.io/tx/0xc10fc67499a037b6c2f14ae0c63b659b05bd7b553378202f96e777dd4843130f)
+
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## Blocks
+
+<img src="block.svg" style="background-color: white" />
+
+* A block is a sequence of transactions
+
+</script></section>
+
+
+
+<section data-markdown><script type="text/template">
+
+## Blockchain
+
+<img src="blockchain.svg" style="background-color: white" />
+
+* A blockchain is a sequence of blocks
+* Each block is linked to the previous by embedding its hash
+
+</script></section>
+
+
+
+<section data-markdown><script type="text/template">
+
+## Miners
+
+* Miners are the entities that actually make the blocks
+* They can't modify the contents of transactions (since they are signed)
+* But, they choose which transactions to include, and the order of those transactions inside each block that they make
+
+</script></section>
+
+
+<section data-markdown><script type="text/template">
+
+## Nodes
+
+* Blockchains are *peer-to-peer* protocols
+* The initial concept is that every user in the system runs the same software
+  * No client/server distinction
+* However, running "full nodes" is expensive so there are alternatives:
+  * Light clients like electrum, SPV
+  * Services like INFURA
+
+</script></section>
+
+
+
+
+<section data-markdown><script type="text/template">
+
+## What do full nodes do?
+
+* Full nodes communicate over a gossip protocol
+* Exchange new pending transactions, and new blocks as they are mined
+* Verify that every transaction in every block follows the rules
+* Some full nodes also manage private keys and create transactions on behalf of users
+  * This is now regarded as bad design
+  * Prefer separation of key management agents from node software
+
+</script></section>
+
+
+
+
+
+<section data-markdown><script type="text/template">
+
+## JSON-RPC
+
+* In order to expose functionality, most node software offers a *Remote Procedural Call* interface
+* Most common is JSON-RPC, which is just JSON messages sent over HTTP
+  * Default Ethereum JSON-RPC port is 8545
+* [Documentation](https://eth.wiki/json-rpc/API)
+
+</script></section>
+
+
+
+<section data-markdown><script type="text/template">
+
+## Data formats
+
+* In JSON-RPC, many inputs and outputs are hex-encoded (string with a "0x" prefix)
+* Numeric values are in [big endian](https://en.wikipedia.org/wiki/Endianness), [two's complement](https://en.wikipedia.org/wiki/Two%27s_complement)
+  * Not essential to understand now: explained later
+* ETH values are always in Wei (there are 10<sup>18</sup> wei in 1 ETH)
+
+</script></section>
+
+
+<section data-markdown><script type="text/template">
+
+## Blockchain VMs
+
+* Both Bitcoin and Ethereum implement stack-based virtual machines
+  * Bitcoin Script/EVM
+* Even if you only use compilers (ie Solidity) it can be useful to understand how the VMs work
+
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## Bitcoin Script
+
+* In Bitcoin, every Unspent Transaction Output (UTXO) is protected by a **script**
+* This is a program for a stack-based virtual machine
+* The spender puts arguments onto the stack, then the transaction script is run
+  * Transaction is valid if the script succeeds and leaves a non-zero argument on top of stack
+
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## EVM
+
+* The Ethereum Virtual Machine (EVM) is an evolution of Bitcoin Scripts
+* Many more instructions
+* Unlike bitcoin, it is turing complete (informal)
+* See [list of EVM opcodes](https://ethereum.stackexchange.com/questions/119/what-opcodes-are-available-for-the-ethereum-evm)
+
+</script></section>
+  
+  
+
+<section>
+  <h2>What is Ethereum 2.0?</h2>
+  <ul>
+      <li>Ethereum 2.0, also called Eth2 or ‘Serenity’, is the next upgrade to the Ethereum blockchain. Ethereum 2.0 will be released in multiple “Phases” starting in 2020 with Phase 0. Each phase will improve the functionality and performance of Ethereum in different ways.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Major impprovments</h2>
+  <ul>
+      <li>Proof of stake</li>
+      <li>Shard Chain</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Proof Of Stake (Phase 0)</h2>
+  <ul>
+      <li>Instead of relying on physical miners and electricity, PoS relies on validators or virtual miners and deposits of ether.</li>
+      <li>Validators are people who elect to continue the blockchain by staking <b>32 ETH</b> into deposit contract.</li>
+      <li>Validators are selected from the pool based on magnitude of stake.</li>
+      <li>On successful validation of block, validator will receive an ETH reward.</li>
+      <li>Validator misbehaviour will slash deposit – loss of some or all of their 32 staked ETH.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Why Proof Of Stake?</h2>
+  <ul>
+      <li>Crypto-economic security less electricity consumption</li>
+      <li>No need of enormous mining facility unlike PoW, staking on Ethereum 2.0 will only require a consumer laptop</li>
+      <li>Increase decentralisation of network</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Shard chains(Phase 1)</h2>
+  <ul>
+      <li>It is like adding another lane to upgrade Ethereum from a single lane road to a multiple lane highway.  More lanes and parallel processing leads to much higher throughput.</li>
+      <li>Shard chains are a mechanism through which the Ethereum blockchain is “split” – thus dividing the data processing responsibility among many nodes.</li>
+  </ul>
+</section>
+
+<section>
+  <img src="beacon.png" width="600px">
+</section>
+
+<section>
+  <h2>Why Shard Chains</h2>
+  <ul>
+      <li>Add scalability and hence increase throughput of the blockchain</li>
+      <li>Transactions can get processed in parallel rather than consecutively</li>
+      <li>Currently single chain is incredibly secure and secure to verify but each full node to process and validate transaction can affect ability to process transaction quickly.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Reward mechanism</h2>
+  <ul>
+      <li>Rewarded for proposing, attesting and validating next block in the chain.</li> 
+      <li>Payout done periodically i.e. after every epoch completion.</li> 
+      <li>Payout calculation is based on total amount of ETH staked and average % online of validator(s).</li>
+      <li>Rewards minus penalties are transferred to validators every epoch</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Launching Beacon chain</h2>
+  <ul>
+      <li>In order for the Beacon Chain to launch, at least 16,384 validators will be needed, which equates to 524,288 ETH staked. Staking rewards are not distributed until the Beacon Chain reaches the genesis threshold.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Ways to earn rewards</h2>
+  <ol>
+      <li>ETH holder may run their own validator(s) by staking ETH in increments of 32 on the network. Running your own validator node means you have the responsibility to validate and organize blocks – not doing so could result in a penalty of ETH.</li>
+      <li>Eth holder can stake their rewards through a staking provider or join a staking pool with smaller amounts of ETH, through which anyone can stake whatever small amount of ETH they are able to and still receive rewards proportional to their contribution</li>
+  </ol>
+</section>
+
+<section>
+  <h2>When will Ethereum 2.0 release?(tentative)</h2>
+  <ul>
+      <li>Phase 0: 2020</li>
+      <li>Pahse 1: 2021</li>
+      <li>Phase 2 and beyond: 2021 or later</li>
+  </ul>
+</section>
+
+<section>
+  <h2>ETH2.0 Developers Resources</h2>
+  <ul>
+      <li><a href="https://notes.ethereum.org/@serenity/handbook" target="_blank">Ethereum 2.0 handbook</a></li>
+      <li><a href="https://prylabs.net/" target="_blank">Onyx test net</a></li>
+      <li><a href="https://docs.google.com/spreadsheets/d/15tmPOvOgi3wKxJw7KQJKoUe-uonbYR6HF7u83LR5Mj4/edit#gid=1548910165" target="_blank">Ethereum 2.0 Calculator</a></li>
+  </ul>
+</section>
+
+<section>
+      <h3>ETH2.0 Relevant Readings</h3>
+      <ul>
+          <li><a href="https://consensys.net/blog/blockchain-explained/a-short-history-of-ethereum/" target="_blank">History Of Ethereum</a></li>
+          <li><a href="https://consensys.net/blog/blockchain-explained/what-is-proof-of-stake/" target="_blank">What is proof of stake?</a></li>
+          <li><a href="https://consensys.net/knowledge-base/ethereum-2/glossary" target="_blank">Ethereum 2.0 Glossary</a></li>
+          <li><a href="https://hackmd.io/@benjaminion/eth2_news/https%3A%2F%2Fhackmd.io%2F%40benjaminion%2Fwnie2_200710" target="_blank">Ethereum 2.0 day to day updates</a></li>
+          <li><a href="https://consensys.net/blog/blockchain-explained/what-happens-to-my-eth-on-ethereum-2/">Existing Eth and Ethereum 2.0</a></li>
+          <li><a href="https://github.com/ethereum/eth2.0-pm/">Ethereum 2.0 Project management</a></li>
+      </ul>
+</section>
+
+<section data-markdown><script type="text/template">
+
+## Common Applications
+
+* Prediction Markets
+* Crowd funding
+* Storage
+* Token exchange
+* Computation
+* Identity
+    
+</script></section>
+
+
+<section data-markdown><script type="text/template">
+
+## Advanced Applications
+
+* Supply chain & Provenance
+* Decentralized finance
+    
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## Assessment
+
+* Module 10 : Architecture Analysis - Ethereum Quiz 
+    
+</script></section>
+
+
+<section data-markdown><script type="text/template">
+
+## End of Class
+
+</script></section>
+
+
+<!------------------------------------------------------->
+
+
+      </div>
+
+    </div>
+
+    <script src="../../reveal.js/lib/js/head.min.js"></script>
+    <script src="../../reveal.js/js/reveal.js"></script>
+    <script src="../../reveal.js/plugin/zoom-js/zoom.js"></script>
+
+    <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+
+        transition: 'none', // none/fade/slide/convex/concave/zoom
+
+	math: {
+          mathjax: '../lib/MathJax/MathJax.js',
+          config: 'TeX-AMS_SVG-full',
+	},
+
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: '../../reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: '../../reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: '../../reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+          { src: '../../reveal.js/plugin/math/math.js', async: true }
+        ]
+      });
+
+    </script>
+
+  </body>
+</html>
