@@ -92,63 +92,61 @@
 
 </script></section>
 
-<section data-markdown><script type="text/template">
-## `$WHOAMI`  
-- DeFi developer and Web3.0 instructor.  
-- Senior Blockchain Developer and CTO at opty.fi
-- Also Adjunct Professor at George Brown College in Blockchain Development Program 
-</script></section>
-
-<section data-markdown><script type="text/template">
-## Evaluation
-- **knowledge checks** - 30% 
-- **Final Project (milestone 1)** - 35%
-- **Final Project (milestone 2)** - 35%
-</script></section>
 
 <section data-markdown><script type="text/template">
 
 ## Class Plan
-* Course Overview
 * Introduction to three-tier architecture
 * Frontend development
 * Backend development
 * Full stack development
-* Project expectations
 </script></section>
-
-<section data-markdown><script type="text/template">
-
-## Course Overview
-
-* Learn core concepts of front end, backend and fullstack and blockchain development
-* Solving problems with help of blockchain technology and other off-chain components
-* Final project work in groups.
-* Knowledge checks/coding activity followed by the end of each class
-* Moodle includes *THINK* questions as a brainstorming exercise.
-</script></section>
-
-
 
 <section data-markdown><script type="text/template">
 
 ## DBMS architecture
 
 * **Single tier architecture** 
-  * Client, server and database reside on same machine
 * **Two tier architecture**
-  * Server and database reside on same machine
 * **Three tier architecture**
-  * functional processes, logic, data access, data storage and UI interface done independently a separate modules
+  * functional processes, logic, data access, data storage and UI interface done independently as separate modules
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+### Single tier architecture
+
+![](./single-tier.webp)
+* Client, server, and Database all reside on the same machine. 
+* For e.g. installing a Database in your system and access it to practice SQL queries. 
+* Rarely used in production.
+
+</script></section>
+
+
+<section data-markdown><script type="text/template">
+
+### Two tier architecture
+
+<img src="./two-tier.webp" width="250">
+* Server and database reside on same machine
+* Presentation layer runs on a client (PC, Mobile, etc.) 
+* Data is stored on a server called the second tier. 
+* It also provides direct and faster communication.
+* E.g. Contact Management system using MS-Access
+
 </script></section>
 
 
 
 <section data-markdown><script type="text/template">
 
-## Three tier DBMS architecture diagram
+## Three tier architecture
 
-<img src="dbms_3tier.png" style="background-color: white" />
+<img src="dbms_3tier.png" style="background-color: white" width="300" />
+
+* Development and maintenance of functional processes, logic, data access, data storage, and user interface is done independently as separate modules. 
+* Contains a presentation layer, an application layer, and a database server.
 
 </script></section>
 
@@ -157,9 +155,8 @@
 ## Goal of three tier architecture
 
 * Segregate user applications and physical database
-* DBMS characteristic 
 * Program-data independence
-* Multiple views of Data
+* Support multiple views of Data
 
 </script></section>
 
@@ -193,6 +190,8 @@
 
 ## Application layer
 
+* Enables communication between end-user and DBMS as well as reverse.
+* The application layer(business logic layer) also processes functional logic, constraint, and rules before passing data to the user or down to the DBMS.
 * Contains application's business logic to drive application's core capabilities
 * Mostly build using NodeJS, Java, .NET, C#, Python, C++, etc
 
@@ -235,7 +234,7 @@
 
   ## Frontend
   
-  * Lies on application layer
+  * Lies on application layer and acts a client to backend application
   * Provides visual and interactive experience to user
   * Parses data from data layer and presents in human readable form.  
   
@@ -247,7 +246,56 @@
 ## UI/UX design
   
 * Look and feel of the application
-* Tools like Adobe XD, Figma, Lucid chart, etc are used for wire framing and simulation
+* Tools like Adobe XD, Figma, Lucid chart, Balsamiq, Sketch etc are used for wire framing and simulation
+  
+</script></section>
+
+
+<section data-markdown><script type="text/template">
+
+## UI/UX wire-frames
+
+* A wireframe is generally a monochromatic drawing that’s created in the design phase of Design Thinking Process. 
+* It provides a blueprint of the page structure, layout, information and functions. 
+* This in turn gives a clear idea to the stakeholders about the functioning and visual representation of application UI.
+* It help save time, gathering feedback and create accurate designs
+  
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## UI/UX design principles
+  
+* Avoid jargon and non-actionable data
+* Be consistent and use a design system
+* Use existing UX patterns
+* Create active guidance and feedback
+* Allow for and anticipate mistakes
+* Focus on localization and device agnostic
+  
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## UI/UX trust signalling
+  
+* Give explicit control to the user
+* Reduce anxiety and cognitive load. 
+* Guide with consistency. 
+* Respect established conventions. 
+* Capture and confirm potential mistakes
+* Make the complex intuitive
+
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## UI/UX Key Takehomes
+  
+* Wireframes should be used early in a project to get user and client approval on the layout of key pages and the navigation.
+* The user is the weakest link in the security chain
+* The UI is the place to make them stronger
+* Designers are the protectors
   
 </script></section>
 
@@ -256,12 +304,34 @@
 
   ## Development
   
-  * The wireframs created during UI/UX design is converted into code.
+  * The wire-frames created during UI/UX design is converted into code.
   * Involves creating visual components around the screen of the device
-  * **Client Side rendering**
-    *  Page gets renders entirely by client side javascript
-  * **Server side rendering**
-    * HTML is generated at each request.
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+  ## Client Side rendering
+  
+  * Initial requests load page, layout, CSS and Javascript
+  * Some or all of the content isn't included
+  * Instead, the JS makes anothe r request, gets a response (likely in JSON),
+  and generates appropriate HTML (likely using a template library such as React)
+  * For subsequent updates to the page, CSR repeats the steps it used to get initial content.
+
+</script></section>
+
+
+<section data-markdown><script type="text/template">
+
+  ## Server side rendering (Dynamic Rendering)
+  
+  * Initial requests loads the page, layout, CSS, JS and **content**
+  * HTML is generated at each request.
+  * Blank page flicker does not happen. (developers mask this problem with a loading image using CSR)
+  * Great for SEO. Content is present before you get it, so search engines are able to index it and crawl it efficiently.
+  * Works fine with text-based sites; mostly static sites
+  * Slow page rendering comparatively
+
 </script></section>
   
 
@@ -272,6 +342,7 @@
   
   * Web application can be deployed on the hosted services on the internet
   * Mobile applications can be published to its corresponding digital distribution service.
+  * Can host on platforms like GH pages, surge.sh, AWS amplify, Firebase hosting
   
 </script></section>
   
@@ -294,47 +365,77 @@
   * High level system design
   * Design core components like API, data model
   * Identify bottle necks and scale up the system
-
-  <aside class="notes">
-    Sequence 1 :
-    Who is this system for?
-    How will this end user get access to your service?
-    How many users do you estimate will be on this service hourly, daily, annually?
-    What do the requests to the system look like?
-    What will users expect this service to output?
-    Will the system be more read heavy than write intensive?
-    How fast should search results be?
-    Should user requests be handled in real time?
-    Will web traffic always be equally distributed across all locations your service will be deployed?
-    
-    Sequence 4 :
-    Design core components like the API, data model
-    Do your use cases point you towards a relationship data model or document-based model?
-    Will you use RPC, SOAP, REST or another API model (if your service is web based)?
-    For each endpoint on your API, what will the request body/parameters contain?
-    If tasks take too long, how do you store them so that their status can be later queried by a user?
-    How will your service authenticate and authorize users?
-    Will any processes in your service depend on an external service?
-
-    Sequence 5 :
-    What portion of the code/system takes too long?
-    Can certain tasks be broken up and handled by smaller child processes?
-    Is it possible to store static files separately and closer to your users with a CDN?
-    How do you ensure that if a server or database goes down, your service won’t go down as well?
-    Is there a way to monitor and log the behaviour of your service?
-  </aside>
+  * Following is the list of sequence to make BE systems scalable, reliable and maintainable 
   
 </script></section>
 
 <section data-markdown><script type="text/template">
   
-  ## High level design
+  ### Sequence 1
 
-  <img src="system_design.png" style="background-color: white; width: 600px;" />
+  * Who is this system for?
+  * How will this end user get access to your service?
+  * How many users do you estimate will be on this service hourly, daily, annually?
+  * What do the requests to the system look like?
+  * What will users expect this service to output?
+  * Will system be more read heavy or write intensive?
+  * How fast should search results be?
+  * Should user requests be handled in real time?
+  * Will web traffic always be equally distributed across all locations your service will be deployed? 
   
 </script></section>
+
+<section data-markdown><script type="text/template">
   
+  ### Sequence 2
+
+  <img src="system_design.png" style="background-color: white; width: 600px;" />
+
+  * Sketch high level design of main components
   
+</script></section>
+
+
+<section data-markdown><script type="text/template">
+  
+  ### Sequence 3
+
+  * Estimate the required storage and bandwidth
+  * How much data would you need to store individual records? e.g say 1 Tweet = 10KB
+  * How much data is this per month for your estimated number of users?
+  * How many read/write requests per second are there?
+  * If a popular account shares an activity, how does this impact the number of reads?
+  
+</script></section>
+
+
+<section data-markdown><script type="text/template">
+  
+  ### Sequence 4
+
+  * Design core components like the API, data model
+  * Do your use cases point you towards a relationship data model or document-based model?
+  * Will you use RPC, SOAP, REST or another API model (if your service is web based)?
+  * what will the API request body/parameters contain?
+  * If tasks take too long, how do you store them so that their status can be later queried by a user?
+  * How will service authenticate and authorize users?
+  * Will any processes in your service depend on an external service?
+  
+</script></section>
+
+
+<section data-markdown><script type="text/template">
+  
+  ### Sequence 5
+
+  * What portion of the code/system takes too long?
+  * Can certain tasks be broken up and handled by smaller child processes?
+  * Is it possible to store static files separately and closer to your users with a CDN?
+  * How do you ensure that if a server or database goes down, your service won’t go down as well?
+  * Is there a way to monitor and log the behavior of your service?
+  
+</script></section>
+
 
 <section data-markdown><script type="text/template">
   
@@ -361,13 +462,47 @@
   
 </script></section>
 
+<section data-markdown><script type="text/template">
+  
+  ## Unit testing
+  
+  * Testing individual function in isolation
+  * Enable stable releases in software development
+  
+</script></section>
 
-
+<section data-markdown><script type="text/template">
+  
+  ## Integration testing
+  
+  * Covers the interaction between different parts of the application.
+  * Checks if different units of the software work together correctly in real life. 
+  
+</script></section>
 
 
 <section data-markdown><script type="text/template">
   
-  ## Development stacks
+  ## System testing
+  
+  * Checks that all components are integrated and work correctly
+  * Verifies that system meets functional, technical and business requirements
+  * It is crucial to create an environment similar to production
+  
+</script></section>
+
+<section data-markdown><script type="text/template">
+  
+  ## Acceptance testing
+  
+  * QA team tests the quality of application by applying predefined test scenarios and test cases
+  * Evaluate system's compliance with business requirements 
+  
+</script></section>
+
+<section data-markdown><script type="text/template">
+  
+  ## Popular tech stacks
   
   * LAMP stack - Linux Apache MySQL PHP
   * MEAN stack - MongoDB Express Angular Node
@@ -378,13 +513,27 @@
 
 <section data-markdown><script type="text/template">
 
-## Final Project discussion
-
-* Milestone #1
-* Milestone #2
-    
+  * Q&A
+  * *THINK* exercises
+  * Module 1: Three tier Architecture Quiz 
+  
 </script></section>
 
+
+<section data-markdown><script type="text/template">
+
+## References
+* [DBMS Architecture](https://www.guru99.com/dbms-architecture.html)
+* [Wireframing in UI/UX Design](https://medium.com/detaux/what-is-ui-ux-wireframe-designerrs-46dac9c8a153)
+* [Diff - UI and UX](https://designerrs.com/why-do-people-confuse-ui-with-ux/)
+* [CSR & SSR](https://www.youtube.com/watch?v=Y2spCNZDt84)
+* [Web server](https://www.techtarget.com/whatis/definition/Web-server)
+* [FE, BE and Web server](https://citykittydesign.com/app-architecture-understanding-frontend-backend-and-web-servers/)
+* [WhatsApp System design](https://youtu.be/vvhC64hQZMk)
+* [Automation testing](https://yalantis.com/blog/unit-testing-for-web-software/)
+* [High level design](https://github.com/donnemartin/system-design-primer/tree/master/solutions/system_design/social_graph#step-2-create-a-high-level-design)
+
+</script></section>
 
 <section data-markdown><script type="text/template">
 
