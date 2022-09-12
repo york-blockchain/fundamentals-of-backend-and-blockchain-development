@@ -326,11 +326,10 @@
   ## Server side rendering (Dynamic Rendering)
   
   * Initial requests loads the page, layout, CSS, JS and **content**
-  * HTML is generated at each request.
   * Blank page flicker does not happen. (developers mask this problem with a loading image using CSR)
-  * Great for SEO. Content is present before you get it, so search engines are able to index it and crawl it efficiently.
+  * SEO friendly : Search engines are able to index and crawl efficiently. Content is present before you get it.
   * Works fine with text-based sites; mostly static sites
-  * Slow page rendering comparatively
+  * HTML is generated at each request; Slow page rendering comparatively
 
 </script></section>
   
@@ -359,12 +358,21 @@
 
 <section data-markdown><script type="text/template">
   
+  ## Three tier application architecture
+
+  <img src="backend-architecture.jpeg" style="background-color: white; width: 800px;" />
+  
+</script></section>
+
+<section data-markdown><script type="text/template">
+  
   ## System design
 
   * Requirement gathering
   * High level system design
   * Design core components like API, data model
   * Identify bottle necks and scale up the system
+  * The non-functional requirements of today’s large scale products demand that backend systems be scalable, reliable and maintainable. 
   * Following is the list of sequence to make BE systems scalable, reliable and maintainable 
   
 </script></section>
@@ -415,7 +423,7 @@
 
   * Design core components like the API, data model
   * Do your use cases point you towards a relationship data model or document-based model?
-  * Will you use RPC, SOAP, REST or another API model (if your service is web based)?
+  * Will you use RPC, SOAP, REST or another API model?
   * what will the API request body/parameters contain?
   * If tasks take too long, how do you store them so that their status can be later queried by a user?
   * How will service authenticate and authorize users?
@@ -436,18 +444,6 @@
   
 </script></section>
 
-
-<section data-markdown><script type="text/template">
-  
-  ## Three tier application architecture
-
-  <img src="backend-architecture.jpeg" style="background-color: white; width: 800px;" />
-  
-  
-</script></section>
-  
-
-
 <section data-markdown><script type="text/template">
   
   ## Backend development
@@ -459,6 +455,90 @@
   * Technical debt
   * **Deployment environments**
     * Development, testing, staging, production 
+  
+</script></section>
+
+
+<section data-markdown><script type="text/template">
+  
+  ## Selecting database : SQL
+  
+  * Relation Data Model
+  * Pros:
+   * Easy to use and setup. 
+   * Universal, compatible with many tools.
+   * Good at high-performance workloads.
+   * Good at structure data.
+  * Cons:
+   * Time consuming to understand and design the structure of the database.
+   * Can be difficult to scale
+  
+</script></section>
+
+<section data-markdown><script type="text/template">
+  
+  ## Selecting database : NoSQL
+  
+  * Document Data Model
+  * Pros:  
+   * No investment to design model. 
+   * Rapid development cycles.
+   * In general faster than SQL.
+   * Runs well on the cloud.
+  * Cons:
+   * Not suitable for interconnected data.
+   * Technology still maturing.
+   * Can have slower response time.
+  
+</script></section>
+
+
+<section data-markdown><script type="text/template">
+  
+  ## Application configuration
+  
+  * The port to run the software on
+  * The authentication tokens to access other software
+  * The location of keys and trusted certificates (to validate client requests)
+  * The URL to access the database
+  * Environment variables
+  
+</script></section>
+
+
+<section data-markdown><script type="text/template">
+  
+  ## Code Review
+  
+  * The purpose of setting up a code review system on a team is to ensure that the agreed quality standards are met. 
+  * It also ensures that existing features are not broken and new bugs are not introduced. 
+  * This process is manual. 
+  
+</script></section>
+
+
+<section data-markdown><script type="text/template">
+  
+  ## Technical debt
+  
+  * Abrupt introduction of requirements leads developers to decide between getting the task done quickly with low quality or to maintain a high quality and possibly miss the deadline. 
+  * The cost of taking the easier path, which would need to be repaid in the future, is called technical debt.
+  
+</script></section>
+
+
+<section data-markdown><script type="text/template">
+  
+  ## Deployment Environments
+  
+  * **Development**
+   * Dev team's feature preview and collaboration
+  * Testing
+   * Used by project team for acceptance testing with test data
+  * Staging
+   * Pre-production used for final acceptance based on production size data set
+  * Production
+   * Used by clients (live), Full production data
   
 </script></section>
 
@@ -574,6 +654,7 @@
 * [Automation testing](https://yalantis.com/blog/unit-testing-for-web-software/)
 * [High level design](https://github.com/donnemartin/system-design-primer/tree/master/solutions/system_design/social_graph#step-2-create-a-high-level-design)
 * [SD Interview](https://youtu.be/NtMvNh0WFVM)
+* [NFR](https://www.scaledagileframework.com/nonfunctional-requirements/)
 
 </script></section>
 
