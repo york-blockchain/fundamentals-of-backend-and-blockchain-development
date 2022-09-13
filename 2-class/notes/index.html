@@ -112,11 +112,11 @@
 <section data-markdown><script type="text/template">
 ## Announcement  
 * Final Project 
-  * Milestone #1 - EOD September 25, 2021
+  * Milestone #1 - EOD September 22, 2021
     * System design document, diagrams
-  * Milestone #2 - EOD September 30, 2021
+  * Milestone #2 - EOD September 29, 2021
     * System design document, diagrams, codebase
-* Each group will present their final project on September 30, 2021 during the class hours.
+* Each group will present their final project on September 29, 2021 during the class hours.
 <br/>(15 minutes per group)
 </script></section>
 
@@ -130,11 +130,12 @@
 
 <section data-markdown><script type="text/template">
 
-## Pre-requisites
+## Online code editors
 
-* Installation
-  * Node JS - [https://nodejs.org/en/download/](https://nodejs.org/en/download/)
-  * VS Code -  [https://code.visualstudio.com/download](https://code.visualstudio.com/download)
+* [CodePen](https://codepen.io/)
+* [jsFiddle](https://jsfiddle.net/)
+* [Glitch](https://glitch.com/)
+
 </script></section>
 
 <section data-markdown><script type="text/template">
@@ -181,20 +182,86 @@
 * Order and logic of operations is sequentially ordered.
 * Top-down execution.
 * Fortran, COBOL, and C are examples of procedural programming languages
-* Demo Code
 
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+  ## Procedural programming
+
+  * <a href="../examples/paradigm/procedural.html" target="_blank">Demo</a>
+  
 </script></section>
 
 <section data-markdown><script type="text/template">
 
 ## Functional programming
 
-* Creating anf apply functions.
+* Creating and applying functions.
 * Re-usability and modularity
 * Immutable and predictable code
 * Haskell, Clojure and Lisp are examples of procedural programming languages
-* Demo Code
 
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+  ## Functional programming
+
+  * <a href="../examples/paradigm/functional.html" target="_blank">Demo</a>
+  
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+  ## Functional programming challenge-1
+  
+  * Create a simple function — `chooseName()` — that prints a random name from the provided array (`names`) to the provided paragraph (`para`), and then run it once.
+   * <a href="https://github.com/york-blockchain/fundamentals-of-backend-and-blockchain-development/blob/main/2-class/exercises/functional1.html" target="_blank">Starting point</a>
+  
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+  ## Functional programming challenge-2
+  
+  * you need to create a function that draws a rectangle on the provided `<canvas>`, based on the five provided input variables:
+    * `x` — the x coordinate of the rectangle.
+    * `y` — the y coordinate of the rectangle.
+    * `width` — the width of the rectangle.
+    * `height` — the height of the rectangle.
+    * `color` — the color of the rectangle.
+      * <a href="https://github.com/york-blockchain/fundamentals-of-backend-and-blockchain-development/blob/main/2-class/exercises/functional2.html" target="_blank">Starting point</a>
+  
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+  ## Functional programming challenge-3 (1/2)
+  
+  * Improving Challenge 1 as follows:
+   * **(1)** Refactor the code that generates the random number into a separate function called `random()`, which takes as parameters two generic bounds that the random number should be between, and returns the result.
+  
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+  ## Functional programming challenge-3 (2/2)
+  
+   * **(2)** Update the `chooseName()` function so that it makes use of the random number function, takes the array to choose from as a parameter, and returns the result.
+   * **(3)** Print the returned result into the paragraph (`para`)'s textContent.
+         * <a href="https://github.com/york-blockchain/fundamentals-of-backend-and-blockchain-development/blob/main/2-class/exercises/functional3.html" target="_blank">Starting point</a>
+  
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+  ## Functional programming challenge-4
+  
+  * We have an array of names, and we're using `Array.filter()` to get an array of only names shorter than 5 characters. The filter is currently being passed a named function `isShort()` which checks the length of the name, returning true if the name is less than 5 characters long; false otherwise.
+  * We'd like you to change this into a compact arrow function.
+           * <a href="https://github.com/york-blockchain/fundamentals-of-backend-and-blockchain-development/blob/main/2-class/exercises/functional4.html" target="_blank">Starting point</a>
+  
 </script></section>
 
 
@@ -209,14 +276,70 @@
 * **Polymorphism**
   * Object can take more than more form
 * Smalltalk, Java and Object-C are examples of Object Oriented programming languages
-* Demo Code
 
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+  ## Object Oriented Programming
+  
+  <a href="../examples/paradigm/oop.html" target="_blank">Demo</a>
+  
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+  ## OO programming challenge-1 (1/3)
+  
+  * Starting with definition for a Shape class is given. It has three properties: `name`, `sides`, and `sideLength`. 
+  * This class only models shapes for which all sides are the same length, like a square or an equilateral triangle.
+  * We'd like you to:
+
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+  ## OO programming challenge-1 (2/3)
+  
+  * (1) Add a `constructor` to this class. The constructor takes arguments for the name, sides, and `sideLength` properties, and initializes them.
+  * (2) Add a new method `calcPerimeter()` method to the class, which calculates its perimeter and logs the result to the console.
+  * (3) Create a new instance of the `Shape` class called `square`. Give it a `name` of `square` and a `sideLength` of 5.
+  
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+  ## OO programming challenge-1 (3/3)
+  
+  * (4) Create a new instance of `Shape` called `triangle`, with a name of `triangle` and a `sideLength` of 3.
+  * (5) Call `triangle.calcPerimeter()` to check that it works OK.
+
+           * <a href="https://github.com/york-blockchain/fundamentals-of-backend-and-blockchain-development/blob/main/2-class/exercises/oop1.html" target="_blank">Starting point</a>
+  
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+  ## OO programming challenge-2 (1/2)
+  
+  * Create a `Square` class that inherits from `Shape`, and adds a `calcArea()` method that calculates the square's area. Also set up the constructor so that the `name` property of `Square` object instances is automatically set to `square`, and the `sides` property is automatically set to 4. When invoking the constructor, you should therefore just need to provide the `sideLength` property.
+  
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+  ## OO programming challenge-2 (2/2)
+  
+  * Create an instance of the `Square` class called `square` with appropriate property values, and call its `calcPerimeter()` and `calcArea()` methods to show that it works OK.
+
+           * <a href="https://github.com/york-blockchain/fundamentals-of-backend-and-blockchain-development/blob/main/2-class/exercises/oop2.html" target="_blank">Starting point</a>
+  
 </script></section>
   
   
 <section data-markdown><script type="text/template">
 
-## SOLID principles
+## OO Design Priciples (SOLID)
 
 * High quality software program : 
   * Understandable
@@ -232,16 +355,30 @@
 * A function or class should have only one reason to change
 * If a class or function has to be be refactored due to change in logic than it has more than one responsibility 
 * Passing class object as a parameter is known as dependency injection
-* Demo code
   
+</script></section>
+
+<section data-markdown><script type="text/template">
+  
+  ## Simple Responsibility Principle
+  
+  * <a href="../examples/1-Single-Responsibility-Principle/index.html" target="_blank">Demo</a>
+    
 </script></section>
 
 <section data-markdown><script type="text/template">
 
 ## Open Closed Principle
 * Class or function should be open for extension and closed for modification
-* Demo code
 
+</script></section>
+
+<section data-markdown><script type="text/template">
+  
+  ## Open Closed Principle
+  
+  * <a href="../examples/2-Open-Close-Principle/index.html" target="_blank">Demo</a>
+    
 </script></section>
 
 
@@ -250,8 +387,15 @@
 ## Liskov Substitution Principle
 
 * Code (behaviour) can be shared between a class and its derived classes called “subclasses”
-* Demo code
   
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+  ## Liskov Substitution Principle
+  
+  * <a href="../examples/3-Liskov-Substitution-Principle/index.html" target="_blank">Demo</a>
+    
 </script></section>
 
 
@@ -260,8 +404,15 @@
 ## Interface Segregation Principle
   
 * Interfaces should not contain code that the end client (user of your code) will not use
-* Demo code
   
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+  ## Interface Segregation Principle
+    
+  * <a href="../examples/4-Interface-Segregation-Principle/index.html" target="_blank">Demo</a>
+    
 </script></section>
 
   
@@ -273,7 +424,13 @@
   * The low level information becomes concrete implementation of abstract high level information
   * High level code is independent of details beneath it
   * Loe level implementations should depend on abstractions above them
-  * Demo code
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+  ## Dependency Inversion Principle
+  
+  * <a href="../examples/5-Dependency-Inversion-Principle/index.html" target="_blank">Demo</a>
 </script></section>
 
 
@@ -281,6 +438,19 @@
 
   ## Assessments : Software Design Principles Quiz
 </script></section>
+
+<section data-markdown><script type="text/template">
+
+  ## Reference
+
+  * [MDN web docs](https://developer.mozilla.org/)
+  * [Client-side JavaScript frameworks](https://developer.mozilla.org/en-US/docs/Learn/Tools_and_testing/Client-side_JavaScript_frameworks)
+  * [Understanding client-side tools](https://developer.mozilla.org/en-US/docs/Learn/Tools_and_testing/Understanding_client-side_tools)
+  * [Guide to Git and GitHub](https://developer.mozilla.org/en-US/docs/Learn/Tools_and_testing/GitHub)
+  * [Eloquent Javascript](https://eloquentjavascript.net/)
+  * [SOLID](https://www.digitalocean.com/community/conceptual_articles/s-o-l-i-d-the-first-five-principles-of-object-oriented-design)
+  
+  </script></section>
 
 
 <section data-markdown><script type="text/template">
