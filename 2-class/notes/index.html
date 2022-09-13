@@ -187,6 +187,48 @@
 
 <section data-markdown><script type="text/template">
 
+## Procedural programming
+
+* Drawing a sine wave procedurally would look like:
+
+```
+function getCanvasCtx(canv) {
+  if (!canv.getContext) throw "Can't get canvas context!";
+  return ctx = canv.getContext('2D');
+}
+
+function drawWave(canv, yGenerator, [startX, startY]) {
+  const ctx = getCanvasCtx(canv);
+
+  ctx.beginPath();
+  ctx.moveTo(startX, startY);
+  for (let x = startX; x <= canvas.width - startX; x++) {
+    const y = yGenerator(x);
+    ctx.lineTo(x, y);
+  }
+  ctx.stroke();
+}
+
+function clearCanvas(canv) {
+  const ctx = getCanvasCtx(canv);
+  ctx.clearRect(0, 0, canv.width, canv.height);
+}
+
+function sineGenerator(amplitude, frequency, offset) {
+  return x => (amplitude * Math.sin(frequency * x)) + offset;
+}
+
+const canv = document.getElementById("waveform-canvas")
+const { height, width } = canv;
+
+let sine = sineGenerator(height / 4, 6 / height, height / 2);
+drawWave(canv, sine, [0, 0]);
+```
+
+</script></section>
+
+<section data-markdown><script type="text/template">
+
   ## Procedural programming
 
   * <a href="../examples/paradigm/procedural.html" target="_blank">Demo</a>
@@ -264,18 +306,15 @@
   
 </script></section>
 
-
 <section data-markdown><script type="text/template">
 
 ## Object Oriented Programming
 
-* **Encapsulation**
-  * Object holds data and functions
-* **Inheritance**
-  * Pass behaviour to derived objects within logical scope
-* **Polymorphism**
-  * Object can take more than more form
-* Smalltalk, Java and Object-C are examples of Object Oriented programming languages
+* Object
+  * An object is an instance of a Class. 
+  * It contains properties and functions. 
+  * e.g. car, house, laptop, etc. are all objects. 
+  * They have some specific properties and methods to perform some action
 
 </script></section>
 
@@ -283,7 +322,284 @@
 
   ## Object Oriented Programming
   
-  <a href="../examples/paradigm/oop.html" target="_blank">Demo</a>
+  * Class
+    * The Class defines the blueprint of Objects. 
+    * They define the properties and functionalities of the objects. 
+    * e.g. Laptop is a class and your laptop is an instance of it.
+  
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## Object Oriented Programming
+
+* Drawing sinewave in OOP would look like:
+
+```
+class Wave {
+  constructor(canv, start = [0, 0]) {
+    this.canv = canv;
+    this.start = start;
+  }
+
+  get ctx() {
+    if (!canv.getContext) throw "Can't get canvas context!";
+    return this.canv.getContext("2d");
+  }
+
+  get width() {
+    return this.canv.width;
+  }
+
+  get height() {
+    return this.canv.height;
+  }
+
+  generateY(x) {
+    throw "generateY for Wave subclass not implemented!"
+  }
+
+  draw() {
+    this.ctx.beginPath();
+    this.ctx.moveTo(this.start[0], this.start[1]);
+    for (let x = this.start[0]; x <= (this.width - this.start[0]); x++) {
+      this.ctx.lineTo(x, this.generateY(x));
+    }
+    this.ctx.stroke();
+  }
+
+  clear() {
+    this.ctx.clearRect(0, 0, this.width, this.height);
+  }
+
+  static redraw(...waves) {
+    // clear all the canvases
+    for (let wave in waves) { wave.clear(); }
+    // redraw all waves
+    for (let wave in waves) { wave.draw(); }
+  }
+}
+
+class Sine extends Wave {
+  constructor(...args) {
+    super(...args);
+    this.amplitude = this.canvas.height / 4;
+    this.frequency = this.canvas.height / 6;
+    this.offset = this.canvas.height / 2;
+  }
+
+  generateY(x) {
+    return (this.amplitude * Math.sin(this.frequency * x)) + this.offset;
+  }
+}
+
+const canv = document.getElementById("waveform-canvas");
+const sine = new Sine(canv);
+sine.draw();
+```
+
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+  ## OOPS Concepts
+  
+  * Abstraction
+  * Encapsulation
+  * Polymorphism
+  * Inheritance
+  * Association
+  * Aggregation
+  * Composition
+  
+  </script></section>
+
+<section data-markdown><script type="text/template">
+
+  ## Abstraction
+  
+  * Abstraction is the concept of hiding the internal details and describing things in simple terms. 
+  * e.g. a method that adds two integers. 
+  * The internal processing of the method is hidden from the outer world. 
+  * Abstraction can be achieved via Encapsulation and Inheritance. 
+  * java compiler takes care of converting simple statements to machine language and hides the inner implementation details from the outer world.
+  
+  </script></section>
+
+<section data-markdown><script type="text/template">
+
+  ## Encapsulation
+  
+  * Encapsulation is the technique used to implement abstraction in object-oriented programming. 
+  * Encapsulation is used for access restriction to class members and methods. 
+  * Access modifier keywords are used for encapsulation in object oriented programming. 
+  * e.g., encapsulation in java is achieved using `private`, `protected` and `public` keywords.
+  
+  </script></section>
+
+
+<section data-markdown><script type="text/template">
+
+  ## Polymorphism
+  
+  * Polymorphism is the concept where an object behaves differently in different situations. 
+  * There are two types of polymorphism - compile time polymorphism and runtime polymorphism. 
+  * Compile-time polymorphism is achieved by **method overloading**. 
+  
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## Compile-time polymorphism
+
+* Compile-time polymorphism is achieved by **method overloading**.
+
+```
+public class Circle {
+
+  public void draw(){
+    System.out.println("Drawing circle with default color Black and diameter 1 cm.");
+  }
+
+  public void draw(int diameter){
+    System.out.println("Drawing circle with default color Black and diameter"+diameter+" cm.");
+  }
+
+  public void draw(int diameter, String color){
+    System.out.println("Drawing circle with color"+color+" and diameter"+diameter+" cm.");
+  }
+}
+``` 
+  
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## Run-time polymorphism
+
+* Runtime-polymorphism is achieved by **method overriding**
+
+```
+package com.journaldev.test;
+
+public class Square implements Shape {
+
+  @Override
+  public void draw() {
+    System.out.println("Drawing Square");
+  }
+
+}
+``` 
+    
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+  ## Inheritance
+  
+  * Object is based on another object. 
+  * Mechanism of code reuse. 
+  * The object that is getting inherited is called the superclass and the object that inherits the superclass is called a subclass. 
+
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+  ## Inheritance
+  
+```
+package com.journaldev.java.examples1;
+
+class SuperClassA {
+
+	public void foo(){
+		System.out.println("SuperClassA");
+	}
+	
+}
+
+class SubClassB extends SuperClassA{
+		
+	public void bar(){
+		System.out.println("SubClassB");
+	}
+	
+}
+
+public class Test {
+	public static void main(String args[]){
+		SubClassB a = new SubClassB();
+		
+		a.foo();
+		a.bar();
+	}
+}
+
+```
+
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+  ## Association
+  
+  *  Defines the relationship between objects.
+  *  The association defines the multiplicity between objects. 
+  *  e.g. Teacher and Student objects. 
+   * There is a one-to-many relationship between a teacher and students. 
+   * A student can have a one-to-many relationship with teacher objects. 
+   * However, both student and teacher objects are independent of each other.
+
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+  ## Aggregation
+  
+  * Aggregation is a special type of association. 
+  * Objects have their own life cycle but there is ownership. 
+  * Whenever we have *“HAS-A”* relationship between objects and ownership then it’s a case of aggregation.
+
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+  ## Composition
+  
+  * The composition is a more restrictive form of aggregation. 
+  * When the contained object in *“HAS-A”* relationship can’t exist on its own, then it’s a case of composition. 
+  * e.g. House *has-a* Room. 
+   * Here the room can’t exist without the house. 
+   * Composition is said to be better than inheritance. 
+
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## Composition
+
+* A person who *has-a* job
+
+```
+package com.journaldev.composition;
+
+public class Person {
+
+  //composition has-a relationship
+  private Job job;
+
+  //variables, methods, constructors etc. object-oriented
+```
+
+</script></section>
+
+
+<section data-markdown><script type="text/template">
+
+  ## Object Oriented Programming
+  
+  * <a href="../examples/paradigm/oop.html" target="_blank">Demo</a>
   
 </script></section>
 
@@ -342,9 +658,9 @@
 ## OO Design Priciples (SOLID)
 
 * High quality software program : 
-  * Understandable
-  * Upgradeable
-  * Maintainable
+  * Clean code : Understandable, Upgradeable and Maintainable
+  * Avoiding code smells, refactoring code, and Agile or Adaptive software development
+  * To make you a better developer
 </script></section>
 
 
@@ -352,8 +668,8 @@
   
 ## Simple Responsibility Principle
 
-* A function or class should have only one reason to change
-* If a class or function has to be be refactored due to change in logic than it has more than one responsibility 
+*A function or class should have only one reason to change meaning that class should have only one job.*
+* If a class or function has to be be refactored due to change in logic than it has no more than one responsibility 
 * Passing class object as a parameter is known as dependency injection
   
 </script></section>
@@ -369,7 +685,8 @@
 <section data-markdown><script type="text/template">
 
 ## Open Closed Principle
-* Class or function should be open for extension and closed for modification
+*Objects or entities should be open for extension but closed for modification.*
+* This means that a class should be extendable without modifying the class itself.
 
 </script></section>
 
@@ -386,7 +703,9 @@
 
 ## Liskov Substitution Principle
 
-* Code (behaviour) can be shared between a class and its derived classes called “subclasses”
+*Let q(x) be a property provable about objects of x of type T. Then q(y) should be provable for objects y of type S where S is a subtype of T.*
+* This means that every subclass or derived class should be substitutable for their base or parent class.
+* Means code (behaviour) can be shared between a class and its derived classes called “subclasses”
   
 </script></section>
 
@@ -402,7 +721,8 @@
 <section data-markdown><script type="text/template">
 
 ## Interface Segregation Principle
-  
+
+*A client should never be forced to implement an interface that it doesn’t use, or clients shouldn’t be forced to depend on methods they do not use.*
 * Interfaces should not contain code that the end client (user of your code) will not use
   
 </script></section>
@@ -420,10 +740,11 @@
 
   ## Dependency Inversion Principle
   
+  *Entities must depend on abstractions, not on concretions. It states that the high-level module must not depend on the low-level module, but they should depend on abstractions.*
   * Invert the order of dependencies in code
   * The low level information becomes concrete implementation of abstract high level information
   * High level code is independent of details beneath it
-  * Loe level implementations should depend on abstractions above them
+  * Low level implementations should depend on abstractions above them
 </script></section>
 
 <section data-markdown><script type="text/template">
@@ -449,6 +770,10 @@
   * [Guide to Git and GitHub](https://developer.mozilla.org/en-US/docs/Learn/Tools_and_testing/GitHub)
   * [Eloquent Javascript](https://eloquentjavascript.net/)
   * [SOLID](https://www.digitalocean.com/community/conceptual_articles/s-o-l-i-d-the-first-five-principles-of-object-oriented-design)
+  * [Uncle bob](http://cleancoder.com)
+  * [OOP](https://www.digitalocean.com/community/tutorials/oops-concepts-java-example)
+  * [Composition vs Inheritance](https://www.digitalocean.com/community/tutorials/composition-vs-inheritance)
+  * [OOP vs Procedural](https://www.reddit.com/r/javascript/comments/8g4try/concrete_examples_of_oop_vs_procedural/)
   
   </script></section>
 
