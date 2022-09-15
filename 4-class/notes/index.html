@@ -112,38 +112,87 @@
 
 <section data-markdown><script type="text/template">
 
-## Class Plan
-* Smart contract languages
-* Frameworks
-* Wallets
-* Developing a DApp
+## Developer environment setup
+* NodeJS
+ * Download Node JS - [https://nodejs.org/en/download/](https://nodejs.org/en/download/)
+ * To update
+
+```
+curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash nvm install --ltsnvm use lts
+```
+* Code editor
+ * VS Code - [https://code.visualstudio.com/download](https://code.visualstudio.com/download)
+
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## Smart contract landscape
+* High-level language
+  * Solidity - [https://docs.soliditylang.org/en/latest/](https://docs.soliditylang.org/en/latest/)
+  * Vyper - [https://vyper.readthedocs.io/en/latest/](https://vyper.readthedocs.io/en/latest/)
+* Low-level language
+  * EWASM - [https://ewasm.readthedocs.io/](https://ewasm.readthedocs.io/)
+  * Huff - [https://huff.sh/](https://huff.sh/)
+  * Yul - [https://docs.soliditylang.org/en/latest/yul.html](https://docs.soliditylang.org/en/latest/yul.html)
 
 </script></section>
 
 
 <section data-markdown><script type="text/template">
 
-## Pet shop tutorial (Correct URL)
-
-* [https://www.trufflesuite.com/tutorial](https://www.trufflesuite.com/tutorial)
-
-</script></section>
-
-<section data-markdown><script type="text/template">
-
-## Smart contract languages
-* Solidity - [https://docs.soliditylang.org/en/latest/](https://docs.soliditylang.org/en/latest/)
-* Vyper - [https://vyper.readthedocs.io/en/latest/](https://vyper.readthedocs.io/en/latest/)
-
-</script></section>
-
-<section data-markdown><script type="text/template">
-
-## Smart contract frameworks
+## Smart contract Frameworks (1/2)
 
 * Truffle - [https://www.trufflesuite.com/docs/truffle](https://www.trufflesuite.com/docs/truffle/)
 * Hardhat - [https://hardhat.org/getting-started/](https://hardhat.org/getting-started/)
 * Brownie - [https://eth-brownie.readthedocs.io/en/latest/](https://eth-brownie.readthedocs.io/en/latest/)
+* foundry - [https://book.getfoundry.sh/](https://book.getfoundry.sh/)
+* ApeWorx - [https://www.apeworx.io/](https://www.apeworx.io/)
+
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## Other Smart contract Frameworks (2/2)
+
+* Embark - [https://framework.embarklabs.io/](https://framework.embarklabs.io/)
+* Waffle - [https://getwaffle.io/](https://getwaffle.io/)
+* dapp.tools - [https://dapp.tools/](https://dapp.tools/)
+* sbt-ethereum - [https://www.sbt-ethereum.io/](https://www.sbt-ethereum.io/)
+* Epirus - [https://www.web3labs.com/epirus](https://www.web3labs.com/epirus)
+* 0xCert - [https://docs.0xcert.org/framework/v2/](https://docs.0xcert.org/framework/v2/)
+
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## Non-framework tools 
+
+* `create-eth-app` - [https://www.npmjs.com/package/create-eth-app](https://www.npmjs.com/package/create-eth-app)
+* `create-web3-dapp` - [https://github.com/alchemyplatform/create-web3-dapp](https://github.com/alchemyplatform/create-web3-dapp)
+* Upgrade plugins - [https://docs.openzeppelin.com/upgrades-plugins/1.x/](https://docs.openzeppelin.com/upgrades-plugins/1.x/)
+* Ganache - [https://www.trufflesuite.com/ganache](https://www.trufflesuite.com/ganache)
+* SC verifier and Blockchain explorer : [https://etherscan.io/](https://etherscan.io/)
+
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## Smart Contract libraries
+
+* openzeppelin-contracts - [https://github.com/OpenZeppelin/openzeppelin-contracts](https://github.com/OpenZeppelin/openzeppelin-contracts) 
+* solmate - [https://github.com/transmissions11/solmate](https://github.com/transmissions11/solmate)
+* solidstate Solidity - [https://github.com/solidstate-network/solidstate-solidity](https://github.com/solidstate-network/solidstate-solidity)
+
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## Smart Contract beginner tools
+
+* oneclickdapp - [https://oneclickdapp.com/](https://oneclickdapp.com/)
+* eth.build - [https://eth.build/](https://eth.build/)
+* scaffold-eth - [https://github.com/scaffold-eth/scaffold-eth](https://github.com/scaffold-eth/scaffold-eth)
 
 </script></section>
 
@@ -159,8 +208,7 @@
 
 <section data-markdown><script type="text/template">
 
-## Test blockchain network
-* Ganache - [https://www.trufflesuite.com/ganache](https://www.trufflesuite.com/ganache)
+## Node providers
 * Infura - [https://infura.io/](https://infura.io/)
 * Chainstack - [https://chainstack.com/developers/](https://chainstack.com/developers/)
 * Alchemy - [https://www.alchemy.com/](https://www.alchemy.com/)
@@ -172,11 +220,11 @@
 
 ## Test Ether faucet
 
-* Rinkeby - [https://faucet.rinkeby.io/](https://faucet.rinkeby.io/)
-* Kovan - [https://gitter.im/kovan-testnet/faucet](https://gitter.im/kovan-testnet/faucet)
-* Rinkeby, Kovan, Ropsten, Goerli - [https://faucet.metamask.io/](https://faucet.metamask.io/)
-* Goerli - [https://goerli-faucet.slock.it/](https://goerli-faucet.slock.it/)
-
+* Goerli
+ * [https://goerli-faucet.slock.it/](https://goerli-faucet.slock.it/)
+ * [https://faucet.metamask.io/](https://faucet.metamask.io/)
+* Sepolia
+ * [https://faucet.sepolia.dev/](https://faucet.sepolia.dev/)
 </script></section>
 
 <section data-markdown><script type="text/template">
@@ -217,6 +265,22 @@
 
 </script></section>
 
+<section data-markdown><script type="text/template">
+
+## Hello world (hardhat)
+
+* [Hello World - full stack DApp](https://github.com/york-blockchain/fundamentals-of-backend-and-blockchain-development/blob/main/4-class/exercise/hello-world-fs.md)
+
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## Pet shop (truffle)
+
+* [https://www.trufflesuite.com/tutorial](https://www.trufflesuite.com/tutorial)
+
+</script></section>
+
 
 <section data-markdown><script type="text/template">
 
@@ -231,6 +295,10 @@
 * [Ethereum developer tools list](https://github.com/ConsenSys/ethereum-developer-tools-list)
 * [Smart contract frameworks](https://github.com/PatrickAlphaC/smart-contract-frameworks)
 * [Setup Dev environemnt](https://ethereum.org/en/developers/local-environment/)
+* [FS DApp with React](https://ethereum.org/en/developers/tutorials/hello-world-smart-contract-fullstack/)
+* [decentralized AirBnB](https://learn.figment.io/tutorials/launch-a-full-stack-dapp-on-polygon)
+* [Boilerplates for connecting with wallets](https://github.com/PatrickAlphaC/full-stack-web3-metamask-connectors)
+* [Sepolia Resources](https://sepolia.dev/)
 </script></section>
 
 <section data-markdown><script type="text/template">
