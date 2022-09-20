@@ -1,0 +1,33 @@
+
+<style>
+    body { font-size: 20px; }
+    div { margin-top: 20px; }
+    
+    ul > li {
+      margin-top: 10px;
+    }
+    </style>
+    
+    <h1>Exercise: Vanity Ethereum Address</h1>
+    
+    <div>In a language of your choice, write a program to find a private key with a corresponding Ethereum address that starts with "0x1234".</div>
+    
+    <ul>
+      <li>Make sure you generate your private key safely!</li>
+      <li>Make sure your random number is actually a valid private key</li>
+      <li>HINT: Use the <a href="https://www.npmjs.com/package/ethereumjs-util">ethereumjs-util</a> JavaScript package</li>
+      <li>Don't use the privateToAddress method. Instead, use privateToPublic and keccak256 so you demonstrate you understand the address generation process, and practice hashing and the use of buffers</li>
+      <li>Extra to think about: Assuming keccak256(x) is uniformly distributed, what is the probability your neighbour generates the same address as you?</li>
+    </ul>
+    
+    <div>
+        <h3>Hint</h3>
+        <ul>
+            <li><code>var ethUtil = require('ethereumjs-util');</code></li>
+            <li>1. generate random number and this is your private key</li>
+            <li>2. <code>ethUtil.privateToPublic</code> and this is your public key</li>
+            <li>3. <code>ethUtil.keccak256</code> and this is your hash of the public key</li>
+            <li>4. <code>.slice(20)</code> and this is your ethereum address</li>
+            <li>5. if address starts with <code>0x1234</code> then done. Else try with a new private key</li>
+        </ul>
+    </div>
