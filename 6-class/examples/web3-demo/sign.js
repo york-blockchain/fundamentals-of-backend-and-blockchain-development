@@ -3,7 +3,7 @@ const Web3 = require("web3");
 
 const web3 = new Web3(
   new Web3.providers.HttpProvider(
-    `https://eth-rinkeby.alchemyapi.io/v2/${process.env.ALCHEMY_KEY}`
+    `https://eth-goerli.g.alchemy.com/v2/${process.env.ALCHEMY_KEY}`
   )
 );
 
@@ -13,7 +13,7 @@ function generateAccountObj() {
 }
 
 async function signAndVerify(accountObj, message) {
-  console.log("Account address : ", accountObj.address);
+  console.log("Account obj : ", accountObj);
   const signatureObj = web3.eth.accounts.sign(message, accountObj.privateKey);
   const recoveredAddress = web3.eth.accounts.recover(signatureObj);
   return recoveredAddress == accountObj.address;

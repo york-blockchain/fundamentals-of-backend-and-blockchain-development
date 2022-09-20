@@ -113,11 +113,78 @@
 <section data-markdown><script type="text/template">
 
 ## Class Plan
+* Randomness
 * Cryptograph in blockchain
 * Hashing and transaction security
 * Blockchain security
 
 </script></section>
+
+<section data-markdown><script type="text/template">
+
+## Scope
+* Cryptography techniques applied to blockchain and DLT technologies
+
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+  ## Randomness
+  
+  * Without randomness, all operations would be predictable, and therefore insecure
+  * Cryptography (and blockchains) could not exist
+  * Needed for generating secret keys, encryption protocols, and more
+  
+  </script></section>
+  
+  
+  
+  
+  <section data-markdown><script type="text/template">
+  
+  *"Any one who considers arithmetical methods of producing random digits is, of course, in a state of sin. For, as has been pointed out several times, there is no such thing as a random number — there are only methods to produce random numbers, and a strict arithmetic procedure of course is not such a method."*
+  
+  —John von Neumann
+  
+  </script></section>
+  
+  
+  
+  
+  <section data-markdown><script type="text/template">
+  
+  ## True random processes
+  
+  * Thermal noise
+  * Radioactive decay
+  * Network packet arrival times
+  * Wiggling mouse/pounding on keyboard (?)
+   
+  </script></section>
+  
+  <section data-markdown><script type="text/template">
+  
+  ## Pseudo-randomness
+  
+  * PRNG (Pseudo-Random Number Generator)
+    * Deterministic process that generates numbers
+  * CSPRNG (Cryptographically Secure PRNG)
+    * Must be unpredictable and unbiased
+    * "Stretches" the randomness from a "seed" (small value from a true RNG)
+  
+  </script></section>
+  
+  <section data-markdown><script type="text/template">
+  
+  ## secure random number generator
+  
+  * Always use a randomness provided by your environment or OS
+    * Web-browser: `window.crypto.getRandomValues()`
+    * node.js: `crypto.randomBytes()`
+    * Linux/OS X: `/dev/urandom`
+    * Windows: `RtlGenRandom`
+  
+  </script></section>
 
 
 <section data-markdown><script type="text/template">
@@ -135,12 +202,39 @@
 
 ## Symmetric key Cryptography
 
+* A sender encrypts a message with a key that has been shared with the receiver over a different channel. 
+* The receiver decrypts the message using same key.
+* When the sender wants to share another message to a new receiver, they need a new key. 
+* This means that there could be as many keys as there are recipients and messages.
+* Length of keys : 128 or 256 bits
+* Requires sharing of secret key
+* Algorithms : RC4, AES, DES, 3DES, etc.
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## Symmetric key Cryptography
+
 <div class="left" style="width:50%;">
   <img src="symmetric-encryption.jpeg" style="background-color: white; width: 600px">
 </div>
 <div class="right" style="width:35%;">
    Sender and receiver generates and uses fresh key every-time to encrypt and decrypt messages.
 </div>
+
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## Asymmetric key Cryptography
+
+* Asymmetric Key Cryptography (or Public Key Cryptography) introduces the use of two keys - 
+ * a public (verification) key 
+ * a private (signing) key. 
+* Every network participant has their own public-private key pair. 
+* Their public keys are available and visible to everyone, including attackers.
+* Length of keys : >=2048 bits
+* Algorithms : RSA, ECDSA, Diffie-Hellman 
 
 </script></section>
 
@@ -195,9 +289,72 @@
 * If you pick a 256 bit number at random, chance it is a valid private key: <span style="font-size: 50%">`99.999999999999999999999999999999999999626%`</span>
 
 </script></section>
-      
-      
+
 <section data-markdown><script type="text/template">
+
+  ## Hashing
+  * Hashing is the method of passing data into a one way hash-function to generate a string of unrecognizable text called a “hash”. 
+  * It is computationally impossible to derive the original input of a hash-function given its output.
+  * [hashing demo](https://andersbrownworth.com/blockchain/hash) 
+
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+  ## Application of Hashing
+  * Data Integrity
+  * Quick lookups
+  * Store/verify password in database
+  * Generate Blockchain address
+  * Locating blockchain transactions
+  * Compressing data    
+</script></section>
+
+
+  <section data-markdown><script type="text/template">
+
+  ## Hashing in Blockchain
+  * The role of hashes in the block structure is to preserve immutability. 
+  * The transactions in the block are hashed together with the hash of the previous block. 
+  * This hash is then included in the block header for a future block to use. 
+  * The genesis block (i.e first block) will have only a hash of the initial transactions from the coinbase (first) account. 
+</script></section>
+
+
+<section data-markdown><script type="text/template">
+
+  ## Hashing secures Blockchain
+  
+  * Even if one transaction changes in a block, the entire block hash would change. 
+  * It would cause a break in the chain. 
+  * In order to perform a successful rewrite of the blocks
+    * Modify the current block and all the previous ones 
+    * Convince the miners/validators on the network that this is valid. 
+    * Do it before the next block is added. 
+    * The longer the chain, the less likely it is that it can be broken.
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+  ## Collision-resistance
+  
+  * Hard to find any two messages that hash to the same value
+  * Formally: Computationally infeasible to find distinct $m$ and $m'$ such that $H(m) = H(m')$
+  
+  </script></section>
+  
+  
+  <section data-markdown><script type="text/template">
+  
+  ## Collision attacks
+  
+  * Hash functions are almost always attacked by finding collisions, not specific preimages
+  * MD5 and SHA1 are insecure because it is easier than it should be to find collisions
+    * Both are still practically secure against preimage attacks
+  
+  </script></section>
+
+    <section data-markdown><script type="text/template">
 
 ## [Sidebar] Keccak/SHA3
 
@@ -246,11 +403,28 @@ Digital signatures let you create messages such as
 
 ## Digital signatures
 
-* A hash generated after signing a message with a private key.
+* A hash after signing a message with a private key.
 * A digital signature is use to ensure :
   * The message was sent from a known entity (authentication).
   * The sender cannot deny they sent the message (non-repudiation),
   * The message was not tampered with during its delivery (integrity).
+* Digital signatures provide proof of identity or atleast proof of control of an identity and its data.
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## Digital signatures
+
+* Bitcoin.
+ * Sender would use their private key to sign the transaction and get a message signature. 
+ * This is sent to the miners who verify the message signature with the public key of the sender. 
+ * If the verification fails then it means the sender of the transaction is not the one who signed it.
+ * Signature proves that they are the owner of those bitcoins
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+*If someone tries to tamper with the transaction, the corresponding signature would fail. How are we able to ensure that there is a one-to-one mapping between transaction data and their signatures?*
 
 </script></section>
 
@@ -285,7 +459,7 @@ On blockchains, almost always **elliptic curves**
 
 ## How to sign blockchain transaction?
 
-* [Sign blockchain transaction](https://andersbrownworth.com/blockchain/public-private-keys/signatures)
+* [Sign blockchain transaction](https://andersbrownworth.com/blockchain/public-private-keys/transaction)
 * Demo for signing a transaction using web3.js
 </script></section>
 
@@ -302,26 +476,26 @@ $h = H(m)$
 
 <section data-markdown><script type="text/template">
   
-  ## Multi-Signatures
-  
-  * When several people agree on something, they can all sign same message
-  
-  <img src="multi-sig-simple.svg" style="background-color: white;" />
-  
-  </script></section>
+## Multi-Signatures
+
+* When several people agree on something, they can all sign same message
+
+<img src="multi-sig-simple.svg" style="background-color: white;" />
+
+</script></section>
   
   
   
   
   <section data-markdown><script type="text/template">
   
-  ## Schnorr Multi-Signatures
-  
-  * Schnorr signatures let you combine these into a single signature, that can still be verified
-  
-  <img src="multi-sig-schnorr.svg" style="background-color: white;" />
-  
-  </script></section>
+## Schnorr Multi-Signatures
+
+* Schnorr signatures let you combine these into a single signature, that can still be verified
+
+<img src="multi-sig-schnorr.svg" style="background-color: white;" />
+
+</script></section>
   
   
   
@@ -338,12 +512,57 @@ $h = H(m)$
 
 <section data-markdown><script type="text/template">
 
-  ## Blockchain Security
-  
-  * Causes
-  * Technics used by Bitcoin and ethereum against replay attack and double spending
-  
-  </script></section>
+## Causes of security issues in Blockchain
+
+* Exposing private keys
+* Poor storage solutions for keys
+* Relinquishing control of keys to centralized parties
+* Erroneously creating immature algorithms
+* Poor infrastructure security
+* Bugs in a smart contract
+* 51% attacks
+* Replay attacks and double spending
+
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## Replay attacks and double spending
+
+* Risk with cryptocurrencies where the same cash can be spent twice.
+* Network attacks where valid data is intercepted in transit, by the originator or an adversary, and then repeated. 
+* The goal is to fool the recipient that the attacker is not malicious since they hold valid data.
+
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## Securing Bitcoin against double spending
+
+* only unspent transaction outputs (UTXOs) behave as coins
+* rule is that every unspent output can be spent only once
+* A transaction which tries to spent same UTXO will be considered as double spending. 
+* Old transactions can not be replayed, because the output is already spent.
+
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## Securing Ethereum against double spending
+
+* Ethereum has account based model
+* Every account has a nonce (number only used once)
+* If there are two transactions referring to the same account with the same nonce, then the first will be executed and the second one will be recognized as a double spend
+
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## Exercise: Vanity Address
+
+[vanity-address.html](vanity-address.html)
+
+</script></section>
 
 
 <section data-markdown><script type="text/template">
@@ -352,6 +571,13 @@ $h = H(m)$
 
 </script></section>
 
+<section data-markdown><script type="text/template">
+
+## References
+* [Public/Private keys and Signing](https://youtu.be/xIDL_akeras)
+* [Blockchain Visual demo](https://youtu.be/_160oMzblY8)
+* [Replay attacks and double spending](http://danielszego.blogspot.com/2018/11/double-spending-and-replay-attacks-in.html)
+</script></section>
 
 <section data-markdown><script type="text/template">
 
