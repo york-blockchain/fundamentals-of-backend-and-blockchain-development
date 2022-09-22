@@ -1,10 +1,9 @@
 {
-  "name": "web-server",
+  "name": "examples",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
-    "express": "^4.18.1",
-    "request": "^2.88.2"
+    "firebase-tools": "^11.9.0"
   }
 }
