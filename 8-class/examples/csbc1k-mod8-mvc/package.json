@@ -1,0 +1,9 @@
+{
+  "name": "csbc1k-mod8-mvc",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "firebase-tools": "^11.10.0"
+  }
+}
