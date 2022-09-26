@@ -71,6 +71,23 @@
         color: red;
         font-weight: bold;
       }
+
+      .left {
+        left:-8.33%;
+        text-align: left;
+        float: left;
+        width:50%;
+        z-index:-10;
+      }
+
+      .right {
+        left:31.25%;
+        top: 75px;
+        text-align: left;
+        float: right;
+        z-index:-10;
+        width:50%;
+      }
     </style>
   </head>
 
@@ -135,10 +152,400 @@
 
 <section data-markdown><script type="text/template">
 
+  ## Storing hashes on-chain
+  
+  * In some smart contract protocols, a user can commit to a certain value for a file, data-base, etc
+  * Because it is expensive to store data on-chain, it is common to hash this value and store only the hash on-chain
+    * Uploading the whole file to the chain might be impractical or impossible (may exceed gas block limit)
+  
+  </script></section>
+  
+  
+  
+  
+  <section data-markdown><script type="text/template">
+  
+  ## Validating on-chain hashes
+  
+  * To get this file, protocol participants must download it from some off-chain system
+    * Bittorrent, usenet, freenet, IPFS, secure scuttlebutt, centralized hosting &mdash; whatever
+  * The participant does **not** need to trust this off-chain source because they will verify the file against the on-chain hash
+    * It is *content addressed*
+  
+  </script></section>
+  
+  
+  
+  <section data-markdown><script type="text/template">
+  
+  ## Bringing it back on-chain
+  
+  * But what if a smart contract needs to access the file, or part of it?
+  * If it had the file, the smart contract could hash the file and compare the hash
+  * But it doesn't, and we have the same problem as before:
+    * It's too expensive/impossible to upload the file to the chain
+  
+  </script></section>
+  
+  
+  
+  
+  
+  
+  <section data-markdown><script type="text/template">
+  
+  ## Quick sidebar: Password storage
+  
+  * You should never store your users' passwords in plain-text
+    * If your database is hacked then they will be exposed
+    * This is bad because many users use the same password on multiple sites
+  * Instead you should store the output of a password hashing function
+  
+  </script></section>
+  
+  
+  
+  <section data-markdown><script type="text/template">
+  
+  ## Password hashing functions
+  
+  * Like regular hash functions, except:
+    * Designed to be very slow to compute, so it takes a long time to crack
+    * Supports salts
+      * A non-secret random value included in the hash to prevent cracking multiple passwords at once, or in advance
+  
+  </script></section>
+  
+  
+  
+  <section data-markdown><script type="text/template">
+  
+  ## Proof of knowledge
+  
+  Example unix password DB:
+  
+  <pre class="hljs js" style="font-size: 45%">
+  alice:$2y$10$weUPjZkUXH6gsPt14UcR/uxCoHRVYf4oEe1CdAZTnHq8eM3SzbXsW
+  bob:$2y$10$DwIX.8e3sNlh8sMMJzS5P./j0BNtGwejh/dxvTH4TDjmBzoEOpfd.
+  carol:$2y$10$xK/m/d4vGlGLylOnQGb/kO4g16aC4S0VrsHOxVcG5zHHO3GQj/vwG
+  </pre>
+  
+  * The DB doesn't store the plain-text passwords
+  * But you can verify somebody knows a password by hashing what they provide and comparing to what's in the DB
+    * The password they provide is a **proof** they know the password
+  
+  </script></section>
+  
+  
+  
+  
+  
+  <section>
+  
+  <p data-markdown>
+  ## git
+  </p>
+  
+  <div class="left">
+      <img src="git1.svg" style="float: left; border:0px; background-color: white" />
+  </div>
+  
+  <div class="right"><p data-markdown>
+  * git stores a tree of *commits*
+  * Each commit is hashed and the hash is its *commit id*
+  * Each commit references its parent(s) by their hashes
+  </p></div>
+  
+  </section>
+  
+  
+  
+  <section>
+  
+  <div class="left">
+      <img src="git2.svg" style="float: left; border:0px; background-color: white" />
+  </div>
+  
+  <div class="right"><p data-markdown>
+  * Suppose somebody knows the root node hash *`f910ba..`* and nothing else
+  * Let's say we want to prove to them that the "bugfix!!" commit exists in the tree
+  </p></div>
+  
+  </section>
+  
+  
+  
+  
+  <section>
+  
+  <div class="left">
+      <img src="git3.svg" style="float: left; border:0px; background-color: white" />
+  </div>
+  
+  <div class="right"><p data-markdown>
+  * You send them the highlighted commits and they can re-compute the hash themselves to verify
+  * The purple is the node you are proving exists
+  * The red nodes are called "witnesses"
+  </p></div>
+  
+  </section>
+  
+  
+  
+  
+  <section>
+  
+  <p data-markdown>
+  ## Verification steps
+  </p>
+  
+  <div class="left">
+      <img src="git3.svg" style="float: left; border:0px; background-color: white" />
+  </div>
+  
+  <div class="right" style="font-size: 80%"><p data-markdown>
+  1. Hash the bugfix node and verify the "fix tests" witness node includes this hash
+  1. Hash the "fix tests" witness and verify the "merge commit" witness includes this hash
+  1. Hash the "merge commit" witness and verify the trusted hash matches this hash
+  </p></div>
+  
+  </section>
+  
+  
+  
+  <section>
+  
+  <div class="left">
+      <img src="git3.svg" style="float: left; border:0px; background-color: white" />
+  </div>
+  
+  <div class="right"><p data-markdown>
+  * Note that the verifier never needed any of the grey nodes to verify the proof
+  * If a secure hash function is used, there is no way to modify the "bugfix" commit and use it to make a valid proof
+  </p></div>
+  
+  </section>
+  
+  
+  
+  <section data-markdown><script type="text/template">
+  
+  ## Review: Trees
+  
+  <img src="trees.svg" style="background-color: white;" />
+  
+  </script></section>
+  
+  
+  
+  <section data-markdown><script type="text/template">
+  
+  ## Why trees? Exponential growth
+  
+  <img src="exponential.svg" style="background-color: white;" />
+  
+  </script></section>
+  
+  
+  
+  <section data-markdown><script type="text/template">
+  
+  ## Concatenation notation
+  
+  * For the rest of this talk we will use the `+` operator to indicate concatenation
+    * Because javascript does it this way
+  * Normally I prefer to use a different operator since addition is commutative but concatenation isn't
+  
+  </script></section>
+  
+  
+  
+  <section data-markdown><script type="text/template">
+  
+  ## Merkle trees
+  
+  * A merkle tree is a tree where each node references its lower nodes by their hashes
+    * Often simply called a *hash tree*
+  * If somebody knows the root node, we can prove that any node exists by providing a **proof**
+    * The proof will include some nodes that the prover isn't interested in but are needed to verify the proof: **witnesses**
+  
+  </script></section>
+  
+  
+  
+  <section data-markdown><script type="text/template">
+  
+  ## History of Merkle trees
+  
+  * Invented by Ralph Merkle in late 70s
+  * Original purpose was to implement hash-based signatures
+    * See the [Signatures Made Simple](https://hoytech.github.io/blockchain-security/lesson1/index.html#/27) slide from our security course
+    * By using Merkle trees, we can make key-pairs that can sign many messages
+    * Modern hash-based signatures still use merkle trees, ie XMSS: eXtended Merkle Signature Scheme (RFC 8391)
+  
+  </script></section>
+
+<section data-markdown><script type="text/template">
+
 ## Merkle tree
 
 <img src="merkle-tree.png" style="background-color: white" />
 </script></section>
+
+<section data-markdown><script type="text/template">
+
+  ## Proof size
+  
+  * Because of exponential growth, the number of nodes in our tree grows much faster than the number of levels
+    * Each leaf node is a data item
+    * Each level increases our proof size by 1 hash (we need a witness at that level)
+  * The number of witnesses required grows according to the *logarithm* of the data items
+    * Proofs can be small, even for huge numbers of nodes
+  
+  </script></section>
+  
+  
+  
+  
+  
+  
+  
+  
+  <section>
+  
+  <p data-markdown>
+  ## Verifiable data-base
+  </p>
+  
+  <div class="left">
+      <img width="100%" src="merkle1.svg" style="float: left; border:0px; background-color: white" />
+  </div>
+  
+  <div class="right"><p data-markdown>
+  * A merkle tree is a way of structuring a data-base so it can be verified with proofs
+  * Here is a DB with 8 elements in it
+  * 3 bit paths required, because:
+    * log2(8) = 3
+  </p></div>
+  
+  </section>
+
+<section data-markdown><script type="text/template">
+
+  ## Simplified Payment Verification
+  
+  * In Bitcoin it is possible to verify a transaction has been included in the blockchain without downloading all the blocks
+  * Only need the block headers of the longest chain
+    * Keep asking nodes until you are sure you have longest chain
+    * Get someone who has the full chain to generate you a merkle proof
+      * Electrum servers can do this
+  
+  </script></section>
+    
+    
+    
+<section data-markdown><script type="text/template">
+
+## Simplified Payment Verification
+
+<img src="spv.svg" style="background-color: white;" />
+
+</script></section>
+    
+    
+    
+    
+    <section>
+    
+    <p data-markdown>
+    ## Certificate transparency
+    </p>
+    
+    <div class="left">
+        <img width="100%" src="certtrans.png" style="float: left; border:0px; background-color: white" />
+    </div>
+    
+    <div class="right"><p data-markdown>
+    * Project that tries to keep SSL Certificate Authorities honest
+    * So they can't sign SSL certificates for spy agencies without getting caught
+    </p></div>
+    
+    </section>
+    
+    
+    
+    
+    <section>
+    
+    <p data-markdown>
+    ## Merkle Patricia Trie
+    </p>
+    
+    <div class="left">
+        <img width="100%" src="trie.png" style="float: left; border:0px; background-color: white" />
+    </div>
+    
+    <div class="right"><p data-markdown>
+    * Merkle Patricia Trie is a way to efficiently handle *sparse* paths, like the output of hash functions
+    * First implemented in Ripple, popularised by Ethereum
+    </p></div>
+    
+    </section>
+    
+    
+    
+    
+    
+    
+  <section data-markdown><script type="text/template">
+  
+  ## Air-drops
+  
+  * Some token creators want to give their tokens an initial distribution by giving them away
+    * Usually to every address that held ETH at a certain block height
+  * This is why you may see unknown (usually worthless) tokens appear in your wallet sometimes
+  
+  </script></section>
+    
+    
+    
+    
+  <section data-markdown><script type="text/template">
+  
+  ## Air-drops: Impossible way
+  
+  * When creating the token contract, pass the list of addresses and their initial token balances in to the constructor
+  * Won't work because there could be millions of addresses
+    * Can't fit that much data in a block (exceeds block gas limit)
+  
+  </script></section>
+    
+    
+    
+  <section data-markdown><script type="text/template">
+  
+  ## Air-drops: Inefficient way
+  
+  * After creating the token contract, send transactions transferring tokens to each address
+  * Requires spamming the network with many transactions
+    * Costs lots of ETH in gas
+    * Wasteful: Most recipients don't even care about these tokens!
+  
+  </script></section>
+    
+    
+    
+    
+  <section data-markdown><script type="text/template">
+  
+  ## Air-drops: Better way
+  
+  * Use a merkle tree to commit to the initial balances
+  * Recipients can submit a proof to claim their tokens
+    * The contract creator doesn't pay any gas for the distribution
+    * Only people who care about their tokens need to pay gas
+  
+  </script></section>
 
 <section data-markdown><script type="text/template">
 
