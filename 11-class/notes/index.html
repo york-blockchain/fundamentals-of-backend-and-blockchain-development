@@ -110,7 +110,7 @@
 * Distributed network of peer nodes. 
 * Redundant data 
 * Data is of validated transactions by a consensus protocol
-* Data is grouped into blocks that 
+* Data is grouped into blocks 
 * Block is bind to previous block via blockhash
 </script></section>
 
@@ -151,6 +151,59 @@
 
 <section data-markdown><script type="text/template">
 
+## HLF network deployment
+
+<img src="test-network.png" style="background-color: white" />
+
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## HLF components
+
+* Peers
+ * Access points for applications
+ * Simulate the transaction then endorse
+ * Enables data propagation 
+* Fabric certificate authorities
+ * Trust enabler for requests to network
+ * Same as browser can trust a website if has CA (*https*)
+ * Participating organization may bring there own CA 
+
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+* Ordering service
+ * Special nodes who only have onus to order transactions in ledger
+ * Unlike Bitcoin/Ethereum where all nodes guarantee consensus
+ * Ensure transaction ordering is deterministic ; not probabilistic
+ * Orderer nodes at deployed at organizational level
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+* Channels
+  * Similar to hotline for privacy concerns
+  * Each channel has its own blockchain
+  * **System channel** : owned by orderer's organization. 
+   * Other orgs are members of this channel.
+   * contains definitions of all consortiums on the network and policies for endorsements, channels and chaincodes.
+  * **Application channel** : owner by any organization for handling business use cases 
+
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+* Chaincode
+ * Smart contracts running in a containerized environment e.g. Docker™. 
+ * Containerized environment keeps them isolated 
+ * Only a peer can interact with a chaincode.
+
+</script></section>
+
+<section data-markdown><script type="text/template">
+
 ## Salient features of HLF
 
 * Modular and configurable architecture
@@ -168,6 +221,36 @@
 * Smart contracts ("chaincode")
 * Configurable DBMSs
 * Enforcement and policy enforcement
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## Chaincode
+
+* Installing chaincode
+ * Operator decides which on which peer chaincode will be installed
+ * A peer accessed by a client application must have chaincode installed.
+ * The packaged chaincode is sent to the peers, extracted and stored in a predefined directory on the containers where the Fabric peer software is running.
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+* Chaincode instantiation
+  * Client or operator will convert the chaincode project into an executable binary which is containerized. 
+  * Channel is notified of chaincode after instantiation. 
+  * Only one peer can instantiate a chaincode as chaincodes have their own state 
+  * State is separate from the channel’s ledger.
+  * divergence of states if there are more than once copy of chaincode
+  * r/w to state of chaincode are transactions.
+</script></section>
+
+
+<section data-markdown><script type="text/template">
+
+* Chaincode upgrade
+  * The new chaincode will be repackaged with a new version, installed and instantiated.
+  * Simple compared upgrading ethereum smart contracts
+   * *How ethereum smart contracts are made upgradeable?*
 </script></section>
 
 <section data-markdown><script type="text/template">
@@ -193,6 +276,59 @@
 
 <section data-markdown><script type="text/template">
 
+## Execute-Order-Validate Architecture
+
+* transactions are simulated and validated by the peers
+* transactions are validated against a predefined policies before committing them to the ledger of a channel
+* Ethereum and bitcoin
+ * order → execute → update state
+
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## Scaling through block configuration
+
+```
+! configtx.yaml
+	Order: &OrderDefaults
+
+		OrdererType: solo
+		Addresses:
+		   -orderer.example.com:7050
+		BatchTimeout: 2s
+		BatchSize:
+		   MaxMessageCount: 10
+		   AbsoluteMaxBytes: 99MB
+		   PreferredMaxBytes: 512 KB
+
+		Kafka:
+		   Brokers:
+		     -127.0.0.1:9092
+```
+
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+* BatchTimeout
+ * the amount of time to wait before creating the next batch of transactions (block).
+* BatchSize 
+ * controls the number of messages in a block
+* MaxMessageCount
+ * maximum number of transactions to add in a batch.
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+* AbsoluteMaxBytes
+  * maximum size of a message in the batch. This number can’t be exceeded.
+* PreferredMaxBytes 
+  * this is what the operator prefers the max size of a batch to be and the network will check this first.
+</script></section>
+
+<section data-markdown><script type="text/template">
+
 ## HLF model
 
 * Assets
@@ -203,31 +339,17 @@
 * Consensus
 </script></section>
 
-<section data-markdown><script type="text/template">
-
-## Fabric ledger features
-
-* Query and update
-* Read-only queries
-* Transactions - keys/value, signatures
-* Transaction validation
-* Configurable block defining policy
-</script></section>
-
 
 <section data-markdown><script type="text/template">
+## Fabric ledger features to scale
 
-## Security Model
+* Requires endorsements from fewer peers across fewer organizations to allow fast transaction confirmations.
+* Private Data Collections
+ * Horizontal (more machines) and vertical(more memory) scaling
+ * Each peer is allowed to create chaincode accessible private database; decided by peers for the access rights
 
-* Identities
-* Membership service providers
-* Policies
-* Peers
-* Ordering service nodes
-* TLS
-* Peer and ordering service node operations service
-* Hardware security Modules
 </script></section>
+
   
 <section data-markdown><script type="text/template">
 
@@ -256,12 +378,17 @@
 
 ## HLF use cases
 
-* Banking
-* Finance
-* Insurance
-* Healthcare
-* Human resources
-* Supply chain 
+* Aerospace
+ * create provenance of aeroplan parts for trading 
+* Energy
+ * Trade excess energy generated by renewable energy providers
+ * power companies, community boards, solar panel vendors and electric vehicle battery charger manufacturers.
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+* Food and clothing provenance
+  * Visibility of supply chain to end consumer
 </script></section>
 
 <section data-markdown><script type="text/template">
@@ -280,17 +407,18 @@
 
 <section data-markdown><script type="text/template">
 
-## Fabric network deployment
+## Assessment
 
-<img src="test-network.png" style="background-color: white" />
-
+* Module 11 : Architecture Analysis - Hyperledger Fabric Quiz 
+    
 </script></section>
 
 <section data-markdown><script type="text/template">
 
-## Assessment
+## Reading
 
-* Module 11 : Architecture Analysis - Hyperledger Fabric Quiz 
+* [transaction flow](https://hyperledger-fabric.readthedocs.io/en/latest/txflow.html) 
+* [HLF performance](https://www.ibm.com/blogs/blockchain/2019/04/does-hyperledger-fabric-perform-at-scale/)
     
 </script></section>
 
