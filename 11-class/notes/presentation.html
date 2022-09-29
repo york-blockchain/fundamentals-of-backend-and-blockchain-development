@@ -1,0 +1,471 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+
+    <title>Fundamentals of Backend and Blockchain Development</title>
+
+    <meta name="author" content="Dhruvin Parikh">
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+    <link rel="stylesheet" href="../../reveal.js/css/reveal.css">
+    <link rel="stylesheet" href="../../reveal.js/css/theme/black.css" id="theme">
+
+    <!-- Code syntax highlighting -->
+    <link rel="stylesheet" href="../../reveal.js/lib/css/zenburn.css">
+
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? '../../reveal.js/css/print/pdf.css' : '../../reveal.js/css/print/paper.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="../reveal.js/lib/js/html5shiv.js"></script>
+    <![endif]-->
+
+    <style>
+      .reveal .slides h1, .reveal .slides h2, .reveal .slides h3 {
+        text-transform: none;
+      }
+
+      .two-column {
+        display: flex;
+        flex-wrap: wrap;
+      }
+
+      .two-column em {
+        margin: 20px;
+      }
+
+      .reveal .big-and-bold {
+        font-weight: bold;
+        font-size: 135%;
+      }
+
+      .reveal .shrunk-a-bit {
+        font-size: 90%;
+      }
+
+      .reveal .shrunk-a-bit pre {
+        width: 100%;
+      }
+
+      .reveal pre {
+        width: 100%;
+      }
+
+      .reveal .highlight {
+        color: yellow;
+        font-weight: bold;
+      }
+
+      .reveal .highlightRed {
+        color: red;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="reveal">
+      <div class="slides">
+
+<!------------------------------------------------------->
+
+
+
+<section data-markdown><script type="text/template">
+
+## CSBC 1000 - Fundamentals of Backend and Blockchain Development
+
+### Class 11: Presentation tips
+
+*Dhruvin Parikh*
+
+</script></section>
+
+
+<section data-markdown><script type="text/template">
+
+## Instructions
+* Each group will be given 15 minutes max to :
+ * Discuss problem and solution
+ * Challenges you faced and how did you overcome
+ * Demoing software
+ * fielding questions 
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## Slide Deck
+
+* Powerpoint, Google Slides or other presentation software
+* Supports a formal presentation
+* Good for in person, web conference or follow along over phone
+* Brief text that requires a speaker to give it context
+* 3-10 slides for a typical business presentation
+* Powerpoint or PDF file format for transfer
+
+</script></section>
+
+
+<section data-markdown><script type="text/template">
+
+## Slide Deck
+
+* Needs to cover
+ * Who - who are you or your company
+ * Problem - what problem are you trying to address
+ * Solution - introduce your solution to the problem
+ * Benefits - what benefits does your solution provide
+ * Features - what features backup the benefits
+ * Call to action
+
+</script></section>
+
+
+<section data-markdown><script type="text/template">
+
+## Slide Deck
+
+* Design
+* Things to avoid
+ * Repetitive boring slides like in this presentation
+ * Mismatched colours
+ * Poor contrast
+ * Inconsistent design
+ * Distractions
+ * Logo soup
+ * Missing context
+
+</script></section>
+
+
+<section data-markdown><script type="text/template">
+
+## Slide Deck
+
+* Design
+* Things to aim for
+ * A variety of slide layouts 
+ * A complementary colour scheme
+ * Easy to read, high contrast
+ * Consistent design
+ * Focus on important features
+ * Judicious use of external graphics like logos
+ * Support context
+
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## Storytelling  - origin story
+
+* Technology
+ * What drove the idea?
+ * What has the journey been?
+ * How have others perceived the idea?
+    
+</script></section>
+
+
+<section data-markdown><script type="text/template">
+
+## Storytelling  - anecdote
+
+* A short amusing biographical narrative
+* Rehearse your story so it doesn’t ramble
+* Provide context for those that were not there
+* Relates to the product idea or business origin
+  
+</script></section>
+
+
+<section data-markdown><script type="text/template">
+
+## Storytelling  - beginning, middle and end
+
+* Beginning
+ * Set up who is involved with relationships
+ * Identify where it took place - sets the scene
+ * When did this take place in time
+* Middle
+ * The journey that the who takes where
+ * Sets up any changes to who or where
+    
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+* End
+    * Lessons learned
+    * Identify the changes to the who or where
+    * Comment on the changes
+    
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## Technology pitches
+
+* Suitability - does this match internal capacity
+* Risk - is the technology ready yet
+* Continuity - the software lifecycle look like
+* Complexity - going to be demanding to take on
+* Compatibility - takes into account existing systems
+* Resources - cost in terms of money, time and assets
+* Timeline - how long of a commitment
+* Dependencies - what else is dependent on this
+
+</script></section>
+
+
+<section data-markdown><script type="text/template">
+
+## Demoing software
+
+* Gives your software visibility - from abstract to concrete
+* Support your benefits
+* Show off your most impactful features
+* Provide a diagram for context
+
+</script></section>
+
+
+<section data-markdown><script type="text/template">
+
+## Demoing software
+
+* Have demo data there to fill out the interface
+* Make demo data professional
+* Find the right amount of data to keep it visible
+* Start from the end
+ * Start with retrieve calls - GET
+ * make changes via for e.g. - POST/PUT/DEL
+ * verify that change happened - GET 
+
+</script></section>
+
+
+<section data-markdown><script type="text/template">
+
+## Demoing software
+
+* Script your demo
+* Script of steps to take
+* Script of what to say
+* Don’t stop talking because you are focusing on steps
+* Clean out demo data of duplicates before presentation
+
+</script></section>
+
+
+<section data-markdown><script type="text/template">
+
+## Demoing software
+
+* Hold off on showing source code
+* Keep the client UI as clean as you can  
+
+</script></section>
+
+
+<section data-markdown><script type="text/template">
+
+## Demoing software
+
+* Recovering from errors
+* Know where things can go wrong
+* Have something you can flip to
+* THIS IS JUST A TWO WEEK PROJECT
+ * Briefly explain the problem or bypass it
+ * Focusing on the problem can show your expertise
+ * Focusing on it makes people remember it
+
+</script></section>
+
+
+<section data-markdown><script type="text/template">
+
+## Demoing software
+
+* Have presets
+ * Text in clipboard to paste
+ * Images ready to drag
+ * Transactions almost completed
+* Explaining how it got there can be faster than showing
+* Use presets to avoid 
+ * Boring repetitive tasks
+ * Slow response times
+ * Multi-step processes
+
+</script></section>
+
+
+<section data-markdown><script type="text/template">
+
+## Demoing software
+
+* Explain what is happening behind the scenes
+* Give context to your transaction
+* Highlight what you are doing or looking at
+* Take your time (within reason)
+* Have a story for your transaction
+ * Mr Almond wants to deposit 15 Eth in his account…
+
+</script></section>
+
+
+<section data-markdown><script type="text/template">
+
+## Demoing software
+
+* At the end you can pull back the curtain
+ * Show diagram of architecture
+ * Documents
+ * Source code
+ * Log files
+ * Project plans
+ * Diagrams
+ * GitHub repos
+
+</script></section>
+
+
+<section data-markdown><script type="text/template">
+
+## Demoing software
+
+* How is your demo supporting your key benefits
+* What in your demo is part of the takeaway
+* When done flip back to final screen of presentation
+  
+</script></section>
+
+
+<section data-markdown><script type="text/template">
+
+## Demoing software
+
+* Live demo!
+ * Proves your system works
+ * See how it works
+ * Less work for you
+ * Lets you shine!
+   
+</script></section>
+
+
+<section data-markdown><script type="text/template">
+
+## Demoing software
+
+* Canned Demo
+    * Highlights actions
+    * Mix in explanatory text
+    * Avoid errors
+    * Bypass steps
+    * Easier to script
+    * Use screen shots    
+    
+</script></section>
+
+
+<section data-markdown><script type="text/template">
+
+## Disaster recovery
+* Things go wrong - be prepared
+* What can go wrong for this presentation?
+ * Nervous
+ * Technical problems
+ * Mistake by organizers
+ * Content mistakes
+ * Design mistakes
+ * Too similar to someone else
+ * Following a strong presenter
+ * Following a weak presenter
+
+</script></section>
+
+
+<section data-markdown><script type="text/template">
+
+## Disaster recovery - safety net
+
+* Practice, practice, practice
+* Backup plans
+* Roll with it
+* Laugh it off
+* Throw it back to organizer
+* Keep a chat window open for you to see
+* BREATHE
+ 
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## Takeaways
+
+* Jobs are no longer guaranteed - make your own opportunities
+* You have to sell people all the time - understand how to do it
+* Always look for your best angle for opportunity
+  
+</script></section>
+
+
+<section data-markdown><script type="text/template">
+
+## End
+
+</script></section>
+
+
+<!------------------------------------------------------->
+
+
+      </div>
+
+    </div>
+
+    <script src="../../reveal.js/lib/js/head.min.js"></script>
+    <script src="../../reveal.js/js/reveal.js"></script>
+    <script src="../../reveal.js/plugin/zoom-js/zoom.js"></script>
+
+    <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+
+        transition: 'none', // none/fade/slide/convex/concave/zoom
+
+	math: {
+          mathjax: '../lib/MathJax/MathJax.js',
+          config: 'TeX-AMS_SVG-full',
+	},
+
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: '../../reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: '../../reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: '../../reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+          { src: '../../reveal.js/plugin/math/math.js', async: true }
+        ]
+      });
+
+    </script>
+
+  </body>
+</html>
