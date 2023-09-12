@@ -12,7 +12,7 @@ var http = require('http');
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '3000');
+var port = normalizePort(process.env.PORT || '3001');
 app.set('port', port);
 
 /**
@@ -88,3 +88,15 @@ function onListening() {
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
 }
+
+// Handle graceful shutdown on SIGINT (Ctrl+C) or SIGTERM (e.g., from process manager)
+process.on('SIGINT', () => {
+  process.stdout.clearLine();
+  // Move the cursor to the beginning of the line
+  process.stdout.cursorTo(0);
+  console.log('Closing server gracefully...');
+  server.close(() => {
+    console.log('Server closed.');
+    process.exit(0);
+  });
+});
