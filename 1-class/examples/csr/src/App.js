@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react'
-import './App.css';
 
 function App() {
   // Define state variables to store the exchange rates
