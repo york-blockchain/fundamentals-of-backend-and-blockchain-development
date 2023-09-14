@@ -14,11 +14,15 @@ There are many ways to make requests to the Ethereum chain. For simplicity, we'l
 
 Once you've created an Alchemy account, you can generate an API key by creating an app. This will allow you to make requests to the **Goerli testnet**. If you're not familiar with testnets you can [read Alchemy's guide to choosing a network](https://docs.alchemyapi.io/guides/choosing-a-network).
 
-On the Alchemy dashboard, find the **Apps** dropdown in the navigation bar and click **Create App**.
+On the Alchemy dashboard, find the **Apps** icon on the left navigation bar 
 
 ![Hello world create app](./hello-world-create-app.png)
 
-Give your app the name '_Hello World_' and write a short description. Select **Staging** as your environment and **Goerli** as your network.
+Now click **Create App**.
+
+![Hello world create new app](./hello-world-create-new-app.png)
+
+Give your app the name '_Hello World_' and write a short description. Select **Ethereum** as your chain and **Ethereum Goerli** as your network.
 
 ![create app view hello world](./create-app-view-hello-world.png)
 
@@ -32,7 +36,11 @@ You need an Ethereum account to send and receive transactions. We'll use MetaMas
 
 You can download and create a MetaMask account for free [here](https://metamask.io/download.html). When you are creating an account, or if you already have an account, make sure to switch over to the Goerli Test Network” in the upper right (so that we’re not dealing with real money).
 
-![](./metamask-goerli-example.png)
+Click on the **Network** dropdown
+![](metamask-network.png)
+
+Switch **Network** to Goerli
+![](metamask-switch-network.png)
 
 ### Step 4: Add ether from a Faucet {#step-4-add-ether-from-a-faucet}
 
@@ -165,11 +173,11 @@ _Note: Be sure to read the comments to understand what this contract does._
 
 ```
 // Specifies the version of Solidity, using semantic versioning.
-// Learn more: https://solidity.readthedocs.io/en/v0.5.10/layout-of-source-files.html#pragma
+// Learn more: https://docs.soliditylang.org/en/latest/layout-of-source-files.html#pragmas
 pragma solidity >=0.7.3;
 
 // Defines a contract named `HelloWorld`.
-// A contract is a collection of functions and data (its state). Once deployed, a contract resides at a specific address on the Ethereum blockchain. Learn more: https://solidity.readthedocs.io/en/v0.5.10/structure-of-a-contract.html
+// A contract is a collection of functions and data (its state). Once deployed, a contract resides at a specific address on the Ethereum blockchain. Learn more: https://docs.soliditylang.org/en/latest/structure-of-a-contract.html
 contract HelloWorld {
 
    //Emitted when update function is called
@@ -181,7 +189,7 @@ contract HelloWorld {
    string public message;
 
    // Similar to many class-based object-oriented languages, a constructor is a special function that is only executed upon contract creation.
-   // Constructors are used to initialize the contract's data. Learn more:https://solidity.readthedocs.io/en/v0.5.10/contracts.html#constructors
+   // Constructors are used to initialize the contract's data. Learn more:https://docs.soliditylang.org/en/latest/contracts.html#constructor
    constructor(string memory initMessage) {
 
       // Accepts a string argument `initMessage` and sets the value into the contract's `message` storage variable).
@@ -222,7 +230,7 @@ Do not name it `process.env` or `.env-custom` or anything else.
 - Follow [these instructions](https://metamask.zendesk.com/hc/en-us/articles/360015289632-How-to-Export-an-Account-Private-Key) to export your private key
 - See below to get HTTP Alchemy API URL
 
-![](./get-alchemy-api-key.gif)
+![](./get-alchemy-api-key.png)
 
 Your `.env` should look like this:
 
