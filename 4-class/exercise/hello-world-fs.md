@@ -868,7 +868,7 @@ You'll notice at the top of the file that we've commented out the `helloWorldCon
 
 The four unimplemented functions after our `helloWorldContract` object do the following:
 
-- `loadCurrentMessage` - this function handles the logic of loading the current message stored in the smart contract. It will make a _read_ call to the Hello World smart contract using the [Alchemy Web3 API](https://github.com/alchemyplatform/alchemy-web3).
+- `loadCurrentMessage` - this function handles the logic of loading the current message stored in the smart contract. It will make a _read_ call to the Hello World smart contract using the [Alchemy sdk js](https://github.com/alchemyplatform/alchemy-sdk-js).
 - `connectWallet` - this function will connect the user's MetaMask to our dapp.
 - `getCurrentWalletConnected` - this function will check if an Ethereum account is already connected to our dapp on page load and update our UI accordingly.
 - `updateMessage` - this function will update the message stored in the smart contract. It will make a _write_ call to the Hello World smart contract, so the user's MetaMask wallet will have to sign an Ethereum transaction to update the message.
@@ -890,13 +890,13 @@ This may sounds like a lot of steps, but don't worry! We'll walk you through how
 
 So remember how in Part 2 of this exercise, we used our [Alchemy Web3 key to read from our smart contract](https://docs.alchemy.com/alchemy/tutorials/hello-world-smart-contract/interacting-with-a-smart-contract#step-1-install-web3-library)? You'll also need an Alchemy Web3 key in your dapp to read from the chain.
 
-If you don't have it already, first install [Alchemy Web3](https://github.com/alchemyplatform/alchemy-web3) by navigating to the root directory of your `starter-files` and running the following in your terminal:
+If you don't have it already, first install [Alchemy Sdk js](https://github.com/alchemyplatform/alchemy-sdk-js) by navigating to the root directory of your `starter-files` and running the following in your terminal:
 
 ```text
-npm install @alch/alchemy-web3
+npm install alchemy-sdk
 ```
 
-[Alchemy Web3](https://github.com/alchemyplatform/alchemy-web3) is a wrapper around [Web3.js](https://web3js.readthedocs.io/en/v1.2.9/), providing enhanced API methods and other crucial benefits to make your life as a web3 developer easier. It is designed to require minimal configuration so you can start using it in your app right away!
+[Alchemy Sdk Js](https://github.com/alchemyplatform/alchemy-sdk-js) is a wrapper around [ethers.js](https://docs.ethers.org/), providing enhanced API methods and other crucial benefits to make your life as a web3 developer easier. It is designed to require minimal configuration so you can start using it in your app right away!
 
 Then, install the [dotenv](https://www.npmjs.com/package/dotenv) package in your project directory, so we have a secure place to store our API key after we fetch it.
 
