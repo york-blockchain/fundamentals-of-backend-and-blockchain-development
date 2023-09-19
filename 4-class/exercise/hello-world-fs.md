@@ -676,7 +676,7 @@ As a prerequisite, you should have a beginner-level understanding of React. If n
 
 ### Clone the starter files {#clone-the-starter-files}
 
-First, go to the [hello-world-part-four GitHub repository](https://github.com/alchemyplatform/hello-world-part-four-tutorial) to get the starter files for this project and clone this repository to your local machine.
+First, go to the [hello-world-part-four GitHub repository](https://github.com/york-blockchain/hello-world-part-four-tutorial) to get the starter files for this project and clone this repository to your local machine.
 
 Open the cloned repository locally. Notice that it contains two folders: `starter-files` and `completed`.
 
