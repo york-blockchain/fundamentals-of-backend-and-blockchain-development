@@ -145,14 +145,6 @@
 
 <section data-markdown><script type="text/template">
 
-## Database versus Blockchain
-
-<img src="database-vs-blockchain-arch.jpeg">
-
-</script></section>
-
-<section data-markdown><script type="text/template">
-
 ## Blockchain: distributed ledger of transactions
 
 <img src="blockchain-workings-explained.png" width="800">
@@ -168,7 +160,7 @@
 * Transaction
 * Block
 * Consensus
-* Token
+* Gas Token
 * State
 * Smart contract(optional)
     
@@ -176,8 +168,16 @@
 
 <section data-markdown><script type="text/template">
 
-## Peer to Peer
-* Nodes use Peer to Peer Network for synchronization.
+## Peer to Peer : Database versus Blockchain
+
+<img src="database-vs-blockchain-arch.jpeg">
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+  ## Peer to Peer
+  * Nodes use Peer to Peer Network for synchronization.
+ <img src="peer-to-peer-network.png">
 </script></section>
 
 <section data-markdown><script type="text/template">
@@ -190,6 +190,7 @@
 
 ## Miner
 * Blockchain miners create Block
+<img src="blockchain-works.png" width="700" style="background-color: white" />
 </script></section>
 
 <section data-markdown><script type="text/template">
@@ -210,35 +211,30 @@
 <section data-markdown><script type="text/template">
 
 ## Consensus
+* Consensus - agreement
 * The transactions are added to ledger based on Consensus from nodes.
 </script></section>
 
 <section data-markdown><script type="text/template">
 
-## Token
-* 
+## Gas Token
+* Currency for the transactor to pay towards transition of state.
+* A medium to compensate miners for validating a block
 </script></section>
 
 <section data-markdown><script type="text/template">
 
 ## State
 * Each node has the copy of the full ledger.
-
+* history of account balance changes.
 </script></section>
 
 <section data-markdown><script type="text/template">
 
 ## Smart Contract
-* 
+* Autonomous code executing agent
 </script></section>
 
-<section data-markdown><script type="text/template">
-
-## How blockchain works
-
-<img src="blockchain-works.png" width="800" style="background-color: white" />
-
-</script></section>
 
 <section data-markdown><script type="text/template">
 
@@ -663,9 +659,39 @@
 
 ## CAP Theorem
 
-* Consistency
-* Availability
-* Partition tolerance
+* CAP Theorem states that all distributed systems can only have two of the three properties at any time. 
+ * Consistency
+ * Availability
+ * Partition tolerance
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## Consistency
+
+* A network has Consistency when all its peers are able to provide the current state without disagreeing on what this state is. 
+* If it does not have the most recent state, it will not provide any response. 
+* In a consistent system, no two nodes return states that are outdated and different from each other. 
+* If there is a discrepancy between the states retrieved from each node, the system returns an error. 
+* This ensures a safety representation of data to clients.
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## Availability
+
+* Distributed system has Availability when all nodes are able to perform read and write operations without delay. 
+* The network is “live” because it allows clients to fetch and store data at any time. 
+* This ignores correctness of the state and focuses on user experience. 
+* This means that although the responses are successful, it is possible to receive an incorrect state. 
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## Partition tolerance
+
+* When two or more peers in a network are disconnected from each other, there is a partition (think of this in terms of graph theory where a node is a vertice and connections to other nodes are edges). 
+* A network has Partition tolerance when it is able to operate despite its partitions.
 </script></section>
 
 <section data-markdown><script type="text/template">
@@ -725,6 +751,17 @@
 </script></section>
 
 <section data-markdown><script type="text/template">
+## Bitcoin blockchian explorer
+* https://www.blockchain.com/explorer/blocks/btc/
+* [Genesis Block](https://www.blockchain.com/explorer/blocks/btc/000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8ce26f)
+</script></section>
+
+<section data-markdown><script type="text/template">
+## Proof-Of-Work Algorithm
+<img src="proof-of-work-bitcoin-implementation.png" width="600">
+</script></section>
+
+<section data-markdown><script type="text/template">
 
 ## Hash-based Proof-of-work
 
@@ -763,6 +800,8 @@
 <section data-markdown><script type="text/template">
 
 ## UTXO model
+
+* 100,000,000 satoshi == 1 BTC
 
 <img src="utxo.png" style="background-color: white; width:600px" />
 
