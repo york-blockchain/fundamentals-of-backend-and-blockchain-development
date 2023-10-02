@@ -102,6 +102,14 @@
 * Use cases
 </script></section>
 
+
+<section data-markdown><script type="text/template">
+## Revision questions
+* What conditions should be fulfilled for a network to be called a blockchain?
+* Would a failed transaction record persist on blockchain?
+* What changes will be applied to state state by a failed transaction?
+</script></section>
+
 <section data-markdown><script type="text/template">
 
 ## Blockchain
@@ -147,6 +155,205 @@
 * Enterprise-grade 
 * Permissioned DLT platform
 * Established under linux foundation
+* Received contributions from IBM
+* Modular architecture - plug-n-play components such as consensus,membership services, chaincode
+* Unique consensus model to perform at scale
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## HLF Concepts
+* **Distributed Ledger** : asset tracking
+* **Transactions** : State management, business logic in chaincode
+* **Chaincode** : implement business logic to expose functions
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## HLF Architecture
+<img src="hlf-arch.png" width="600">
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## Peers
+
+* maintains ledger and state
+* Commit transactions
+* May hold smart contract (chain code)
+* Access points for applications
+* Simulate the transaction then endorse
+* Enables data propagation 
+
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## Endorsing Peers
+
+* Specialised peer also endorses transaction by receiving a transaction proposal and responds by granting or denying endorsement.
+* Must hold smart contract
+
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## Ordering Node
+
+* Approves the inclusion of transaction blocks into the ledger and communicates with committing and endorsing peer nodes.
+* Does not hold smart contract.
+* Does not hold ledger
+
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## Ordering service
+  * Special nodes who only have onus to order transactions in ledger
+  * Unlike Bitcoin/Ethereum where all nodes guarantee consensus
+  * Ensure transaction ordering is deterministic ; not probabilistic
+  * Orderer nodes at deployed at organizational level
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## Channels
+  * Similar to hotline for privacy concerns
+  * Each channel has its own blockchain
+  * **System channel** : owned by orderer's organization. 
+    * Other orgs are members of this channel.
+    * contains definitions of all consortiums on the network and policies for endorsements, channels and chaincodes.
+  * **Application channel** : owner by any organization for handling business use cases 
+
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## Chaincode
+  * Smart contracts running in a containerized environment e.g. Docker™. 
+  * Containerized environment keeps them isolated 
+  * Only a peer can interact with a chaincode.
+
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## Chaincode methods
+  * Init
+  * Invoke
+  * Query
+
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## Chaincode life cycle
+  * Package
+  * Deploy
+  * Approve
+  * Commit
+
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## Fabric certificate authorities
+ * Trust enabler for requests to network
+ * Same as browser can trust a website if has CA (*https*)
+ * Participating organization may bring there own CA 
+
+</script></section>
+
+
+<section data-markdown><script type="text/template">
+
+## Transaction flow
+
+* Address resiliency, flexibility, scalability, performance and confidentiality through following steps :
+  * Execute
+  * Order
+  * Validate
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## Execute-Order-Validate Architecture
+
+* transactions are simulated and validated by the peers
+* transactions are validated against a predefined policies before committing them to the ledger of a channel
+* Ethereum and bitcoin
+  * order → execute → update state
+
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## Detailed transaction flow
+
+<img src="tx-sequence.png" style="background-color: white" />
+
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## Transaction flow steps
+
+1. Propose transaction
+2. Execute proposal
+3. Proposal Response
+4. Order transaction (SOLO - dev only, Raft)
+5. Deliver transaction
+6. Validate transaction 
+7. Notify transaction
+
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## Propose transaction 
+
+<img src="tx-step1.png" style="background-color: white" />
+
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## Execute proposal 
+
+<img src="tx-step2.png" style="background-color: white" />
+
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## Proposal response
+
+<img src="tx-step3.png" style="background-color: white" />
+
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## Order transaction
+
+<img src="tx-step4.png" style="background-color: white" />
+
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## Deliver transaction
+
+<img src="tx-step5.png" style="background-color: white" />
+
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## Validate transaction
+
+<img src="tx-step6.png" style="background-color: white" />
+
 </script></section>
 
 <section data-markdown><script type="text/template">
@@ -154,51 +361,6 @@
 ## HLF network deployment
 
 <img src="test-network.png" style="background-color: white" />
-
-</script></section>
-
-<section data-markdown><script type="text/template">
-
-## HLF components
-
-* Peers
- * Access points for applications
- * Simulate the transaction then endorse
- * Enables data propagation 
-* Fabric certificate authorities
- * Trust enabler for requests to network
- * Same as browser can trust a website if has CA (*https*)
- * Participating organization may bring there own CA 
-
-</script></section>
-
-<section data-markdown><script type="text/template">
-
-* Ordering service
- * Special nodes who only have onus to order transactions in ledger
- * Unlike Bitcoin/Ethereum where all nodes guarantee consensus
- * Ensure transaction ordering is deterministic ; not probabilistic
- * Orderer nodes at deployed at organizational level
-</script></section>
-
-<section data-markdown><script type="text/template">
-
-* Channels
-  * Similar to hotline for privacy concerns
-  * Each channel has its own blockchain
-  * **System channel** : owned by orderer's organization. 
-   * Other orgs are members of this channel.
-   * contains definitions of all consortiums on the network and policies for endorsements, channels and chaincodes.
-  * **Application channel** : owner by any organization for handling business use cases 
-
-</script></section>
-
-<section data-markdown><script type="text/template">
-
-* Chaincode
- * Smart contracts running in a containerized environment e.g. Docker™. 
- * Containerized environment keeps them isolated 
- * Only a peer can interact with a chaincode.
 
 </script></section>
 
@@ -255,35 +417,15 @@
 
 <section data-markdown><script type="text/template">
 
-  ## Ethereum vs HLF
-  
-  * HLF is a framework - Ethereum is platform
-  * HLF has pluggable consensus
-  * HLF does not have native currency
-  * HLF Smart contract written in Golang, Java, Node.js
-  * HLF transactions can be made private, confidential and identifiable
-  </script></section>
+## Ethereum vs HLF
 
-<section data-markdown><script type="text/template">
-
-## Transaction flow
-
-* Address resiliency, flexibility, scalability, performance and confidentiality through following steps :
-  * Execute
-  * Order
-  * Validate
+* HLF is a framework - Ethereum is platform
+* HLF has pluggable consensus
+* HLF does not have native currency
+* HLF Smart contract written in Golang, Java, Node.js
+* HLF transactions can be made private, confidential and identifiable
 </script></section>
 
-<section data-markdown><script type="text/template">
-
-## Execute-Order-Validate Architecture
-
-* transactions are simulated and validated by the peers
-* transactions are validated against a predefined policies before committing them to the ledger of a channel
-* Ethereum and bitcoin
- * order → execute → update state
-
-</script></section>
 
 <section data-markdown><script type="text/template">
 
@@ -419,7 +561,7 @@
 
 * [transaction flow](https://hyperledger-fabric.readthedocs.io/en/latest/txflow.html) 
 * [HLF performance](https://www.ibm.com/blogs/blockchain/2019/04/does-hyperledger-fabric-perform-at-scale/)
-    
+* [Writing chaincode in HLF](https://www.youtube.com/live/3ZcQfvRfTSE?si=Od43DjxqqTViPCSa)    
 </script></section>
 
 
