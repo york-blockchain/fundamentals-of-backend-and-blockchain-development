@@ -1,11 +1,9 @@
 const http = require("http");
 
 const hostname = "127.0.0.1";
-const port = 5001;
 
 const server = http.createServer((req, res) => {
   console.log("request received");
-  //    console.log(req);
   console.log(req.url);
 
   res.statusCode = 200;
@@ -13,14 +11,19 @@ const server = http.createServer((req, res) => {
   res.end("Hello World");
 });
 
-server.listen(port, hostname, () => {
-  console.log(`Server running at http://${hostname}:${port}/`);
+server.listen(process.argv[2], hostname, () => {
+  console.log(`Server running at http://${hostname}:${process.argv[2]}/`);
 });
 
-server.on("close", () => {
-  console.log("\nclosing ports");
-});
 
-process.on("SIGINT", () => {
-  server.close();
+// Handle graceful shutdown on SIGINT (Ctrl+C) or SIGTERM (e.g., from process manager)
+process.on('SIGINT', () => {
+  process.stdout.clearLine();
+  // Move the cursor to the beginning of the line
+  process.stdout.cursorTo(0);
+  console.log('Closing server gracefully...');
+  server.close(() => {
+    console.log('Server closed.');
+    process.exit(0);
+  });
 });

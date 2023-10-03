@@ -114,9 +114,11 @@
 
 ## Class Plan
 * Randomness
-* Cryptograph in blockchain
+* Cryptography in blockchain
 * Hashing and transaction security
 * Blockchain security
+* Coding activity
+* Quiz 
 
 </script></section>
 
@@ -186,6 +188,81 @@
   
   </script></section>
 
+  <section data-markdown><script type="text/template">
+
+  ## Hashing
+  * Hashing is the method of passing data into a one way hash-function to generate a string of unrecognizable text called a “hash”. 
+  * It is computationally impossible to derive the original input of a hash-function given its output.
+  * [hashing demo](https://andersbrownworth.com/blockchain/hash) 
+
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+  ## Application of Hashing
+  * Data Integrity
+  * Quick lookups
+  * Store/verify password in database
+  * Generate Blockchain address
+  * Locating blockchain transactions
+  * Compressing data    
+</script></section>
+
+
+  <section data-markdown><script type="text/template">
+
+  ## Hashing in Blockchain
+  * The role of hashes in the block structure is to preserve immutability. 
+  * The transactions in the block are hashed together with the hash of the previous block. 
+  * This hash is then included in the block header for a future block to use. 
+  * The genesis block (i.e first block) will have only a hash of the initial transactions from the coinbase (first) account. 
+</script></section>
+
+
+<section data-markdown><script type="text/template">
+
+  ## Hashing secures Blockchain
+  
+  * Even if one transaction changes in a block, the entire block hash would change. 
+  * It would cause a break in the chain. 
+  * In order to perform a successful rewrite of the blocks
+    * Modify the current block and all the previous ones 
+    * Convince the miners/validators on the network that this is valid. 
+    * Do it before the next block is added. 
+    * The longer the chain, the less likely it is that it can be broken.
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+  ## Collision-resistance
+  
+  * Hard to find any two messages that hash to the same value
+  * Formally: Computationally infeasible to find distinct $m$ and $m'$ such that $H(m) = H(m')$
+  
+  </script></section>
+  
+  
+  <section data-markdown><script type="text/template">
+  
+  ## Collision attacks
+  
+  * Hash functions are almost always attacked by finding collisions, not specific preimages
+  * MD5 and SHA1 are insecure because it is easier than it should be to find collisions
+    * Both are still practically secure against preimage attacks
+  
+  </script></section>
+
+    <section data-markdown><script type="text/template">
+
+## [Sidebar] Keccak/SHA3
+
+* There are 2 separate hash functions: 
+* keccak256
+* SHA3 (standardised)
+* Confusingly, Ethereum folks sometimes say "SHA3", but they *always* mean keccak256
+* So be careful when using libraries in various languages!
+
+</script></section>
 
 <section data-markdown><script type="text/template">
 
@@ -290,83 +367,7 @@
 
 </script></section>
 
-<section data-markdown><script type="text/template">
 
-  ## Hashing
-  * Hashing is the method of passing data into a one way hash-function to generate a string of unrecognizable text called a “hash”. 
-  * It is computationally impossible to derive the original input of a hash-function given its output.
-  * [hashing demo](https://andersbrownworth.com/blockchain/hash) 
-
-</script></section>
-
-<section data-markdown><script type="text/template">
-
-  ## Application of Hashing
-  * Data Integrity
-  * Quick lookups
-  * Store/verify password in database
-  * Generate Blockchain address
-  * Locating blockchain transactions
-  * Compressing data    
-</script></section>
-
-
-  <section data-markdown><script type="text/template">
-
-  ## Hashing in Blockchain
-  * The role of hashes in the block structure is to preserve immutability. 
-  * The transactions in the block are hashed together with the hash of the previous block. 
-  * This hash is then included in the block header for a future block to use. 
-  * The genesis block (i.e first block) will have only a hash of the initial transactions from the coinbase (first) account. 
-</script></section>
-
-
-<section data-markdown><script type="text/template">
-
-  ## Hashing secures Blockchain
-  
-  * Even if one transaction changes in a block, the entire block hash would change. 
-  * It would cause a break in the chain. 
-  * In order to perform a successful rewrite of the blocks
-    * Modify the current block and all the previous ones 
-    * Convince the miners/validators on the network that this is valid. 
-    * Do it before the next block is added. 
-    * The longer the chain, the less likely it is that it can be broken.
-</script></section>
-
-<section data-markdown><script type="text/template">
-
-  ## Collision-resistance
-  
-  * Hard to find any two messages that hash to the same value
-  * Formally: Computationally infeasible to find distinct $m$ and $m'$ such that $H(m) = H(m')$
-  
-  </script></section>
-  
-  
-  <section data-markdown><script type="text/template">
-  
-  ## Collision attacks
-  
-  * Hash functions are almost always attacked by finding collisions, not specific preimages
-  * MD5 and SHA1 are insecure because it is easier than it should be to find collisions
-    * Both are still practically secure against preimage attacks
-  
-  </script></section>
-
-    <section data-markdown><script type="text/template">
-
-## [Sidebar] Keccak/SHA3
-
-* There are 2 separate hash functions: 
-* keccak256
-* SHA3 (standardised)
-* Confusingly, Ethereum folks sometimes say "SHA3", but they *always* mean keccak256
-* So be careful when using libraries in various languages!
-
-</script></section>
-  
-      
 <section data-markdown><script type="text/template">
 
 ## Why hash public keys?
@@ -441,7 +442,11 @@ On blockchains, almost always **elliptic curves**
 
 </script></section>
     
-    
+<section data-markdown><script type="text/template">
+
+## 15 minute break
+
+</script></section>    
     
 <section data-markdown><script type="text/template">
 
@@ -461,6 +466,7 @@ On blockchains, almost always **elliptic curves**
 
 * [Sign blockchain transaction](https://andersbrownworth.com/blockchain/public-private-keys/transaction)
 * Demo for signing a transaction using web3.js
+* message signing/verifying tool : https://etherscan.io/verifiedSignatures
 </script></section>
 
 <section data-markdown><script type="text/template">
@@ -472,6 +478,178 @@ On blockchains, almost always **elliptic curves**
 
 $h = H(m)$
 
+</script></section>
+
+
+<section data-markdown><script type="text/template">
+## Secp256k1 curve
+
+![curve](./secp256k1.webp)
+<br/>
+* specific curve used with ECDSA to generate key pairs and signatures
+* set of points on the curve using the equation<br/> *y<sup>2</sup> = x<sup>3</sup> + 7*
+</script></section>
+
+<section data-markdown><script type="text/template">
+## ECDSA {r,s,v}
+* Signature (65 byte long) is represented by: 
+ * *r* : 32-byte x-coordinate of a point generated during the signing process
+ * *s* : 32-byte value derived from the formula 
+ ```
+ s = k^-1 * (e + d*r) mod n
+ ``` 
+ where `e = hash(msg)` and *d* is the signer’s private key.
+* and followed by :
+ * *v* : 1-byte recovery value used to determine public key from value *r*
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## Signature malleability
+
+* ECDSA allow attackers to change the signature slightly without invalidating the signature itself.
+* Can occur if smart contract doesn’t utilize ECDSA correctly and validates signatures improperly. 
+* Allows malicious actors to modify signatures to bypass signature validity measures.
+* Attacker still doesn't know signer's private key.
+</script></section>
+
+<section data-markdown><script type="text/template">
+## Signature malleability demo(javascript)
+```
+const Web3 = require("web3");
+const BN = require("bn.js");
+const { assert } = require("chai");
+
+const web3 = new Web3(Web3.givenProvider);
+
+const N = new BN("0xfffffffffffffffffffffffffffffffebaaedce6af48a03bbfd25e8cd0364141".substr(2), 16);
+
+
+function Main(){
+    // let's generate a new account
+    let acc = web3.eth.accounts.create();
+    console.log(`Original Signer Address : ${acc.address}`);
+
+    // hash the message and sign the result
+    const msgHash = web3.utils.soliditySha3("hello");
+    //sign the hashed message
+    let sig = acc.sign(msgHash);
+
+    // lets make sure the recovered address is equal to the original signer
+    assert(acc.address == web3.eth.accounts.recover(msgHash, sig.signature), "Something is wrong w the signature");
+
+    // convert the signature S and V properties to a bigNumber, so we can manipulate them
+    let S = new BN(sig.s.substr(2), 16)
+    let newV = new BN(sig.v.substr(2), 16).mod(new BN('2')) == 0 ? new BN('1b', 16) : new BN('1c', 16);
+
+
+
+    let newSig = sig.r + 
+        N.sub(S).toString(16) + // manipulate S
+        newV.toString(16);
+
+    let recoveredSignerFromNewSignature = web3.eth.accounts.recover(msgHash, newSig);
+    console.log(`Recovered Signer Address : ${acc.address}`);
+
+    assert(recoveredSignerFromNewSignature == acc.address, "Signers are not equal");
+    console.log("Signature works!!!")
+}
+
+Main()
+```
+</script></section>
+      
+<section data-markdown><script type="text/template">
+## Signature malleability output (javascript)
+
+```
+// randomly generated account
+Original Signer Address : 0xeF69029195d59655E982c26E654b34eEbc6075cA 
+
+// should be equal to the above message
+Recovered Signer Address : 0xeF69029195d59655E982c26E654b34eEbc6075cA
+Signature works!!!
+```
+</script></section>
+
+<section data-markdown><script type="text/template">
+## Signature Verification Contract (solidity)
+```
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+contract SignatureMalleability{
+
+    function verify(bytes32 _messageHash, bytes memory _sig, address _expectedSigner) 
+    public pure returns (bool) {
+        bytes32 ethSignedHash = keccak256(
+            abi.encodePacked("\x19Ethereum Signed Message:\n32", _messageHash)
+        );
+        address signer = recoverSigner(ethSignedHash, _sig);
+        return signer == _expectedSigner;
+    }
+
+    function recoverSigner(bytes32 _ethSignedHash, bytes memory _sig) 
+    public pure returns (address) {
+        require(_sig.length == 65, "Invalid signature length");
+        bytes32 r;
+        bytes32 s;
+        uint8 v;
+        assembly {
+            r := mload(add(_sig, 32))
+            s := mload(add(_sig, 64))
+            v := byte(0, mload(add(_sig, 96)))
+        }
+        if (v < 27) {
+            v += 27;
+        }
+        require(v == 27 || v == 28, "Invalid signature v value");
+        return ecrecover(_ethSignedHash, v, r, s);
+    }
+
+}
+```
+</script></section>
+
+<section data-markdown><script type="text/template">
+## Signature attacker contract (solidity)
+```
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+contract Attack{
+
+    function manipulateSignature(bytes memory signature) public pure returns(bytes memory) {
+        (uint8 v, bytes32 r, bytes32 s) = splitSignature(signature);
+
+        uint8 manipulatedV = v % 2 == 0 ? v - 1 : v + 1;
+        uint256 manipulatedS = modNegS(uint256(s));
+        bytes memory manipulatedSignature = abi.encodePacked(r, bytes32(manipulatedS), manipulatedV);
+
+        return manipulatedSignature;
+    }
+
+    function splitSignature(bytes memory sig) public pure returns (uint8 v, bytes32 r, bytes32 s) {
+        require(sig.length == 65, "Invalid signature length");
+        assembly {
+            r := mload(add(sig, 32))
+            s := mload(add(sig, 64))
+            v := byte(0, mload(add(sig, 96)))
+        }
+        if (v < 27) {
+            v += 27;
+        }
+        require(v == 27 || v == 28, "Invalid signature v value");
+    }
+
+    function modNegS(uint256 s) public pure returns (uint256) {
+  
+        uint256 n = 0xfffffffffffffffffffffffffffffffebaaedce6af48a03bbfd25e8cd0364141;        
+        return n - s;
+    }
+
+}
+```
 </script></section>
 
 <section data-markdown><script type="text/template">
@@ -577,6 +755,7 @@ $h = H(m)$
 * [Public/Private keys and Signing](https://youtu.be/xIDL_akeras)
 * [Blockchain Visual demo](https://youtu.be/_160oMzblY8)
 * [Replay attacks and double spending](http://danielszego.blogspot.com/2018/11/double-spending-and-replay-attacks-in.html)
+* [Signature malleability in ECDSA](https://medium.com/draftkings-engineering/signature-malleability-7a804429b14a)
 </script></section>
 
 <section data-markdown><script type="text/template">

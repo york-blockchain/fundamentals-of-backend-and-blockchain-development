@@ -1,0 +1,459 @@
+{
+	"info": {
+		"_postman_id": "79b43e2c-2f0c-4980-933a-03b7d475b2a5",
+		"name": "csbc1k",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29845535"
+	},
+	"item": [
+		{
+			"name": "create investor",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"firstname\": \"joseph\",\n    \"lastname\": \"lubin\",\n    \"balance\": 5000,\n    \"networth\": 7000,\n    \"assets\": {\n        \"ETH\": \"500\",\n        \"BTC\": \"100\",\n        \"DOT\" :\"2000\"\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/investors/create",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"investors",
+						"create"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "record created successfully",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"firstname\": \"joseph\",\n    \"lastname\": \"lubin\",\n    \"balance\": 5000,\n    \"networth\": 7000,\n    \"assets\": {\n        \"ETH\": \"500\",\n        \"BTC\": \"100\",\n        \"DOT\" :\"2000\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/investors/create",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"investors",
+								"create"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "html",
+					"header": [
+						{
+							"key": "x-powered-by",
+							"value": "Express"
+						},
+						{
+							"key": "content-type",
+							"value": "text/html; charset=utf-8"
+						},
+						{
+							"key": "content-length",
+							"value": "69"
+						},
+						{
+							"key": "etag",
+							"value": "W/\"45-Wpu1QRPxhCZFDOp35myxWnvPpWs\""
+						},
+						{
+							"key": "date",
+							"value": "Tue, 26 Sep 2023 23:45:09 GMT"
+						},
+						{
+							"key": "connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "keep-alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "Successfully added investor with 54e1aa01-9eb7-48f8-9079-0e361086f9aa"
+				}
+			]
+		},
+		{
+			"name": "get investor by id",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/investors/12daf260-c229-48bf-8d0a-e591de7cf06c",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"investors",
+						"12daf260-c229-48bf-8d0a-e591de7cf06c"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "response Okay",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/investors/12daf260-c229-48bf-8d0a-e591de7cf06c",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"investors",
+								"12daf260-c229-48bf-8d0a-e591de7cf06c"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "x-powered-by",
+							"value": "Express"
+						},
+						{
+							"key": "content-type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "content-length",
+							"value": "173"
+						},
+						{
+							"key": "etag",
+							"value": "W/\"ad-Fk/4OEfXKSlp1HDPabGmqXsvfZQ\""
+						},
+						{
+							"key": "date",
+							"value": "Tue, 26 Sep 2023 23:58:24 GMT"
+						},
+						{
+							"key": "connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "keep-alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": \"12daf260-c229-48bf-8d0a-e591de7cf06c\",\n    \"data\": {\n        \"firstname\": \"joseph\",\n        \"assets\": {\n            \"BTC\": \"100\",\n            \"ETH\": \"500\",\n            \"DOT\": \"2000\"\n        },\n        \"balance\": 5000,\n        \"networth\": 7000,\n        \"lastname\": \"lubin\"\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "get all investors",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/investors/",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"investors",
+						""
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "all investors response okay",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/investors/",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"investors",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "x-powered-by",
+							"value": "Express"
+						},
+						{
+							"key": "content-type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "content-length",
+							"value": "511"
+						},
+						{
+							"key": "etag",
+							"value": "W/\"1ff-d2DjYCmJahBA1bFAjnTtu9jFDW4\""
+						},
+						{
+							"key": "date",
+							"value": "Wed, 27 Sep 2023 00:02:15 GMT"
+						},
+						{
+							"key": "connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "keep-alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": \"12daf260-c229-48bf-8d0a-e591de7cf06c\",\n        \"data\": {\n            \"firstname\": \"joseph\",\n            \"assets\": {\n                \"BTC\": \"100\",\n                \"ETH\": \"500\",\n                \"DOT\": \"2000\"\n            },\n            \"balance\": 5000,\n            \"networth\": 7000,\n            \"lastname\": \"lubin\"\n        }\n    },\n    {\n        \"id\": \"6d73dbdc-b2f6-493e-9ef1-f878573d4a0e\",\n        \"data\": {\n            \"firstname\": \"gavin\",\n            \"assets\": {\n                \"BTC\": \"100\",\n                \"ETH\": \"500\",\n                \"DOT\": \"2000\"\n            },\n            \"balance\": 5000,\n            \"networth\": 9000,\n            \"lastname\": \"wood\"\n        }\n    },\n    {\n        \"id\": \"9d57f89b-787a-4384-b830-18fffdc2ea73\",\n        \"data\": {\n            \"firstname\": \"vitalik\",\n            \"assets\": {\n                \"BTC\": \"100\",\n                \"ETH\": \"500\"\n            },\n            \"balance\": 2000,\n            \"networth\": 1000,\n            \"lastname\": \"buterin\"\n        }\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "modify investor by id",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"balance\": 5000,\n    \"networth\": 6000\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/investors/12daf260-c229-48bf-8d0a-e591de7cf06c",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"investors",
+						"12daf260-c229-48bf-8d0a-e591de7cf06c"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "modify investor by id",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"balance\": 5000,\n    \"networth\": 6000\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/investors/12daf260-c229-48bf-8d0a-e591de7cf06c",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"investors",
+								"12daf260-c229-48bf-8d0a-e591de7cf06c"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "x-powered-by",
+							"value": "Express"
+						},
+						{
+							"key": "content-type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "content-length",
+							"value": "173"
+						},
+						{
+							"key": "etag",
+							"value": "W/\"ad-XwPYLGyN99U3apUNxrb+YU6S5BQ\""
+						},
+						{
+							"key": "date",
+							"value": "Wed, 27 Sep 2023 00:05:31 GMT"
+						},
+						{
+							"key": "connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "keep-alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": \"12daf260-c229-48bf-8d0a-e591de7cf06c\",\n    \"data\": {\n        \"firstname\": \"joseph\",\n        \"assets\": {\n            \"BTC\": \"100\",\n            \"ETH\": \"500\",\n            \"DOT\": \"2000\"\n        },\n        \"lastname\": \"lubin\",\n        \"balance\": 5000,\n        \"networth\": 6000\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "remove investor by",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/investors/12daf260-c229-48bf-8d0a-e591de7cf06c",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"investors",
+						"12daf260-c229-48bf-8d0a-e591de7cf06c"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "record deleted okay",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/investors/12daf260-c229-48bf-8d0a-e591de7cf06c",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"investors",
+								"12daf260-c229-48bf-8d0a-e591de7cf06c"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "html",
+					"header": [
+						{
+							"key": "x-powered-by",
+							"value": "Express"
+						},
+						{
+							"key": "content-type",
+							"value": "text/html; charset=utf-8"
+						},
+						{
+							"key": "content-length",
+							"value": "59"
+						},
+						{
+							"key": "etag",
+							"value": "W/\"3b-snH1i4h7DPcg0gi9Q/2ubBqSv50\""
+						},
+						{
+							"key": "date",
+							"value": "Wed, 27 Sep 2023 00:07:08 GMT"
+						},
+						{
+							"key": "connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "keep-alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "Successfully deleted : 12daf260-c229-48bf-8d0a-e591de7cf06c"
+				},
+				{
+					"name": "record does not exist",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/investors/6d73dbdc-b2f6-493e-9ef1-f878573d4a0e",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"investors",
+								"6d73dbdc-b2f6-493e-9ef1-f878573d4a0e"
+							]
+						}
+					},
+					"status": "Internal Server Error",
+					"code": 500,
+					"_postman_previewlanguage": "html",
+					"header": [
+						{
+							"key": "x-powered-by",
+							"value": "Express"
+						},
+						{
+							"key": "content-type",
+							"value": "text/html; charset=utf-8"
+						},
+						{
+							"key": "content-length",
+							"value": "68"
+						},
+						{
+							"key": "etag",
+							"value": "W/\"44-aKGbappJErPLtso8nipX0LpX2ic\""
+						},
+						{
+							"key": "date",
+							"value": "Wed, 27 Sep 2023 00:11:48 GMT"
+						},
+						{
+							"key": "connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "keep-alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "record with id : 6d73dbdc-b2f6-493e-9ef1-f878573d4a0e does not exist"
+				}
+			]
+		}
+	]
+}

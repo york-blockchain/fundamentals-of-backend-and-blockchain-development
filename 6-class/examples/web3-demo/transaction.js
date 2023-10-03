@@ -12,13 +12,14 @@ async function transact() {
     process.env.PRIVATE_KEY
   );
   const sender = accountObj.address;
-  const recipient = "0x3e397B1B291B68C022ed20E725aFE21240994ACB";
+  console.log(sender)
+  const recipient = "0x678d24b693C9503De6385775CA9BCDa6383a9837";
   const senderNonce = await web3.eth.getTransactionCount(sender);
   const txObj = {
     nonce: senderNonce,
     to: recipient,
     from: sender,
-    value: "787979445438",
+    value: "0",
     gas: 30000,
   };
   const signTx = await accountObj.signTransaction(txObj);
