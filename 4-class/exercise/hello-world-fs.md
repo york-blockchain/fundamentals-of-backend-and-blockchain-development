@@ -917,7 +917,7 @@ A contract ABI is necessary for specifying which function a contract will invoke
 
 Your contract-abi.json should be stored in your src folder.
 
-Armed with our contract address, ABI, and Alchemy Web3 endpoint, we can use the [contract method](https://web3js.readthedocs.io/en/v1.2.0/web3-eth-contract.html?highlight=constructor#web3-eth-contract) to load an instance of our smart contract. Import your contract ABI into the `interact.js` file and add your contract address.
+Armed with our contract address, ABI, and Alchemy Web3 endpoint, we can use the [contract method](https://docs.ethers.org/v5/api/contract/contract/#Contract--creating) to load an instance of our smart contract. Import your contract ABI into the `interact.js` file and add your contract address.
 
 ```javascript
 // HelloWorld.js
@@ -953,7 +953,7 @@ We can now finally load the smart contract using our AlchemyWeb3 endpoint:
   }, []);
 ```
 
-To recap, the first 50 lines of your `HelloWorld.js` should now look like this:
+To recap, the first 43 lines of your `HelloWorld.js` should now look like this:
 
 ```javascript
 // HelloWorld.js
@@ -968,7 +968,6 @@ import {
 } from "./util/interact.js";
 import alchemylogo from "./alchemylogo.svg";
 import { Network, Alchemy, Contract } from "alchemy-sdk";
-
 
 const alchemyKey = process.env.REACT_APP_ALCHEMY_KEY;
 // Optional Config object, but defaults to demo api-key and eth-mainnet.
@@ -996,10 +995,6 @@ const HelloWorld = () => {
       const ethersProvider = await alchemy.config.getProvider();
       const helloWorldContractInstance = new Contract(contractAddress, contractABI, ethersProvider)
       setHelloWorldContractInstance(helloWorldContractInstance)
-      const { address, status } = await getCurrentWalletConnected();
-      setWallet(address);
-      setStatus(status);
-      addWalletListener();
     }
     init()
 
@@ -1029,10 +1024,17 @@ Since we want to display this smart contract in our UI, let's add following to t
 // HelloWorld.js
 
 //called only once
-useEffect(async () => {
-  const message = await loadCurrentMessage(helloWorldContractInstance)
-  setMessage(message)
-}, [])
+ useEffect(() => {
+    const init = async () => {
+      const ethersProvider = await alchemy.config.getProvider();
+      const helloWorldContractInstance = new Contract(contractAddress, contractABI, ethersProvider)
+      setHelloWorldContractInstance(helloWorldContractInstance)
+const message = await loadCurrentMessage(helloWorldContractInstance);
+      setMessage(message);
+    }
+    init()
+
+  }, []);
 ```
 
 Note, we only want our `loadCurrentMessage` to be called once during the component's first render. We'll soon implement another `useEffect`  to automatically update the UI after the message in the smart contract changes.
@@ -1135,7 +1137,7 @@ You can download and create a MetaMask account for free [here](https://metamask.
 
 #### Add ether from a Faucet {#add-ether-from-a-faucet}
 
-To sign a transaction on the Ethereum blockchain, we’ll need some fake Eth. To get Eth you can go to the [Goerli faucet](https://goerli-faucet.slock.it/) and enter your Goerli account address, click “Request funds”, then select “Ethereum Testnet Goerli in the dropdown and finally click “Request funds” button again. You should see Eth in your MetaMask account soon after!
+To sign a transaction on the Ethereum blockchain, we’ll need some fake Eth. To get Eth you can go to the [Goerli faucet](https://goerlifaucet.com/) and enter your Goerli account address, click “Request funds”, then select “Ethereum Testnet Goerli in the dropdown and finally click “Request funds” button again. You should see Eth in your MetaMask account soon after!
 
 #### Check your Balance {#check-your-balance}
 
@@ -1495,8 +1497,6 @@ export const updateMessage = async (helloWorldContractInstance, address, message
     };
   }
   const { data, to } = await helloWorldContractInstance.populateTransaction.update(message)
-  console.log("to ",to)
-  console.log("from ",address)
   //set up transaction parameters
   const transactionParameters = {
     to, // Required except during contract publications.
