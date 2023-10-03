@@ -676,7 +676,7 @@ As a prerequisite, you should have a beginner-level understanding of React. If n
 
 ### Clone the starter files {#clone-the-starter-files}
 
-First, go to the [hello-world-part-four GitHub repository](https://github.com/alchemyplatform/hello-world-part-four-tutorial) to get the starter files for this project and clone this repository to your local machine.
+First, go to the [hello-world-part-four GitHub repository](https://github.com/york-blockchain/hello-world-part-four-tutorial) to get the starter files for this project and clone this repository to your local machine.
 
 Open the cloned repository locally. Notice that it contains two folders: `starter-files` and `completed`.
 
@@ -753,7 +753,7 @@ Here's what each of the variables represents:
 - `message` - a string that stores the current message in the smart contract
 - `newMessage` - a string that stores the new message that will be written to the smart contract
 
-After the state variables, you'll see five un-implemented functions: `useEffect` ,`addSmartContractListener`, `addWalletListener` , `connectWalletPressed`, and `onUpdatePressed`. We'll explain what they do below:
+After the state variables, you'll see five un-implemented functions: `useEffect` ,`useEffect`, `addWalletListener` , `connectWalletPressed`, and `onUpdatePressed`. We'll explain what they do below:
 
 ```javascript
 // HelloWorld.js
@@ -763,9 +763,10 @@ useEffect(async () => {
   //TODO: implement
 }, [])
 
-function addSmartContractListener() {
+//called only once
+useEffect(async () => {
   //TODO: implement
-}
+}, [])
 
 function addWalletListener() {
   //TODO: implement
@@ -781,7 +782,7 @@ const onUpdatePressed = async () => {
 ```
 
 - [`useEffect`](https://reactjs.org/docs/hooks-effect.html)- this is a React hook that is called after your component is rendered. Because it has an empty array `[]` prop passed into it \(see line 4\), it will only be called on the component's _first_ render. Here we'll load the current message stored in our smart contract, call our smart contract and wallet listeners, and update our UI to reflect whether a wallet is already connected.
-- `addSmartContractListener`- this function sets up a listener that will watch for our HelloWorld contract's `UpdatedMessages` event and update our UI when the message is changed in our smart contract.
+- `useEffect`- this react hook sets up a listener that will watch for our HelloWorld contract's `UpdatedMessages` event and update our UI when the message is changed in our smart contract.
 - `addWalletListener`- this function sets up a listener that detects changes in the user's MetaMask wallet state, such as when the user disconnects their wallet or switches addresses.
 - `connectWalletPressed`- this function will be called to connect the user's MetaMask wallet to our dapp.
 - `onUpdatePressed` - this function will be called when the user wants to update the message stored in the smart contract.
@@ -868,7 +869,7 @@ You'll notice at the top of the file that we've commented out the `helloWorldCon
 
 The four unimplemented functions after our `helloWorldContract` object do the following:
 
-- `loadCurrentMessage` - this function handles the logic of loading the current message stored in the smart contract. It will make a _read_ call to the Hello World smart contract using the [Alchemy Web3 API](https://github.com/alchemyplatform/alchemy-web3).
+- `loadCurrentMessage` - this function handles the logic of loading the current message stored in the smart contract. It will make a _read_ call to the Hello World smart contract using the [Alchemy sdk js](https://github.com/alchemyplatform/alchemy-sdk-js).
 - `connectWallet` - this function will connect the user's MetaMask to our dapp.
 - `getCurrentWalletConnected` - this function will check if an Ethereum account is already connected to our dapp on page load and update our UI accordingly.
 - `updateMessage` - this function will update the message stored in the smart contract. It will make a _write_ call to the Hello World smart contract, so the user's MetaMask wallet will have to sign an Ethereum transaction to update the message.
@@ -890,44 +891,19 @@ This may sounds like a lot of steps, but don't worry! We'll walk you through how
 
 So remember how in Part 2 of this exercise, we used our [Alchemy Web3 key to read from our smart contract](https://docs.alchemy.com/alchemy/tutorials/hello-world-smart-contract/interacting-with-a-smart-contract#step-1-install-web3-library)? You'll also need an Alchemy Web3 key in your dapp to read from the chain.
 
-If you don't have it already, first install [Alchemy Web3](https://github.com/alchemyplatform/alchemy-web3) by navigating to the root directory of your `starter-files` and running the following in your terminal:
+If you don't have it already, first install [Alchemy Sdk js](https://github.com/alchemyplatform/alchemy-sdk-js) by navigating to the root directory of your `starter-files` and running the following in your terminal:
 
 ```text
-npm install @alch/alchemy-web3
+npm install alchemy-sdk
 ```
 
-[Alchemy Web3](https://github.com/alchemyplatform/alchemy-web3) is a wrapper around [Web3.js](https://web3js.readthedocs.io/en/v1.2.9/), providing enhanced API methods and other crucial benefits to make your life as a web3 developer easier. It is designed to require minimal configuration so you can start using it in your app right away!
-
-Then, install the [dotenv](https://www.npmjs.com/package/dotenv) package in your project directory, so we have a secure place to store our API key after we fetch it.
-
-```text
-npm install dotenv --save
-```
-
-For our dapp, **we'll be using our Websockets API key** instead of our HTTP API key, as it will allow us to set up a listener that detects when the message stored in the smart contract changes.
+[Alchemy Sdk Js](https://github.com/alchemyplatform/alchemy-sdk-js) is a wrapper around [ethers.js](https://docs.ethers.org/), providing enhanced API methods and other crucial benefits to make your life as a web3 developer easier. It is designed to require minimal configuration so you can start using it in your app right away!
 
 Once you have your API key, create a `.env` file in your root directory and add your Alchemy Websockets url to it. Afterwards, your `.env` file should look like so:
 
 ```javascript
-REACT_APP_ALCHEMY_KEY = wss://eth-goerli.g.alchemy.com/v2/<key>
+REACT_APP_ALCHEMY_KEY = <key>
 ```
-
-Now, we're ready to set up our Alchemy Web3 endpoint in our dapp! Let's go back to our `interact.js`, which is nested inside our `util` folder and add the following code at the top of the file:
-
-```javascript
-// interact.js
-
-require("dotenv").config()
-const alchemyKey = process.env.REACT_APP_ALCHEMY_KEY
-const { createAlchemyWeb3 } = require("@alch/alchemy-web3")
-const web3 = createAlchemyWeb3(alchemyKey)
-
-//export const helloWorldContract;
-```
-
-Above, we first imported the Alchemy key from our `.env` file and then passed our `alchemyKey` to `createAlchemyWeb3` to establish our Alchemy Web3 endpoint.
-
-With this endpoint ready, it's time to load our smart contract!
 
 #### Loading your Hello World smart contract {#loading-your-hello-world-smart-contract}
 
@@ -935,48 +911,94 @@ To load your Hello World smart contract, you'll need its contract address and AB
 
 #### How to get your contract ABI from Etherscan {#how-to-get-your-contract-abi-from-etherscan}
 
-If you skipped Part 3 of this exercise, you can use the HelloWorld contract with address [0x6f3f635A9762B47954229Ea479b4541eAF402A6A](https://ropsten.etherscan.io/address/0x6f3f635a9762b47954229ea479b4541eaf402a6a#code). It's ABI can be found [here](https://ropsten.etherscan.io/address/0x6f3f635a9762b47954229ea479b4541eaf402a6a#code).
+If you skipped Part 3 of this exercise, you can use the HelloWorld contract with address [0x40c2335762cDFFad8FAefbfE2457696d939254d2](https://goerli.etherscan.io/address/0x40c2335762cDFFad8FAefbfE2457696d939254d2#code). It's ABI can be found [here](https://goerli.etherscan.io/address/0x40c2335762cDFFad8FAefbfE2457696d939254d2#code).
 
 A contract ABI is necessary for specifying which function a contract will invoke as well ensuring that the function will return data in the format you're expecting. Once we've copied our contract ABI, let's save it as a JSON file called `contract-abi.json` in your `src` directory.
 
 Your contract-abi.json should be stored in your src folder.
 
-Armed with our contract address, ABI, and Alchemy Web3 endpoint, we can use the [contract method](https://web3js.readthedocs.io/en/v1.2.0/web3-eth-contract.html?highlight=constructor#web3-eth-contract) to load an instance of our smart contract. Import your contract ABI into the `interact.js` file and add your contract address.
+Armed with our contract address, ABI, and Alchemy Web3 endpoint, we can use the [contract method](https://docs.ethers.org/v5/api/contract/contract/#Contract--creating) to load an instance of our smart contract. Import your contract ABI into the `interact.js` file and add your contract address.
 
 ```javascript
-// interact.js
+// HelloWorld.js
+import { Network, Alchemy, Contract } from "alchemy-sdk";
 
-const contractABI = require("../contract-abi.json")
-const contractAddress = "0x6f3f635A9762B47954229Ea479b4541eAF402A6A"
+const alchemyKey = process.env.REACT_APP_ALCHEMY_KEY;
+// Optional Config object, but defaults to demo api-key and eth-mainnet.
+const settings = {
+  apiKey: alchemyKey, // Replace with your Alchemy API Key.
+  network: Network.ETH_GOERLI, // Replace with your network.
+};
+
+const alchemy = new Alchemy(settings);
+
+const contractABI = require("./contract-abi.json");
+const contractAddress = "0x40c2335762cDFFad8FAefbfE2457696d939254d2";
 ```
 
-We can now finally uncomment our `helloWorldContract` variable, and load the smart contract using our AlchemyWeb3 endpoint:
+We can now finally load the smart contract using our AlchemyWeb3 endpoint:
 
 ```javascript
-// interact.js
-export const helloWorldContract = new web3.eth.Contract(
-  contractABI,
-  contractAddress
-)
+// HelloWorld.js
+
+// called only once
+  useEffect(() => {
+    const init = async () => {
+      const ethersProvider = await alchemy.config.getProvider();
+      const helloWorldContractInstance = new Contract(contractAddress, contractABI, ethersProvider)
+      setHelloWorldContractInstance(helloWorldContractInstance)
+    }
+    init()
+
+  }, []);
 ```
 
-To recap, the first 12 lines of your `interact.js` should now look like this:
+To recap, the first 43 lines of your `HelloWorld.js` should now look like this:
 
 ```javascript
-// interact.js
+// HelloWorld.js
 
-require("dotenv").config()
-const alchemyKey = process.env.REACT_APP_ALCHEMY_KEY
-const { createAlchemyWeb3 } = require("@alch/alchemy-web3")
-const web3 = createAlchemyWeb3(alchemyKey)
+import React from "react";
+import { useEffect, useState } from "react";
+import {
+  connectWallet,
+  updateMessage,
+  loadCurrentMessage,
+  getCurrentWalletConnected,
+} from "./util/interact.js";
+import alchemylogo from "./alchemylogo.svg";
+import { Network, Alchemy, Contract } from "alchemy-sdk";
 
-const contractABI = require("../contract-abi.json")
-const contractAddress = "0x6f3f635A9762B47954229Ea479b4541eAF402A6A"
+const alchemyKey = process.env.REACT_APP_ALCHEMY_KEY;
+// Optional Config object, but defaults to demo api-key and eth-mainnet.
+const settings = {
+  apiKey: alchemyKey, // Replace with your Alchemy API Key.
+  network: Network.ETH_GOERLI, // Replace with your network.
+};
 
-export const helloWorldContract = new web3.eth.Contract(
-  contractABI,
-  contractAddress
-)
+const alchemy = new Alchemy(settings);
+
+const contractABI = require("./contract-abi.json");
+const contractAddress = "0x40c2335762cDFFad8FAefbfE2457696d939254d2";
+
+const HelloWorld = () => {
+  //state variables
+  const [walletAddress, setWallet] = useState("");
+  const [status, setStatus] = useState("");
+  const [message, setMessage] = useState("No connection to the network."); //default message
+  const [newMessage, setNewMessage] = useState("");
+  const [helloWorldContractInstance, setHelloWorldContractInstance] = useState();
+
+  // called only once
+  useEffect(() => {
+    const init = async () => {
+      const ethersProvider = await alchemy.config.getProvider();
+      const helloWorldContractInstance = new Contract(contractAddress, contractABI, ethersProvider)
+      setHelloWorldContractInstance(helloWorldContractInstance)
+    }
+    init()
+
+  }, []);
 ```
 
 Now that we have our contract loaded, we can implement our `loadCurrentMessage` function!
@@ -990,25 +1012,32 @@ Update the `loadCurrentMessage` in your `interact.js` file to the following:
 ```javascript
 // interact.js
 
-export const loadCurrentMessage = async () => {
-  const message = await helloWorldContract.methods.message().call()
+export const loadCurrentMessage = async (helloWorldContractInstance) => {
+  const message = await helloWorldContractInstance.message()
   return message
 }
 ```
 
-Since we want to display this smart contract in our UI, let's update the `useEffect` function in our `HelloWorld.js` component to the following:
+Since we want to display this smart contract in our UI, let's add following to the `useEffect` function in our `HelloWorld.js` component to the following:
 
 ```javascript
 // HelloWorld.js
 
 //called only once
-useEffect(async () => {
-  const message = await loadCurrentMessage()
-  setMessage(message)
-}, [])
+ useEffect(() => {
+    const init = async () => {
+      const ethersProvider = await alchemy.config.getProvider();
+      const helloWorldContractInstance = new Contract(contractAddress, contractABI, ethersProvider)
+      setHelloWorldContractInstance(helloWorldContractInstance)
+const message = await loadCurrentMessage(helloWorldContractInstance);
+      setMessage(message);
+    }
+    init()
+
+  }, []);
 ```
 
-Note, we only want our `loadCurrentMessage` to be called once during the component's first render. We'll soon implement `addSmartContractListener` to automatically update the UI after the message in the smart contract changes.
+Note, we only want our `loadCurrentMessage` to be called once during the component's first render. We'll soon implement another `useEffect`  to automatically update the UI after the message in the smart contract changes.
 
 Before we dive into our listener, let's check out what we have so far! Save your `HelloWorld.js` and `interact.js` files, and then go to [http://localhost:3000/](http://localhost:3000/)
 
@@ -1018,7 +1047,7 @@ You'll notice that the current message no longer says "No connection to the netw
 
 Now speaking of that listener...
 
-#### Implement `addSmartContractListener` {#implement-addsmartcontractlistener}
+#### Implement smart contract listener {#implement-addsmartcontractlistener}
 
 If you think back to the `HelloWorld.sol` file we wrote in Part 1 of this exercise, you'll recall that there is a smart contract event called `UpdatedMessages` that is emitted after our smart contract's `update` function is invoked \(see lines 9 and 27\):
 
@@ -1060,42 +1089,37 @@ contract HelloWorld {
 
 Smart contract events are a way for your contract to communicate that something happened \(i.e. there was an _event_\) on the blockchain to your front-end application, which can be 'listening' for specific events and take action when they happen.
 
-The `addSmartContractListener` function is going to specifically listen for our Hello World smart contract's `UpdatedMessages` event, and update our UI to display the new message.
+The second `useEffect`  is going to specifically listen for our Hello World smart contract's `UpdatedMessages` event, and update our UI to display the new message.
 
-Modify `addSmartContractListener` to the following:
+Modify second `useEffect` to the following:
 
 ```javascript
 // HelloWorld.js
 
-function addSmartContractListener() {
-  helloWorldContract.events.UpdatedMessages({}, (error, data) => {
-    if (error) {
-      setStatus("😥 " + error.message)
-    } else {
-      setMessage(data.returnValues[1])
-      setNewMessage("")
-      setStatus("🎉 Your message has been updated!")
+ useEffect(() => {
+    if (helloWorldContractInstance) {
+      const filter = helloWorldContractInstance.filters.UpdatedMessages(null, null);
+
+      const eventListener = async (_, newStr) => {
+        setMessage(newStr);
+        setNewMessage("");
+        setStatus("🎉 Your message has been updated!");
+      };
+
+      helloWorldContractInstance.on(filter, eventListener);
+
+      // Return a cleanup function to remove the event listener when the component unmounts
+      return () => {
+        helloWorldContractInstance.off(filter, eventListener);
+      };
     }
-  })
-}
+  }, [helloWorldContractInstance]);
 ```
 
 Let's break down what happens when the listener detects an event:
 
-- If an error occurs when the event is emitted, it will be reflected in the UI via our `status` state variable.
-- Otherwise, we will use the `data` object returned. The `data.returnValues` is an array indexed at zero where the first element in the array stores the previous message and second element stores the updated one. Altogether, on a successful event we'll set our `message` string to the updated message, clear the `newMessage` string, and update our `status` state variable to reflect that a new message has been published on our smart contract.
+- We will use the `_newStr` object returned. On a successful event we'll set our `message` string to the updated message, clear the `newMessage` string, and update our `status` state variable to reflect that a new message has been published on our smart contract.
 
-Finally, let's call our listener in our `useEffect` function so it is initialized on the `HelloWorld.js` component's first render. Altogether, your `useEffect` function should look like this:
-
-```javascript
-// HelloWorld.js
-
-useEffect(async () => {
-  const message = await loadCurrentMessage()
-  setMessage(message)
-  addSmartContractListener()
-}, [])
-```
 
 Now that we're able to read from our smart contract, it would be great to figure out how to write to it too! However, to write to our dapp, we must first have an Ethereum wallet connected to it.
 
@@ -1113,7 +1137,7 @@ You can download and create a MetaMask account for free [here](https://metamask.
 
 #### Add ether from a Faucet {#add-ether-from-a-faucet}
 
-To sign a transaction on the Ethereum blockchain, we’ll need some fake Eth. To get Eth you can go to the [Goerli faucet](https://goerli-faucet.slock.it/) and enter your Goerli account address, click “Request funds”, then select “Ethereum Testnet Goerli in the dropdown and finally click “Request funds” button again. You should see Eth in your MetaMask account soon after!
+To sign a transaction on the Ethereum blockchain, we’ll need some fake Eth. To get Eth you can go to the [Goerli faucet](https://goerlifaucet.com/) and enter your Goerli account address, click “Request funds”, then select “Ethereum Testnet Goerli in the dropdown and finally click “Request funds” button again. You should see Eth in your MetaMask account soon after!
 
 #### Check your Balance {#check-your-balance}
 
@@ -1282,9 +1306,11 @@ To see this function in action, let's call it in our `useEffect` function of our
 // HelloWorld.js
 
 useEffect(async () => {
-  const message = await loadCurrentMessage()
-  setMessage(message)
-  addSmartContractListener()
+   const ethersProvider = await alchemy.config.getProvider();
+   const helloWorldContractInstance = new Contract(contractAddress, contractABI, ethersProvider)
+   const message = await loadCurrentMessage(helloWorldContractInstance);
+   setMessage(message);
+   setHelloWorldContractInstance(helloWorldContractInstance)
 
   const { address, status } = await getCurrentWalletConnected()
   setWallet(address)
@@ -1343,15 +1369,17 @@ Last but not least, we must call it in our `useEffect` function:
 // HelloWorld.js
 
 useEffect(async () => {
-  const message = await loadCurrentMessage()
-  setMessage(message)
-  addSmartContractListener()
+  const ethersProvider = await alchemy.config.getProvider();
+  const helloWorldContractInstance = new Contract(contractAddress, contractABI, ethersProvider)
+  const message = await loadCurrentMessage(helloWorldContractInstance);
+  setMessage(message);
+  setHelloWorldContractInstance(helloWorldContractInstance)
+  const { address, status } = await getCurrentWalletConnected();
 
-  const { address, status } = await getCurrentWalletConnected()
-  setWallet(address)
-  setStatus(status)
+  setWallet(address);
+  setStatus(status);
 
-  addWalletListener()
+  addWalletListener();
 }, [])
 ```
 
@@ -1376,18 +1404,19 @@ We'll want our function to return early if there is no MetaMask extension instal
 ```javascript
 // interact.js
 
-export const updateMessage = async (address, message) => {
+export const updateMessage = async (helloWorldContractInstance, address, message) => {
+  //input error handling
   if (!window.ethereum || address === null) {
     return {
       status:
-        "💡 Connect your MetaMask wallet to update the message on the blockchain.",
-    }
+        "💡 Connect your Metamask wallet to update the message on the blockchain.",
+    };
   }
 
   if (message.trim() === "") {
     return {
       status: "❌ Your message cannot be an empty string.",
-    }
+    };
   }
 }
 ```
@@ -1401,37 +1430,38 @@ If you're already comfortable with traditional web3 Ethereum transactions, the c
 ```javascript
 // interact.js
 
-//set up transaction parameters
-const transactionParameters = {
-  to: contractAddress, // Required except during contract publications.
-  from: address, // must match user's active address.
-  data: helloWorldContract.methods.update(message).encodeABI(),
-}
+  const { data, to } = await helloWorldContractInstance.populateTransaction.update(message)
+  //set up transaction parameters
+  const transactionParameters = {
+    to, // Required except during contract publications.
+    from: address, // must match user's active address.
+    data,
+  };
 
-//sign the transaction
-try {
-  const txHash = await window.ethereum.request({
-    method: "eth_sendTransaction",
-    params: [transactionParameters],
-  })
-  return {
-    status: (
-      <span>
-        ✅{" "}
-        <a target="_blank" href={`https://goerli.etherscan.io/tx/${txHash}`}>
-          View the status of your transaction on Etherscan!
-        </a>
-        <br />
-        ℹ️ Once the transaction is verified by the network, the message will be
-        updated automatically.
-      </span>
-    ),
+  //sign the transaction
+  try {
+    const txHash = await window.ethereum.request({
+      method: "eth_sendTransaction",
+      params: [transactionParameters],
+    });
+    return {
+      status: (
+        <span>
+          ✅{" "}
+          <a target="_blank" rel="noreferrer" href={`https://goerli.etherscan.io/tx/${txHash}`}>
+            View the status of your transaction on Etherscan!
+          </a>
+          <br />
+          ℹ️ Once the transaction is verified by the network, the message will
+          be updated automatically.
+        </span>
+      ),
+    };
+  } catch (error) {
+    return {
+      status: "😥 " + error.message,
+    };
   }
-} catch (error) {
-  return {
-    status: "😥 " + error.message,
-  }
-}
 ```
 
 Let's breakdown what's happening. First, we set up our transactions parameters, where:
@@ -1452,39 +1482,39 @@ Altogether, our `updateMessage` function should look like this:
 ```javascript
 // interact.js
 
-export const updateMessage = async (address, message) => {
+export const updateMessage = async (helloWorldContractInstance, address, message) => {
   //input error handling
   if (!window.ethereum || address === null) {
     return {
       status:
-        "💡 Connect your MetaMask wallet to update the message on the blockchain.",
-    }
+        "💡 Connect your Metamask wallet to update the message on the blockchain.",
+    };
   }
 
   if (message.trim() === "") {
     return {
       status: "❌ Your message cannot be an empty string.",
-    }
+    };
   }
-
+  const { data, to } = await helloWorldContractInstance.populateTransaction.update(message)
   //set up transaction parameters
   const transactionParameters = {
-    to: contractAddress, // Required except during contract publications.
+    to, // Required except during contract publications.
     from: address, // must match user's active address.
-    data: helloWorldContract.methods.update(message).encodeABI(),
-  }
+    data,
+  };
 
   //sign the transaction
   try {
     const txHash = await window.ethereum.request({
       method: "eth_sendTransaction",
       params: [transactionParameters],
-    })
+    });
     return {
       status: (
         <span>
           ✅{" "}
-          <a target="_blank" href={`https://goerli.etherscan.io/tx/${txHash}`}>
+          <a target="_blank" rel="noreferrer" href={`https://goerli.etherscan.io/tx/${txHash}`}>
             View the status of your transaction on Etherscan!
           </a>
           <br />
@@ -1492,13 +1522,13 @@ export const updateMessage = async (address, message) => {
           be updated automatically.
         </span>
       ),
-    }
+    };
   } catch (error) {
     return {
       status: "😥 " + error.message,
-    }
+    };
   }
-}
+};
 ```
 
 Last but not least, we need to connect our `updateMessage` function to our `HelloWorld.js` component.
@@ -1511,9 +1541,9 @@ Our `onUpdatePressed` function should make an await call to the imported `update
 // HelloWorld.js
 
 const onUpdatePressed = async () => {
-  const { status } = await updateMessage(walletAddress, newMessage)
-  setStatus(status)
-}
+    const { status } = await updateMessage(helloWorldContractInstance, walletAddress, newMessage);
+    setStatus(status);
+  };
 ```
 
 It's super clean and simple. And guess what... YOUR DAPP IS COMPLETE!!!
