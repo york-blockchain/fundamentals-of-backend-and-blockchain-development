@@ -112,11 +112,11 @@
 <section data-markdown><script type="text/template">
 ## Announcement  
 * Final Project 
-  * Milestone #1 - EOD September 26, 2023
+  * Milestone #1 - EOD Jan 25, 2024
     * System design document, diagrams
-  * Milestone #2 - EOD Oct 3, 2023
+  * Milestone #2 - EOD Feb 1, 2024
     * System design document, diagrams, codebase
-* Each group will present their final project on Oct 3, 2023 during the class hours.
+* Each group will present their final project on Feb 1, 2024 during the class hours.
 <br/>(15 minutes per group)
 </script></section>
 
@@ -125,6 +125,7 @@
 ## Class Plan
 * An overview of programming paradigms
 * **SOLID** principles
+* In-class exercise
 </script></section>
 
 
@@ -650,6 +651,38 @@ public class Ostrich extends Bird{}
 
 *A client should never be forced to implement an interface that it doesn’t use, or clients shouldn’t be forced to depend on methods they do not use.*
 * Interfaces should not contain code that the end client (user of your code) will not use
+  
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+```
+// burger place where a customer can order a burger, fries or a combo of both:
+interface OrderService {
+  void orderBurger(int quantity);
+  void orderFries(int fries);
+  void orderCombo(int quantity, int fries);
+}
+
+// to implement a burger-only order, we are forced to throw an exception in the orderFries() method:
+
+class BurgerOrderService implements OrderService {
+  @Override
+  public void orderBurger(int quantity) {
+      System.out.println("Received order of "+quantity+" burgers");
+  }
+
+  @Override
+  public void orderFries(int fries) {
+      throw new UnsupportedOperationException("No fries in burger only order");
+  }
+
+  @Override
+  public void orderCombo(int quantity, int fries) {
+      throw new UnsupportedOperationException("No combo in burger only order");
+  }
+}
+```
   
 </script></section>
 
