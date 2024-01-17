@@ -114,10 +114,10 @@
 
 ## Class Plan
 * Decentralized evolution
+* Data Structures
 * What is Blockchain?
-* Public Blockchains
-* Permissioned Blockchains 
-* Discussion
+* Public & Permissioned Blockchains
+* Case Study
 * Quiz
 * Class 2 challenges
 * Project
@@ -187,6 +187,320 @@
 
 </script></section>
 
+
+<section data-markdown><script type="text/template">
+
+## Data Structure
+
+* In computer science, a data structure is a data organization, management, and storage format that is usually chosen for efficient access to data.
+
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## Types of  Data Structure
+
+![data structure](./types-of-datastructures.png)
+
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## Array
+
+* With an array such as [1, 2, 3] you know that the element 1 is at position [0] and element 2 is at position [1].
+
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## Linked List
+
+* Singly Linked List
+* Doubly Linked List
+
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## Singly Linked List
+
+* 2 components make up the singly linked list node
+  * the data and the pointer.
+* A Singly Linked List has a data element to it and a pointer pointing to the next node. When the pointer is pointing at nothing we say that it is pointing at Null.
+
+![](singly-linked-list.webp)
+
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## Doubly Linked List
+
+* 3 components make up the doubly linked list node
+  * A backwards pointer, a data element and a forwards pointer..
+* A doubly linked list is a singly linked list that has a “backwards” component.
+
+![](doubly-linked-list.webp)
+
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## Program for Singly Linked List
+
+```
+class Node {
+	// constructor
+	constructor(element) {
+		this.element = element;
+		this.next = null
+	}
+}
+// linkedlist class
+class LinkedList {
+	constructor() {
+		this.head = null;
+		this.size = 0;
+	}
+
+	// adds an element at the end
+	// of list
+	add(element) {
+		// creates a new node
+		let node = new Node(element);
+
+		// to store current node
+		let current;
+
+		// if list is Empty add the
+		// element and make it head
+		if (this.head == null)
+			this.head = node;
+		else {
+			current = this.head;
+
+			// iterate to the end of the
+			// list
+			while (current.next) {
+				current = current.next;
+			}
+
+			// add node
+			current.next = node;
+		}
+		this.size++;
+	}
+
+	// insert element at the position index
+	// of the list
+	insertAt(element, index) {
+		if (index < 0 || index > this.size)
+			return console.log("Please enter a valid index.");
+		else {
+			// creates a new node
+			let node = new Node(element);
+			let curr, prev;
+
+			curr = this.head;
+
+			// add the element to the
+			// first index
+			if (index == 0) {
+				node.next = this.head;
+				this.head = node;
+			} else {
+				curr = this.head;
+				let it = 0;
+
+				// iterate over the list to find
+				// the position to insert
+				while (it < index) {
+					it++;
+					prev = curr;
+					curr = curr.next;
+				}
+
+				// adding an element
+				node.next = curr;
+				prev.next = node;
+			}
+			this.size++;
+		}
+	}
+
+	// removes an element from the
+	// specified location
+	removeFrom(index) {
+		if (index < 0 || index >= this.size)
+			return console.log("Please Enter a valid index");
+		else {
+			let curr, prev, it = 0;
+			curr = this.head;
+			prev = curr;
+
+			// deleting first element
+			if (index === 0) {
+				this.head = curr.next;
+			} else {
+				// iterate over the list to the
+				// position to remove an element
+				while (it < index) {
+					it++;
+					prev = curr;
+					curr = curr.next;
+				}
+
+				// remove the element
+				prev.next = curr.next;
+			}
+			this.size--;
+
+			// return the remove element
+			return curr.element;
+		}
+	}
+
+	// removes a given element from the
+	// list
+	removeElement(element) {
+		let current = this.head;
+		let prev = null;
+
+		// iterate over the list
+		while (current != null) {
+			// comparing element with current
+			// element if found then remove the
+			// and return true
+			if (current.element === element) {
+				if (prev == null) {
+					this.head = current.next;
+				} else {
+					prev.next = current.next;
+				}
+				this.size--;
+				return current.element;
+			}
+			prev = current;
+			current = current.next;
+		}
+		return -1;
+	}
+
+
+	// finds the index of element
+	indexOf(element) {
+		let count = 0;
+		let current = this.head;
+
+		// iterate over the list
+		while (current != null) {
+			// compare each element of the list
+			// with given element
+			if (current.element === element)
+				return count;
+			count++;
+			current = current.next;
+		}
+
+		// not found
+		return -1;
+	}
+
+	// checks the list for empty
+	isEmpty() {
+		return this.size == 0;
+	}
+
+	// gives the size of the list
+	size_of_list() {
+		console.log(this.size);
+	}
+
+
+	// prints the list items
+	printList() {
+		let curr = this.head;
+		let str = "";
+		while (curr) {
+			str += curr.element + " ";
+			curr = curr.next;
+		}
+		console.log(str);
+	}
+
+}
+
+// creating an object for the
+// Linkedlist class
+let ll = new LinkedList();
+
+// testing isEmpty on an empty list
+// returns true
+console.log(ll.isEmpty());
+
+// adding element to the list
+ll.add(10);
+
+// prints 10
+ll.printList();
+
+// returns 1
+console.log(ll.size_of_list());
+
+// adding more elements to the list
+ll.add(20);
+ll.add(30);
+ll.add(40);
+ll.add(50);
+
+// returns 10 20 30 40 50
+ll.printList();
+
+// prints 50 from the list
+console.log("is element removed ?" + ll.removeElement(50));
+
+// prints 10 20 30 40
+ll.printList();
+
+// returns 3
+console.log("Index of 40 " + ll.indexOf(40));
+
+// insert 60 at second position
+// ll contains 10 20 60 30 40
+ll.insertAt(60, 2);
+
+ll.printList();
+
+// returns false
+console.log("is List Empty ? " + ll.isEmpty());
+
+// remove 3rd element from the list
+console.log(ll.removeFrom(3));
+
+// prints 10 20 60 40
+ll.printList();
+
+```
+
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## Blockchain as a Singly Linked List
+
+*The blockchain is an immutable, ordered, back-linked list of blocks of transactions. If you want to truly understand blockchain you need to understand linked lists.
+
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## Simplified Bitcoin Blockchain
+
+![](./simplified-bitcoin-blockchain.webp)
+
+</script></section>
+
 <section data-markdown><script type="text/template">
 
 ## Blockchain
@@ -200,8 +514,10 @@
 
 ## Centralized vs Decentralized vs Distributed
 
-<img src="networks.png" style="background-color: white; width: 500px" />
-* DLTs are an abstract concept
+<img src="networks.png" style="background-color: white; width: 300px" />
+* Blockchain is 
+  * distributed because of DLT
+  * decentralized because of peer to peer comm
 
 </script></section>
 
@@ -264,6 +580,7 @@
 ## Political decentralization
 
 * how many individuals or organizations ultimately control the computers that the system is made up of?
+* https://www.blockchain.com/explorer/charts/pools
 
 </script></section>
 
@@ -300,7 +617,7 @@
 
 * Append only linked list
 * Hashing, blocks, blockchain, distributed and tokens
-* [Visual demo](https://txstreet.com)
+* [Visual demo](https://txstreets.com/v/eth-btc)
 * [Eth build Sandbox](https://sandbox.eth.build/)
 * [Blockchain demo by andersbrownworth](https://andersbrownworth.com/blockchain/hash)
 
@@ -667,6 +984,61 @@
 
 </script></section>
 
+<aside class="notes">
+  Using blockchain for supply chain data sharing in the pharmaceutical industry can have several advantages, 
+  but it also comes with its own set of challenges. 
+  
+  Let's explore the pros and cons, and then discuss the feasibility of using public or private blockchain for this specific use case.
+
+  Pros of Using Blockchain:
+    Decentralization and Transparency:
+      Pros: Blockchain enables decentralized and transparent data sharing. 
+            Each participant (supplier) has a copy of the entire blockchain, enhancing transparency and reducing the risk of data manipulation.
+    
+    Immutable Record:
+      Pros: Once data is added to the blockchain, it is tamper-proof. 
+            This immutability ensures data integrity, which is crucial for maintaining trust in the supply chain.
+  
+    Real-time Data Availability:
+      Pros: Blockchain allows for real-time data sharing among participants, facilitating more accurate and timely forecasting.
+  
+    Smart Contracts:
+      Pros: Smart contracts can automate various processes, such as order fulfillment, payment execution, and compliance checks, 
+            reducing the need for intermediaries and streamlining operations.
+  
+  Cons of Using Blockchain:
+    Technical Complexity:
+      Cons: Implementing and maintaining a blockchain network can be complex and requires a good understanding of the technology. 
+            It may also involve significant initial setup costs.
+  
+    Scalability:
+      Cons: Some blockchain networks face challenges with scalability, especially if the number of participants and transactions increases rapidly. 
+            This can impact the speed and efficiency of the supply chain.
+  
+    Data Privacy Concerns:
+      Cons: While blockchain ensures data integrity, it may not inherently address data privacy concerns. 
+            Participants need to carefully manage access controls to sensitive information.
+  
+    Integration with Existing Systems:
+      Cons: Integrating blockchain with existing IT infrastructure can be challenging and may require significant changes to current systems and processes.
+  
+    Feasibility of Public vs. Private Blockchain:
+    
+    Public Blockchain:
+      Pros: Offers a high level of decentralization and transparency, suitable for scenarios where trust among participants is a critical factor.
+      Cons: May have scalability and privacy challenges, and the openness might not be suitable for all businesses.
+  
+    Private Blockchain:
+      Pros: Provides greater control over access, scalability, and privacy. Well-suited for a business-centric supply chain where a certain level of trust already exists among participants.
+      Cons: May not be as decentralized and transparent as a public blockchain.
+  
+    Recommendation:
+      Given the sensitivity of pharmaceutical supply chain data and the need for a high level of trust and privacy, 
+      a private blockchain might be more suitable for Farma's use case. It allows for controlled access, scalability, 
+      and customization while maintaining the benefits of blockchain technology. 
+      Additionally, Farma should conduct a thorough feasibility study, considering technical, regulatory, and organizational factors before implementing a blockchain solution.
+</aside>
+
 
 <section data-markdown><script type="text/template">
 
@@ -679,6 +1051,7 @@
   ## References
 
   * [Blockchain from first principles](https://medium.com/international-blockchain-olympiad/blockchain-from-first-principles-3d615701dce7)
+  * [Blockchain Data Structure](https://medium.com/hackernoon/you-dont-understand-blockchain-unless-you-understand-this-simple-data-structure-fb1df7982cc5)
   * [Bitcoin Whitepaper](https://bitcoin.org/bitcoin.pdf)
   * [History of Ethereum forks](https://ethereum.org/en/history/)
   * [Consensus Mechanism video](https://youtu.be/dylgwcPH4EA)
