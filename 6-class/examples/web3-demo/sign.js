@@ -15,6 +15,7 @@ function generateAccountObj() {
 async function signAndVerify(accountObj, message) {
   console.log("Account obj : ", accountObj);
   const signatureObj = web3.eth.accounts.sign(message, accountObj.privateKey);
+  console.log(signatureObj)
   const recoveredAddress = web3.eth.accounts.recover(signatureObj);
   return recoveredAddress == accountObj.address;
 }

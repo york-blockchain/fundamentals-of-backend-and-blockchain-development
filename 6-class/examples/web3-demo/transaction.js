@@ -13,7 +13,7 @@ async function transact() {
   );
   const sender = accountObj.address;
   console.log(sender)
-  const recipient = "0x678d24b693C9503De6385775CA9BCDa6383a9837";
+  const recipient = "0xCF404c120cCF1B3175FFf1973e21aa300A3719Ed";
   const senderNonce = await web3.eth.getTransactionCount(sender);
   const txObj = {
     nonce: senderNonce,
