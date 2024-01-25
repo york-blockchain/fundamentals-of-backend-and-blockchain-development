@@ -1,0 +1,9 @@
+{
+  "name": "csbc1000_mod7",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "firebase-tools": "^13.1.0"
+  }
+}
