@@ -10,68 +10,71 @@
 * initialize npm project `yarn -y init`
 * Install `firebase-tools` by running `yarn add -D firebase-tools`
 * Run `yarn firebase login` (on your terminal/command prompt) to connect to your Firebase account
+
 >* Allow Firebase to collect CLI and Emulator Suite usage and error reporting information? n
->* A url in browser will be open which will ask you to login to firebase. Please allow any permissions as prompted.
-![](./firebase-cli-access-permission.png)
+>* A url in browser will be open which will ask you to login to firebase. 
+* Please allow any permissions as prompted.
+<br/>![](./firebase-cli-access-permission.png)
 * After successful login you should be able to following message in browser
-![](./firebase-login-success.png) 
+<br/>![](./firebase-login-success.png) 
 * You'll also see a success message in terminal
 ```
 ✔  Success! Logged in as your@email.com
 ```
 * Create a project using [firebase console](https://console.firebase.google.com) by clicking on **create a project**
-![](./create-project.png)
+<br/>![](./create-project.png)
 * Provide a name to the project "csbc1000-mod7", agree all terms and press **continue**
 ![](./name-a-project.png)
 * Enable or Disable google analytics for your firebase project and press **create project**
 ![](./google-analytics-agreement.png)
 * you'll see prompt that shows progress of project creation
-![](./creating-project.png)
+<br/>![](./creating-project.png)
 * Once your project, you'll see following message. press **continue**
-![](./project-is-ready.png)
+<br/>![](./project-is-ready.png)
 * On the firebase dashboard, click **Project overview**
-![](./click-project-overview.png)
+<br/>![](./click-project-overview.png)
 * Select **cloud firestore**
-![](./select-cloud-firestore.png)
+<br/>![](./select-cloud-firestore.png)
 * Press **create database**
-![](./create-database.png)
+<br/>![](./create-database.png)
 * Set the region based on your location and hit **next**
-![](./select-database-region.png)
-* Select **start in test mode** and hit **next**
+<br/>![](./select-database-region.png)
+* Select **start in test mode** and hit **next**<br/>
 ![](./database-secure-rules.png)
 * You'll see a message on provisioning of cloud firestore
-![](./provisioning-cloud-firestore.png)
+<br/>![](./provisioning-cloud-firestore.png)
 * run `yarn firebase init`
- * select firestore, functions and emulator 
+* select firestore, functions and emulator 
  ![](./select-firebase-features.png)
- * select `use existing project`
- ![](./firebase-cli-select-project.png)
- ![](./firebase-cli-select-correct-project.png)
- * Select `javascript` for Cloud Functions language
- * select `y` for eslint rules
- * select `n` for installing deps with `npm`
-  ![](./firebase-cli-functions-setup.png)
- * setup firebase firestore
- ![](./firestore-setup.png)
- * select `functions` and `firestore` emulator
- * accept default port for functions emulator
- * accept default port for firestore emulator
- * select `y`for the Emulator UI
- * press enter when prompted for `Which port do you want to use for the Emulator UI (leave empty to use any available port)?`
- * select `y` to download the emulators now
- ![](./firebase-cli-emulator-setup.png)
+* select `use existing project`
+<br/>![](./firebase-cli-select-project.png)
+<br/>![](./firebase-cli-select-correct-project.png)
+* Select `javascript` for Cloud Functions language
+* select `y` for eslint rules
+* select `n` for installing deps with `npm`
+<br/>![](./firebase-cli-functions-setup.png)
+* setup firebase firestore
+<br/>![](./firestore-setup.png)
+* select `functions` and `firestore` emulator
+* accept default port for functions emulator
+* accept default port for firestore emulator
+* select `y`for the Emulator UI
+* press enter when prompted for `Which port do you want to use for the Emulator UI (leave empty to use any available port)?`
+* select `y` to download the emulators now
+<br/>![](./firebase-cli-emulator-setup.png)
 * After firebase project is initialized you'll see
 ```
 ✔  Firebase initialization complete!
 ```
 * `cd functions` run `yarn add express body-parser uuid`
 * run `cd ..` and Let us test the setup by running `yarn firebase emulators:start`
-![](./firebase-emulator-test.png)
+<br/>![](./firebase-emulator-test.png)
 * You should be able to open emulator dashboard on browser. URL of the same can be identified from above image.
-![](./emulator-dashboard.png)
+<br/>![](./emulator-dashboard.png)
 * let us hit API using postman
-![](./hello-from-firebase.png)
+<br/>![](./hello-from-firebase.png)
 * now stop the emulator on terminal by hitting ctrl+c
+
 * Replace code inside `functions/index.js` with following
 ```
 /* eslint-disable require-jsdoc */
@@ -134,13 +137,13 @@ module.exports = {webAPI};
 ```
 
 * Start the server again by `yarn firebase emulators:start`
-![](./webapi-emulator.png)
+<br/>![](./webapi-emulator.png)
 
 * Make sure that firestore emulator will be empty
-![](./firestore-empty-collection.png)
+<br/>![](./firestore-empty-collection.png)
 
 * let us add some data by hitting `/investors` API using postman
-![](./post-req-postman.png)
+<br/>![](./post-req-postman.png)
 
 * Verify the data got added inside firestore
-![](./firestore-data-available.png)
+<br/>![](./firestore-data-available.png)
